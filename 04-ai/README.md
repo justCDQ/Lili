@@ -1,8 +1,10 @@
-# 04 · AI 工程
+# 04 · AI 工程：从模型调用到生产系统
 
-目标是掌握从模型 API、Context、RAG 到 Tool、Agent、Evaluation 和生产治理的 AI 工程能力。
+从编程、数据和模型 API 入门，逐步掌握 Context、RAG、Tool、Agent、Evaluation 和生产治理，并通过可复现实验持续跟踪技术变化。
 
 - [学习路线图](roadmap.md)
+- [每日 AI 实验](daily/README.md)
+- [模块学习笔记](notes/README.md)
 - [实践项目](projects.md)
 - [本方向笔记模板](notes-template.md)
 - [返回总览](../README.md)

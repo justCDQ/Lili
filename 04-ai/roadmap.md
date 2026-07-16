@@ -1,6 +1,43 @@
-# AI 工程 Roadmap
+# AI 工程 Roadmap：从零基础到生产级 AI 系统
 
-## 一、基础认知
+AI 工具、模型与框架会快速变化，这条路线以相对稳定的原理和工程闭环为主干：任务定义、模型接口、上下文、检索、工具、工作流、评估、可靠性与安全。具体厂商和框架作为可替换实现持续更新。
+
+## 能力阶梯
+
+| 阶段 | 能力目标 | 代表产出 |
+| --- | --- | --- |
+| 入门 | 能调用模型并理解输入、输出、Token 和限制 | 命令行 AI 小程序 |
+| 初级 | 能构建稳定的结构化、流式 AI 功能 | AI Chat 与结构化抽取 |
+| 中级 | 能构建 RAG、Tool 和可评估 Workflow | 文档助手与工具助手 |
+| 高级 | 能构建可恢复、可观测、安全的 Agent | 长任务 Agent Workflow |
+| 专项 | 能治理多模型、成本、质量和生产风险 | AI 平台或企业工作台 |
+
+---
+
+## 阶段零：编程、数据与 API 入门
+
+### 必要编程基础
+
+- [ ] 选择 JavaScript/TypeScript 或 Python 作为第一门 AI 应用语言。
+- [ ] 变量、函数、对象/字典、数组/列表、模块、异常和异步。
+- [ ] 命令行、Git、包管理、虚拟环境和环境变量。
+- [ ] HTTP、JSON、REST API、状态码、认证和流式响应。
+- [ ] 文件读写、文本编码、CSV/JSONL 和基础数据清洗。
+- [ ] Secret 不进入代码和 Git；理解最小权限和费用上限。
+
+### 第一次模型实验
+
+- [ ] 使用 SDK 和原始 HTTP 各完成一次模型调用。
+- [ ] 记录模型标识、日期、输入、输出、Token、延迟和费用。
+- [ ] 实现 Streaming、取消、超时和错误展示。
+- [ ] 使用 Schema 获取结构化结果并进行运行时校验。
+- [ ] 为同一任务准备五条固定样例，比较两种提示或模型。
+
+验收：能独立完成一个命令行或网页 AI 小程序；错误、密钥、超时和输出校验都有明确处理。
+
+---
+
+## 阶段一：基础认知
 
 - [ ] 训练、推理、参数、损失、泛化、过拟合。
 - [ ] 训练集、验证集、测试集和 Benchmark。
@@ -15,7 +52,7 @@
 
 ---
 
-## 二、模型 API 与 Prompt
+## 阶段二：模型 API 与 Prompt
 
 ### 模型调用
 
@@ -41,7 +78,7 @@ Role + Task + Context + Constraints + Examples + Output Format + Failure Behavio
 
 ---
 
-## 三、Context Engineering
+## 阶段三：Context Engineering
 
 上下文可能来自系统规则、当前输入、历史、文件、知识库、用户资料、项目状态、工具结果、搜索和记忆。
 
@@ -60,7 +97,7 @@ Role + Task + Context + Constraints + Examples + Output Format + Failure Behavio
 
 ---
 
-## 四、AI 应用与 AI UX
+## 阶段四：AI 应用与 AI UX
 
 状态：Idle、Preparing、Queued、Streaming、Tool Calling、Waiting Approval、Completed、Failed、Cancelled、Partial Success、Needs Input。
 
@@ -77,7 +114,7 @@ Role + Task + Context + Constraints + Examples + Output Format + Failure Behavio
 
 ---
 
-## 五、RAG
+## 阶段五：RAG
 
 ```text
 文档 → 解析 → 清洗 → Chunk → Embedding → 索引 → 查询处理 → 检索 → Rerank → Context → 生成 → 引用 → 评估
@@ -117,7 +154,7 @@ Role + Task + Context + Constraints + Examples + Output Format + Failure Behavio
 
 ---
 
-## 六、Tool Calling 与 MCP
+## 阶段六：Tool Calling 与 MCP
 
 ### Tool 设计
 
@@ -141,7 +178,7 @@ Role + Task + Context + Constraints + Examples + Output Format + Failure Behavio
 
 ---
 
-## 七、Workflow 与 Agent
+## 阶段七：Workflow 与 Agent
 
 优先使用可预测 Workflow，固定流程可解决时不优先使用自由 Agent。
 
@@ -170,7 +207,7 @@ Role + Task + Context + Constraints + Examples + Output Format + Failure Behavio
 
 ---
 
-## 八、Evaluation
+## 阶段八：Evaluation
 
 评估维度：Correctness、Relevance、Completeness、Format、Safety、Latency、Cost、Groundedness、Tool Selection、Task Completion。
 
@@ -186,7 +223,7 @@ Role + Task + Context + Constraints + Examples + Output Format + Failure Behavio
 
 ---
 
-## 九、生产工程
+## 阶段九：生产工程
 
 ### Model Gateway
 
@@ -217,7 +254,7 @@ Role + Task + Context + Constraints + Examples + Output Format + Failure Behavio
 
 ---
 
-## 十、安全与治理
+## 阶段十：安全与治理
 
 - [ ] Prompt Injection 和间接注入。
 - [ ] 外部网页、邮件、PDF、数据库和 Tool 结果视为不可信数据。
@@ -232,7 +269,7 @@ Role + Task + Context + Constraints + Examples + Output Format + Failure Behavio
 
 ---
 
-## 十一、进阶选修
+## 阶段十一：进阶选修
 
 ### 开源模型与本地推理
 
@@ -244,11 +281,40 @@ Hugging Face、量化、显存、Batch、Throughput、Latency、KV Cache、Servi
 
 ---
 
-## 十二、推荐资源
+## 持续更新机制
+
+### 每日：一个可复现的 AI 实验
+
+- [ ] 从 Prompt、Context、Structured Output、RAG、Tool、Workflow、Agent、Evaluation 或 Safety 中选择一个小问题。
+- [ ] 固定任务与样例，只改变一个变量。
+- [ ] 记录模型完整标识、接口/框架版本、日期和配置。
+- [ ] 同时记录质量、延迟、Token、成本、失败类型和安全影响。
+- [ ] 保存输入、输出、Trace 或截图等证据，不只记录“效果不错”。
+- [ ] 得出可证伪结论，并说明适用范围和下一次实验。
+
+### 每周：能力与案例更新
+
+- [ ] 精读一个官方文档、技术报告、模型卡、协议变更或高质量工程案例。
+- [ ] 用现有评估集复测一个新模型、新能力或框架升级。
+- [ ] 把线上失败或实验失败加入回归样例。
+- [ ] 更新一张能力卡：它解决什么、不能解决什么、成本和替代方案是什么。
+
+### 每季度：路线图维护
+
+- [ ] 检查官方 API、模型生命周期、SDK 和协议版本变化。
+- [ ] 检查 RAG、Agent、Evaluation、Safety 与多模态是否出现稳定的新实践。
+- [ ] 删除只绑定过时框架的内容，保留稳定原理和迁移说明。
+- [ ] 在仓库变更记录中写明新增、修改、废弃及证据来源。
+
+更新原则：官方文档、规范、论文和可复现实验优先于二手资讯；新能力必须经过固定评估集，而不是仅凭演示判断。
+
+---
+
+## 学习资源
 
 书籍：动手学深度学习、Hands-On Large Language Models、Build a Large Language Model From Scratch、AI Engineering、Designing Machine Learning Systems、Machine Learning Design Patterns、DDIA、Release It!。
 
-网站与博客：Hugging Face Learn、3Blue1Brown、Andrej Karpathy、fast.ai、Simon Willison、Lilian Weng、Chip Huyen、Eugene Yan、Hamel Husain、Anthropic Engineering、Latent Space。
+网站与博客：[Hugging Face Learn](https://huggingface.co/learn)、[Model Context Protocol](https://modelcontextprotocol.io/)、[Anthropic Engineering](https://www.anthropic.com/engineering)、3Blue1Brown、Andrej Karpathy、fast.ai、Simon Willison、Lilian Weng、Chip Huyen、Eugene Yan、Hamel Husain、Latent Space。优先阅读所用模型和 SDK 的官方文档与模型卡。
 
 
 ---

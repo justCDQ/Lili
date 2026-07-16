@@ -2,6 +2,8 @@
 
 从高级前端工程师到软件产品工程师的长期成长路线。
 
+五个方向也分别提供从零基础开始的独立路径，任何人都可以按自己的目标选择一个入口，在理论、日常练习、项目和笔记中持续成长。
+
 ## 为什么叫「狸力」
 
 「狸力」（lí lì）出自《山海经·南山经》。书中记载它“其状如豚，有距，其音如狗吠”，出现时当地会兴起许多土木工程，即“见则其县多土功”。
@@ -16,27 +18,23 @@
 
 ## 五个核心方向
 
-| 方向 | 目标 | 路线图 | 实践项目 |
-| --- | --- | --- | --- |
-| 01 前端深化 | 架构、性能、工程化与 Web 平台能力 | [进入路线图](01-frontend/roadmap.md) | [项目清单](01-frontend/projects.md) |
-| 02 产品能力 | 用户发现、产品定义、数据与商业能力 | [进入路线图](02-product/roadmap.md) | [项目清单](02-product/projects.md) |
-| 03 交互设计 | 信息架构、复杂交互、可用性与 AI UX | [进入路线图](03-interaction-design/roadmap.md) | [项目清单](03-interaction-design/projects.md) |
-| 04 AI 工程 | AI 应用、RAG、Tool、Agent 与评估体系 | [进入路线图](04-ai/roadmap.md) | [项目清单](04-ai/projects.md) |
-| 05 后端与数据 | Go、数据系统、分布式与云原生能力 | [进入路线图](05-backend-data/roadmap.md) | [项目清单](05-backend-data/projects.md) |
+| 方向 | 目标 | 路线图 | 每日记录 | 模块笔记 | 实践项目 |
+| --- | --- | --- | --- | --- | --- |
+| 01 前端深化 | 从 Web 入门到架构、性能与平台能力 | [路线图](01-frontend/roadmap.md) | [每日前端项目](01-frontend/daily/README.md) | [笔记](01-frontend/notes/README.md) | [项目](01-frontend/projects.md) |
+| 02 产品能力 | 从产品观察到定义、数据与商业能力 | [路线图](02-product/roadmap.md) | [每日产品/功能拆解](02-product/daily/README.md) | [笔记](02-product/notes/README.md) | [项目](02-product/projects.md) |
+| 03 交互设计 | 从交互原则到复杂流程与 AI UX | [路线图](03-interaction-design/roadmap.md) | [每日交互拆解](03-interaction-design/daily/README.md) | [笔记](03-interaction-design/notes/README.md) | [项目](03-interaction-design/projects.md) |
+| 04 AI 工程 | 从模型 API 到 RAG、Agent 与评估体系 | [路线图](04-ai/roadmap.md) | [每日 AI 实验](04-ai/daily/README.md) | [笔记](04-ai/notes/README.md) | [项目](04-ai/projects.md) |
+| 05 后端与数据 | 从编程入门到分布式与云原生能力 | [路线图](05-backend-data/roadmap.md) | [每日算法题](05-backend-data/daily/README.md) | [笔记](05-backend-data/notes/README.md) | [项目](05-backend-data/projects.md) |
 
-## 长期规划
+## 一份持续演进的路线图
 
-- [三年成长规划](3-year-plan.md)
-- [综合项目索引](projects/README.md)
-- [通用模板](templates/README.md)
+这里没有固定的三年期限，也不以追赶进度为目标。技术、产品和我们的理解都会持续变化，因此路线图本身也是产品：学习、实践、记录、验证，再根据新证据迭代。
 
-## 使用原则
-
-- 每季度只设置一个主方向，投入约 60%。
-- 一个辅助方向投入约 25%。
-- 复盘、写作和开源投入约 15%。
-- 每周至少交付一个可验证成果。
-- 每半年完成一个可以公开展示的综合项目。
+- 五个方向都是可以从零开始、独立完成的成长路线。
+- 理论建立心智模型，日常练习形成手感，项目验证综合能力，笔记沉淀自己的知识体系。
+- 具体框架和工具会过时，稳定原理、问题解决过程和可复现证据应长期保留。
+- 新内容优先依据官方文档、标准、论文、源码和可复现实验。
+- 路线图的更新记录在 [CHANGELOG](CHANGELOG.md)，综合项目维护在 [项目索引](projects/README.md)，通用模板位于 [templates](templates/README.md)。
 
 ## 学习闭环
 
@@ -50,10 +48,10 @@
 ## 如何维护
 
 1. 用 Obsidian 将仓库根目录作为 Vault 打开，或直接用 VS Code 编辑 Markdown。
-2. 从方向主页进入路线图，在待办项中维护完成状态。
-3. 学习时复制 [学习笔记模板](templates/learning-note.md)，项目结束后复制 [项目复盘模板](templates/project-retrospective.md)。
-4. 每周和每月复盘，把可验证产出链接回对应方向或 [综合项目索引](projects/README.md)。
-5. 通过 Git 提交和 GitHub 同步，每次提交尽量只包含一个主题。
+2. 任选一个方向，从该方向的 `README.md` 和 `roadmap.md` 开始，不要求五条路线同步推进。
+3. 每完成一个模块，把笔记放进该方向的 `notes/`；每天的最小练习放进 `daily/`。
+4. 项目结束后使用 [项目复盘模板](templates/project-retrospective.md)，把代码、数据、文档或体验证据链接回来。
+5. 通过 Git 提交和 GitHub 同步；路线图更新、学习笔记和日常记录尽量分别提交。
 
 ## 目录结构
 
@@ -67,5 +65,5 @@
 ├── 05-backend-data/
 ├── templates/
 ├── projects/
-└── 3-year-plan.md
+└── CHANGELOG.md
 ```

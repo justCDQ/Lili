@@ -1,6 +1,52 @@
-# 后端与数据系统 Roadmap
+# 后端与数据 Roadmap：从零基础到系统工程
 
-## 一、数据结构与算法
+这是一条可以独立学习的后端与数据路线。先建立编程、命令行、网络和数据基础，再进入 Go 服务、数据库、缓存、消息、分布式和云原生；复杂架构必须由真实规模和故障需求推动。
+
+## 能力阶梯
+
+| 阶段 | 能力目标 | 代表产出 |
+| --- | --- | --- |
+| 入门 | 会编程、使用命令行和理解请求/数据 | CLI 与简单 HTTP 服务 |
+| 初级 | 能构建带数据库的可靠 API | CRUD、认证、测试和部署 |
+| 中级 | 能处理缓存、异步、文件与搜索 | 企业任务或文件系统 |
+| 高级 | 能处理分布式故障、可观测性和交付 | 分布式任务系统 |
+| 专项 | 能做领域建模、数据平台或基础设施 | 企业级综合平台 |
+
+---
+
+## 阶段零：编程与计算机基础
+
+### 编程入门
+
+- [ ] 值、变量、类型、条件、循环、函数和错误。
+- [ ] Array/Slice、Map、Struct/Object、String 和基础文件处理。
+- [ ] 模块、包、依赖、输入输出和命令行参数。
+- [ ] 使用伪代码拆解问题，使用日志、断点和测试调试。
+- [ ] 先用 JavaScript 熟悉算法表达，再用 Go 重写关键题目并比较类型、内存和错误处理。
+
+### 工具与环境
+
+- [ ] 文件、目录、路径、权限、进程和环境变量。
+- [ ] 终端与 Shell 基础，Git 的提交、分支和远端协作。
+- [ ] 编辑器、格式化、静态检查、测试和调试器。
+- [ ] 二进制、十六进制、字符编码、时间和时区基础。
+- [ ] CPU、内存、磁盘和网络分别负责什么。
+
+### 服务与数据入门
+
+- [ ] 客户端、服务器、进程、端口、域名和 DNS。
+- [ ] HTTP 请求/响应、方法、状态码、Header、JSON 和 Cookie。
+- [ ] 数据库、表、行、列、主键、查询和事务的直觉。
+- [ ] 同步、异步、并发、并行和队列的基本区别。
+- [ ] 本地运行一个服务，使用 `curl` 请求并查看日志。
+
+必做：命令行 Todo、读取 JSON/CSV 的统计工具、内存 CRUD HTTP API，并为核心逻辑编写测试。
+
+验收：能从空目录创建、运行、调试和提交程序；能解释一次 API 请求如何到达服务并返回数据。
+
+---
+
+## 阶段一：数据结构与算法
 
 - [ ] 复杂度、数组、链表、栈、队列、双端队列。
 - [ ] 哈希表、冲突、扩容、负载因子。
@@ -15,7 +61,7 @@
 
 ---
 
-## 二、Go
+## 阶段二：Go
 
 ### 语言
 
@@ -40,7 +86,7 @@
 
 ---
 
-## 三、Linux、操作系统和网络
+## 阶段三：Linux、操作系统和网络
 
 ### Linux
 
@@ -66,7 +112,7 @@
 
 ---
 
-## 四、API 与服务
+## 阶段四：API 与服务
 
 - [ ] REST、RPC、gRPC、GraphQL、WebSocket、SSE、Webhook 的适用场景。
 - [ ] Resource、Method、Status Code、分页、筛选、排序、批量和版本。
@@ -80,7 +126,7 @@
 
 ---
 
-## 五、关系型数据库
+## 阶段五：关系型数据库
 
 ### 建模
 
@@ -115,7 +161,7 @@
 
 ---
 
-## 六、Redis 与缓存
+## 阶段六：Redis 与缓存
 
 - [ ] String、Hash、List、Set、Sorted Set、Bitmap、HyperLogLog、Stream、Geo。
 - [ ] Cache Aside、Read Through、Write Through、多级缓存。
@@ -130,7 +176,7 @@
 
 ---
 
-## 七、消息队列与异步任务
+## 阶段七：消息队列与异步任务
 
 - [ ] Producer、Consumer、Topic、Queue、Partition、Offset、Ack、Consumer Group。
 - [ ] At-most-once、At-least-once、重复、乱序、幂等 Consumer。
@@ -142,7 +188,7 @@
 
 ---
 
-## 八、搜索、对象存储与数据分析
+## 阶段八：搜索、对象存储与数据分析
 
 ### 搜索
 
@@ -167,7 +213,7 @@
 
 ---
 
-## 九、分布式系统
+## 阶段九：分布式系统
 
 演进顺序：单体、单机优化、垂直扩容、水平扩容、负载均衡、缓存、复制、消息、服务拆分、多区域。
 
@@ -198,7 +244,7 @@
 
 ---
 
-## 十、系统设计
+## 阶段十：系统设计
 
 固定步骤：需求、非功能、规模估算、API、数据模型、高层架构、读写流程、扩展性、一致性、高可用、安全、可观测性、成本和 Trade-off。
 
@@ -208,7 +254,7 @@
 
 ---
 
-## 十一、Docker、Kubernetes、IaC 与 CI/CD
+## 阶段十一：Docker、Kubernetes、IaC 与 CI/CD
 
 ### Docker
 
@@ -235,7 +281,7 @@
 
 ---
 
-## 十二、可观测性、SRE 与安全
+## 阶段十二：可观测性、SRE 与安全
 
 ### 可观测性
 
@@ -259,7 +305,7 @@
 
 ---
 
-## 十三、领域建模与架构
+## 阶段十三：领域建模与架构
 
 - [ ] Interface、Application、Domain、Infrastructure 分层。
 - [ ] Entity、Value Object、Aggregate、Repository、Domain Event。
@@ -269,7 +315,7 @@
 
 ---
 
-## 十四、推荐资源
+## 学习资源
 
 书籍：Learning Go、The Go Programming Language、100 Go Mistakes、How Linux Works、OSTEP、Computer Networking: A Top-Down Approach、高性能 MySQL、Database Internals、DDIA、Release It!、System Design Interview、Site Reliability Engineering、Kubernetes in Action、Terraform: Up & Running。
 

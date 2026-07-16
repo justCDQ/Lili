@@ -1,88 +1,166 @@
-# 前端深化 Roadmap
+# 前端 Roadmap：从零基础到前端专家
 
-## 一、最终能力
+这是一条可以独立学习的前端路线。顺序是“计算机与 Web 入门 → 页面 → 编程 → 工程应用 → 浏览器原理 → 架构与平台”，每个阶段都同时包含知识、练习、项目和验收。
 
-完成本模块后，应能够：
+## 能力阶梯
 
-- 独立设计中大型前端应用架构。
-- 使用 DevTools 定位网络、运行时、渲染和内存问题。
-- 建立 Monorepo、Design System、测试和发布体系。
-- 开发 CLI、Codemod、构建插件和自动化工具。
-- 处理复杂状态、权限、国际化和可观测性。
-- 在 AI Native UI、编辑器、数据可视化等方向形成专项能力。
+| 阶段 | 能力目标 | 代表产出 |
+| --- | --- | --- |
+| 入门 | 会使用开发环境，理解网页如何被访问 | 第一个可访问网页 |
+| 初级 | 能独立还原页面并编写交互 | 多页面响应式网站 |
+| 中级 | 能用框架和 TypeScript 构建完整应用 | 带 API、路由、状态和测试的应用 |
+| 高级 | 能处理性能、架构、质量和复杂场景 | 中大型应用与性能报告 |
+| 专家 | 能建设平台、工具和标准并影响团队 | Design System、CLI、基础设施或专项产品 |
 
 ---
 
-## 二、Web 基础
+## 阶段零：计算机与 Web 入门
 
-### HTML
+### 开发环境
 
-- [ ] 语义化元素与文档结构。
-- [ ] 表单、原生校验、自动填充。
-- [ ] 焦点顺序和键盘操作。
-- [ ] `label`、`fieldset`、`legend`。
-- [ ] Dialog、Popover、Details。
-- [ ] 响应式图片、`picture`、`srcset`。
-- [ ] SEO 与可访问性基础。
-- [ ] ARIA 的使用边界。
+- [ ] 文件、目录、路径、扩展名、文本编码和压缩包。
+- [ ] VS Code 的文件、搜索、终端、插件和调试面板。
+- [ ] 命令行的 `cd`、`pwd`、`ls`、`mkdir`、`cp`、`mv` 和删除操作。
+- [ ] Git 的仓库、工作区、暂存区、提交、分支、合并和远端。
+- [ ] Node.js、包管理器、`package.json`、依赖和脚本。
+- [ ] 使用浏览器 DevTools 查看 Elements、Console、Network 和 Sources。
 
-验收：不使用 UI 库，实现一个完全支持键盘操作、错误关联和浏览器自动填充的注册流程。
+### Web 如何工作
 
-### CSS
+- [ ] 客户端、服务器、浏览器和搜索引擎的角色。
+- [ ] URL、域名、DNS、IP、端口、HTTP 请求与响应。
+- [ ] HTML、CSS、JavaScript 各自负责什么。
+- [ ] 静态网站、动态网站、前端、后端和 API 的区别。
+- [ ] 本地开发服务器、构建产物、部署和 HTTPS 的基本概念。
 
-- [ ] Normal Flow、Box Model。
-- [ ] Flexbox、Grid。
-- [ ] Containing Block、BFC、Stacking Context。
-- [ ] Cascade、Specificity、Inheritance。
-- [ ] Custom Properties、Cascade Layers。
-- [ ] Container Queries、Logical Properties。
-- [ ] 深色模式、RTL、高对比度模式。
-- [ ] Transition、Animation、Transform。
-- [ ] `prefers-reduced-motion`。
+必做：创建一个 Git 仓库，用纯文本写出第一个 HTML 页面，在本地服务器打开并部署到公开地址。
 
-验收：能解释尺寸、滚动、定位和 `z-index` 的来源；能设计一套 Token，而不是到处写任意值。
+验收：能从输入 URL 开始，口述浏览器获取并显示页面的大致过程；能独立创建、运行、调试和提交一个网页。
 
-### JavaScript
+---
 
-- [ ] Scope、Closure、Prototype、`this`。
-- [ ] Module、Iterator、Generator、Proxy。
-- [ ] Event Loop、Task、Microtask。
-- [ ] Promise、Async Iterator、AbortController。
+## 阶段一：HTML 与内容结构
+
+### 基础语法
+
+- [ ] 元素、属性、嵌套、注释、空元素和字符实体。
+- [ ] 标题、段落、列表、链接、图片、音视频和表格。
+- [ ] `head`、元数据、favicon、语言和页面标题。
+- [ ] 块级与行内内容的基本区别。
+
+### 语义、表单与可访问性
+
+- [ ] `header`、`nav`、`main`、`article`、`section`、`aside`、`footer`。
+- [ ] 表单控件、按钮、原生校验、自动填充和提交行为。
+- [ ] `label`、`fieldset`、`legend`、错误提示与帮助文本。
+- [ ] 标题层级、替代文本、焦点顺序和键盘操作。
+- [ ] Dialog、Popover、Details 等原生交互元素。
+- [ ] 响应式图片、`picture`、`srcset` 和懒加载。
+- [ ] SEO、Open Graph 和结构化内容基础。
+- [ ] ARIA 的使用边界：优先使用正确的原生元素。
+
+必做：个人主页、文章详情页、数据表格和支持键盘操作及自动填充的注册流程。
+
+验收：关闭 CSS 和 JavaScript 后内容仍然结构清楚；能使用键盘完成表单；HTML 校验无关键错误。
+
+---
+
+## 阶段二：CSS 与视觉实现
+
+### 基础与布局
+
+- [ ] 选择器、声明、单位、颜色、背景、边框和字体。
+- [ ] Cascade、Specificity、Inheritance 和默认样式。
+- [ ] Box Model、Normal Flow、`display`、溢出和滚动。
+- [ ] Position、Containing Block、BFC 和 Stacking Context。
+- [ ] Flexbox、Grid、多列布局和常见居中方法。
+- [ ] 响应式设计、媒体查询、移动优先和断点选择。
+
+### 系统化与现代 CSS
+
+- [ ] Custom Properties、Design Token 和主题切换。
+- [ ] Cascade Layers、Container Queries、Logical Properties。
+- [ ] 深色模式、RTL、高对比度和打印样式。
+- [ ] Transition、Animation、Transform 和关键帧。
+- [ ] `prefers-reduced-motion` 与动效性能。
+- [ ] BEM、CSS Modules、CSS-in-JS、Utility CSS 的边界与取舍。
+
+必做：从设计稿还原三个不同布局；实现响应式营销页、Dashboard 和一组可复用基础组件样式。
+
+验收：能解释元素尺寸、滚动、定位和 `z-index` 的来源；缩放和不同屏幕下不依赖大量临时覆盖；能建立一套 Token。
+
+---
+
+## 阶段三：JavaScript 编程基础到语言深入
+
+### 编程基础
+
+- [ ] 值、变量、类型、运算符、表达式和类型转换。
+- [ ] 条件、循环、函数、参数、返回值和递归基础。
+- [ ] Array、Object、String、Map、Set 和 Date 的常用操作。
+- [ ] 解构、展开、模板字符串和可选链。
+- [ ] 模块、导入导出、错误与异常处理。
+- [ ] 使用伪代码拆解问题，使用断点和日志调试。
+
+### DOM、事件与网络
+
+- [ ] DOM 树、查询、创建、更新、删除和样式操作。
+- [ ] Event、冒泡、捕获、委托、默认行为和自定义事件。
+- [ ] 表单状态、校验、URL 与 Web Storage。
+- [ ] JSON、Fetch、HTTP 方法、状态码和请求错误处理。
+- [ ] 同步、异步、Callback、Promise 和 `async/await`。
+
+### 语言深入
+
+- [ ] Scope、Closure、Execution Context、Hoisting。
+- [ ] Prototype、原型链、Class、`this` 和对象模型。
+- [ ] Iterator、Generator、Proxy 和 Reflect。
+- [ ] Event Loop、Call Stack、Task 和 Microtask。
+- [ ] Promise 组合、Async Iterator、AbortController。
 - [ ] Streams、Structured Clone、Transferable Object。
-- [ ] GC、WeakMap、WeakSet。
-- [ ] 事件监听器、计时器、闭包造成的泄漏。
+- [ ] GC、WeakMap、WeakSet 与常见内存泄漏。
 
-必做：
+必做：Todo、天气应用、分页搜索、图片懒加载、EventEmitter、并发调度器、可取消重试请求器和 SSE 流解析器。
 
-- [ ] 并发任务调度器。
-- [ ] 可取消、可重试请求器。
-- [ ] SSE 流解析器。
-- [ ] EventEmitter。
-- [ ] LRU Cache。
+验收：不依赖框架完成一个调用真实 API 的小型单页应用；能画出异步代码的调用栈、任务队列和生命周期。
 
-验收：遇到异步问题时能画出调用栈、任务队列和生命周期，而不是通过增加 `setTimeout` 试错。
+---
+
+## 阶段四：TypeScript、框架与完整应用
 
 ### TypeScript
 
-- [ ] Narrowing、Generics。
+- [ ] 基础类型、函数、对象、接口、类型别名和枚举的取舍。
+- [ ] Union、Intersection、Narrowing、Generic。
 - [ ] Conditional、Mapped、Template Literal Types。
 - [ ] Discriminated Union、Type Predicate、`infer`。
-- [ ] Declaration File、Module Resolution。
-- [ ] Project References、Compiler Options。
-- [ ] Runtime Schema Validation。
+- [ ] Declaration File、Module Resolution、Compiler Options 和 Project References。
+- [ ] Runtime Schema Validation；类型系统不能替代运行时校验。
 
-必做：
+### 框架基础
 
-- [ ] 类型安全 API Client。
-- [ ] 类型安全事件系统。
-- [ ] 使用联合类型表达状态机。
-- [ ] 为 JavaScript 库编写声明文件。
+- [ ] 组件、Props、State、事件、条件、列表和生命周期。
+- [ ] 响应式更新或渲染模型，理解框架如何把状态映射为 UI。
+- [ ] 路由、Layout、表单、请求、错误边界和懒加载。
+- [ ] 客户端状态、服务端状态、URL 状态和持久化状态。
+- [ ] SSR、SSG、CSR 和 Hydration 的入门概念。
+- [ ] 先掌握一种主流框架，再比较 React、Vue、Svelte 等方案。
 
-验收：能设计稳定公共 API；不滥用 `any` 和 `as`；知道类型系统不能替代运行时验证。
+### 应用工程基础
+
+- [ ] Vite 等开发与构建工具的基本配置。
+- [ ] ESLint、Formatter、类型检查和 Git Hooks。
+- [ ] Unit、Component 和 E2E 测试入门。
+- [ ] 环境变量、配置、构建、部署和错误监控。
+- [ ] 依赖选择、升级、锁文件和供应链基础。
+
+必做：使用 TypeScript 和一种主流框架实现一个包含登录、路由、表单、CRUD、请求状态、错误处理和测试的完整应用。
+
+验收：能从空目录搭建并部署完整应用；公共 API 类型稳定，不滥用 `any` 和类型断言；核心流程有自动化测试。
 
 ---
 
-## 三、浏览器与运行时
+## 阶段五：浏览器与运行时
 
 ### 页面加载
 
@@ -118,7 +196,7 @@
 
 ---
 
-## 四、应用与组件架构
+## 阶段六：应用与组件架构
 
 ### 组件设计
 
@@ -154,7 +232,7 @@
 
 ---
 
-## 五、性能工程
+## 阶段七：性能工程
 
 ### 指标
 
@@ -190,7 +268,7 @@
 
 ---
 
-## 六、工程化与工具链
+## 阶段八：工程化与工具链
 
 ### 构建与模块
 
@@ -227,7 +305,7 @@
 
 ---
 
-## 七、测试、安全与可观测性
+## 阶段九：测试、安全与可观测性
 
 ### 测试
 
@@ -256,7 +334,7 @@
 
 ---
 
-## 八、专项方向
+## 阶段十：专家专项
 
 选择一到两个长期深入：
 
@@ -278,7 +356,7 @@ WebAssembly、WebGPU、Worker、PWA、WebRTC、浏览器扩展。
 
 ---
 
-## 九、推荐资源
+## 学习资源
 
 ### 书籍
 
