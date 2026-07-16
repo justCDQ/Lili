@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lili 技术教程写作"
+  short_description: "编写、扩写、审校并验证 Lili 路线图深度学习文章"
+  default_prompt: "Use $write-lili-learning-notes to expand and verify a Lili roadmap learning article."

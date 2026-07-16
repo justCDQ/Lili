@@ -300,8 +300,6 @@ button.removeAttribute("disabled");  // 也可以：删除 HTML 属性
 
 MDN 还会列出由其他规范或特定实现提供的 global attributes，例如 `part`、`exportparts`、`virtualkeyboardpolicy`。因此“HTML Living Standard 当前列出的属性”和“浏览器参考页收录的所有属性”可能不是完全相同的集合；使用非 Baseline 能力前必须查看兼容性，而不是只看属性是否出现在参考列表中。
 
-完整列表会继续变化。本文核对的 HTML Living Standard 页面最后更新于 2026-07-16，其中已经包含 `autocorrect`、`writingsuggestions`、`headingoffset` 和 `headingreset` 等较新的全局属性。应以 WHATWG 的 global attributes 章节和 MDN 属性参考为准，不把某一篇教程中的列表视为永久全集。
-
 ### 6.2 元素专属属性
 
 元素专属属性由元素的功能决定：
@@ -650,9 +648,3 @@ container.innerHTML = userInput; // 不可信输入可能形成 XSS
 - [MDN：HTML attribute reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes)（访问日期：2026-07-17）
 - [MDN：Void element](https://developer.mozilla.org/en-US/docs/Glossary/Void_element)（访问日期：2026-07-17）
 - [Nu HTML Checker](https://validator.w3.org/nu/)（访问日期：2026-07-17）
-
-## 参考的写作方式
-
-本文借鉴了你提供的文章按“属性作用、用途、示例和特殊规则”逐项展开的组织方式，但技术结论重新依据 HTML Living Standard 和 MDN 核对：
-
-- [HTML 进阶——常用标签及其属性](https://blog.csdn.net/weixin_43207208/article/details/154950794)（访问日期：2026-07-17）
