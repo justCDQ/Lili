@@ -26,6 +26,8 @@
 | 04 AI 工程 | 从模型 API 到 RAG、Agent 与评估体系 | [路线图](04-ai/roadmap.md) | [每日 AI 实验](04-ai/daily/README.md) | [笔记](04-ai/notes/README.md) | [项目](04-ai/projects.md) |
 | 05 后端与数据 | 从编程入门到分布式与云原生能力 | [路线图](05-backend-data/roadmap.md) | [每日算法题](05-backend-data/daily/README.md) | [笔记](05-backend-data/notes/README.md) | [项目](05-backend-data/projects.md) |
 
+五个方向当前已经形成 229 篇入门与初级笔记。统一覆盖范围、学习方式和维护约定见 [入门与初级知识库](learning-notes.md)。
+
 ## 一份持续演进的路线图
 
 这里没有固定的三年期限，也不以追赶进度为目标。技术、产品和我们的理解都会持续变化，因此路线图本身也是产品：学习、实践、记录、验证，再根据新证据迭代。
@@ -58,6 +60,7 @@
 ```text
 .
 ├── README.md
+├── learning-notes.md
 ├── 01-frontend/
 ├── 02-product/
 ├── 03-interaction-design/
