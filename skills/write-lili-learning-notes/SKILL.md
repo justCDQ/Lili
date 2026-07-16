@@ -21,7 +21,9 @@ Read [references/article-standard.md](references/article-standard.md) completely
 6. Add examples that can be executed, inspected, calculated, or followed. Never invent output.
 7. Add the smallest useful visual. For rendered UI or browser behavior, create a runnable example, render it in a real browser, inspect the DOM/state/errors, and save the resulting image in the repository.
 8. Validate links, code fences, local assets, examples, article structure, and repository formatting. Run `scripts/validate_note.py` on every changed note.
-9. Update the direction index and global counts only when adding, deleting, or splitting articles.
+9. Run `scripts/validate_code_blocks.py` with an explicit Node.js path when the notes contain JSON, JavaScript, or shell examples; compile TypeScript and other languages with their real toolchains when available.
+10. When a directory or stage is complete, run `scripts/audit_corpus.py` on the whole set to detect short notes and repeated long prose across articles.
+11. Update the direction index and global counts only when adding, deleting, or splitting articles.
 
 ## Hard rules
 
@@ -47,6 +49,8 @@ Read [references/article-standard.md](references/article-standard.md) completely
 Do not mark an article complete until:
 
 - Every heading and example has substantive content.
+- Beginner/junior notes normally reach at least 120 lines and 8 KB of real content; intermediate notes normally reach at least 200 lines and 12 KB. Falling below either floor requires expansion, not template padding.
+- A worked case includes concrete input/evidence, step-by-step processing, output, verification, and at least one failure branch.
 - Every factual statement that can change has been checked against a current primary source.
 - Every important term introduced by the roadmap item is defined and operationalized.
 - Code and commands are syntactically valid and safe in their stated context.

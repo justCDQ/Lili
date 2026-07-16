@@ -24,12 +24,24 @@ def validate(path: Path) -> list[str]:
     errors: list[str] = []
     text = path.read_text(encoding="utf-8")
 
-    if not text.startswith("# "):
+    body = re.sub(r"\A---\n.*?\n---\n+", "", text, count=1, flags=re.S)
+    if not body.startswith("# "):
         errors.append("缺少一级标题")
     if "## 来源" not in text:
         errors.append("缺少 ## 来源")
     if text.count("```") % 2:
         errors.append("代码围栏数量为奇数")
+
+    frontmatter = text[len("---\n"):text.find("\n---", 4)] if text.startswith("---\n") else ""
+    is_intermediate = bool(re.search(r"^stage:\s*intermediate\s*$", frontmatter, re.M))
+    minimum_lines = 200 if is_intermediate else 120
+    minimum_bytes = 12_000 if is_intermediate else 8_000
+    line_count = len(text.splitlines())
+    byte_count = len(text.encode("utf-8"))
+    if line_count < minimum_lines:
+        errors.append(f"正文过短：{line_count} 行，最低审计线为 {minimum_lines} 行")
+    if byte_count < minimum_bytes:
+        errors.append(f"内容过少：{byte_count} bytes，最低审计线为 {minimum_bytes} bytes")
     if re.search(r"\[\[[^\]]+\]\]", text):
         errors.append("包含 GitHub 无法解析的 Obsidian Wiki Link")
     if any(term in text for term in FORBIDDEN):
