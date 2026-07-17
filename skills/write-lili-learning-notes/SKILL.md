@@ -18,6 +18,7 @@ Read [references/article-standard.md](references/article-standard.md) completely
 3. Browse current primary sources. Prefer living standards, official documentation, specifications, original papers, authoritative public data, and source repositories. Use secondary material only to discover questions or improve organization.
 4. Reduce every claim to its prerequisites and mechanism. Check definitions, defaults, units, inheritance, state transitions, failure conditions, compatibility, deprecation, and version-specific behavior.
 5. Write or expand the article using the applicable template in `article-standard.md`.
+   When expanding an existing short note, restructure it into one continuous teaching path. Remove or merge the old summary sections; do not append a second explanation and case after the old template.
 6. Add examples that can be executed, inspected, calculated, or followed. Never invent output.
 7. Add the smallest useful visual. For rendered UI or browser behavior, create a runnable example, render it in a real browser, inspect the DOM/state/errors, and save the resulting image in the repository.
 8. Validate links, code fences, local assets, examples, article structure, and repository formatting. Run `scripts/validate_note.py` on every changed note.
@@ -28,6 +29,7 @@ Read [references/article-standard.md](references/article-standard.md) completely
 ## Hard rules
 
 - Explain what the concept is, why it exists, how it works, how to use it, special behavior, failure modes, boundaries, verification, and related knowledge.
+- Keep one explanation path per concept. Repeated “brief version + expanded version”, duplicate cases, and appended template sections are incomplete even when the file passes length checks.
 - Expand named attributes, parameters, methods, states, metrics, rules, or variants individually when readers need them to use the concept.
 - State the actual rule directly. Do not include research-process narration, source-selection commentary, writing references, or remarks meant only for maintainers.
 - Do not add analogies, motivational filler, scene-setting prose, fake quotations, or unsupported absolutes.
