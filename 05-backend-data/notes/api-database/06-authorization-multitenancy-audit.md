@@ -73,6 +73,7 @@ CREATE TABLE expenses (
     expense_id uuid NOT NULL,
     owner_id uuid NOT NULL,
     status text NOT NULL,
+    external_ref text,
     amount_cents bigint NOT NULL CHECK (amount_cents >= 0),
     PRIMARY KEY (tenant_id, expense_id)
 );

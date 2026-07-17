@@ -32,7 +32,7 @@ WHERE account_id > $1
 
 若计算必须基于读到的旧版本，带版本条件：
 
-```sql
+```text
 UPDATE accounts
 SET target = $computed, migration_version = 2
 WHERE account_id = $id
@@ -46,7 +46,7 @@ WHERE account_id = $id
 
 选择不可变或单调主键 keyset，不用不断变大的 OFFSET：
 
-```sql
+```text
 SELECT account_id
 FROM accounts
 WHERE account_id > $last

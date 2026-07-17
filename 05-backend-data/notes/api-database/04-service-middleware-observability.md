@@ -54,14 +54,16 @@ func Chain(h http.Handler, m ...Middleware) http.Handler {
 | 下游客户端 timeout | 连接、TLS、响应头、总请求 | 不应只依赖默认值 |
 
 ```go
-srv := &http.Server{
-    Addr:              ":8080",
-    Handler:           handler,
-    ReadHeaderTimeout: 5 * time.Second,
-    ReadTimeout:       15 * time.Second,
-    WriteTimeout:      30 * time.Second,
-    IdleTimeout:       60 * time.Second,
-    MaxHeaderBytes:    1 << 20,
+func newServer(handler http.Handler) *http.Server {
+    return &http.Server{
+        Addr:              ":8080",
+        Handler:           handler,
+        ReadHeaderTimeout: 5 * time.Second,
+        ReadTimeout:       15 * time.Second,
+        WriteTimeout:      30 * time.Second,
+        IdleTimeout:       60 * time.Second,
+        MaxHeaderBytes:    1 << 20,
+    }
 }
 ```
 

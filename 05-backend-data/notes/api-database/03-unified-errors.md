@@ -113,14 +113,16 @@ func writeProblem(w http.ResponseWriter, p Problem) {
 领域错误使用 `errors.Is/As` 识别，而不是比较字符串：
 
 ```go
-switch {
-case errors.Is(err, ErrOrderNotFound):
-    return Problem{Type: base + "/resource-not-found", Title: "Resource not found", Status: 404}
-case errors.Is(err, ErrVersionConflict):
-    return Problem{Type: base + "/stale-version", Title: "Resource version is stale", Status: 412}
-default:
-    logger.Error("request failed", "trace_id", traceID, "error", err)
-    return Problem{Type: base + "/internal-error", Title: "Internal server error", Status: 500, TraceID: traceID}
+func problemFor(err error, base, traceID string, logger *slog.Logger) Problem {
+    switch {
+    case errors.Is(err, ErrOrderNotFound):
+        return Problem{Type: base + "/resource-not-found", Title: "Resource not found", Status: 404}
+    case errors.Is(err, ErrVersionConflict):
+        return Problem{Type: base + "/stale-version", Title: "Resource version is stale", Status: 412}
+    default:
+        logger.Error("request failed", "trace_id", traceID, "error", err)
+        return Problem{Type: base + "/internal-error", Title: "Internal server error", Status: 500, TraceID: traceID}
+    }
 }
 ```
 
