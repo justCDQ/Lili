@@ -6,36 +6,156 @@
 
 直接双击 `file:` 页面缺少真实 HTTP 环境，模块、请求和路径行为可能不同；本地服务器更接近生产访问方式。
 
-## 实际使用
+## 从源码到公开 URL
+
+```mermaid
+flowchart LR
+    A["源码与依赖锁文件"] --> B["安装依赖"]
+    B --> C["开发服务器"]
+    B --> D["生产构建"]
+    D --> E["dist 等构建产物"]
+    E --> F["部署到托管环境"]
+    F --> G["DNS 与 TLS"]
+    G --> H["公开 HTTPS URL"]
+    H --> I["冒烟检查与监控"]
+```
+
+开发服务器优化的是反馈速度，可能在内存中转换模块、注入热更新客户端并显示详细错误。生产构建通常执行转译、资源指纹、压缩和代码分割；最终行为由具体工具配置决定，不能假定所有构建都会完成同一组优化。
+
+## 开发、构建与预览命令
 
 ```sh
-npx serve .
-# 或项目脚本
 npm run dev
 npm run build
+npm run preview
 ```
+
+运行第三方 `npx` 包可能下载并执行代码。应优先使用项目已锁定的 `npm run` 脚本；若必须临时运行工具，先核对包名、版本和来源。
 
 开发时确认终端输出的 host/port；构建后检查 `dist/`，用静态服务器预览而非直接打开。部署时只上传约定产物，配置正确入口、404 回退、缓存和 HTTPS，最后用公开 URL 检查 Network 与证书。
 
-## 关键规则
+## 开发服务器、产物与 HTTPS 规则
 
 - 开发服务器通常不适合公网生产：性能、安全和错误输出配置不同。
 - 构建产物是生成文件，应由同一源码和锁文件重建；是否提交由项目约定。
 - HTTPS 不保证站点业务可信，只保护客户端到证书对应服务器之间的传输。
 - HTTPS 页面加载 HTTP 子资源会形成 mixed content，并可能被浏览器阻止。
 
-## 常见错误与边界
+### 部署检查面
+
+| 检查项 | 可观察结果 |
+| --- | --- |
+| 入口与路由 | `/` 和直接访问深层 URL 都返回预期内容 |
+| 静态资源路径 | JS、CSS、图片在目标 base path 下无 404 |
+| 缓存 | 带内容哈希资源可长期缓存，HTML 能及时更新 |
+| 压缩 | 文本资源使用服务器支持的内容编码 |
+| HTTPS | 证书域名匹配、链有效、无 mixed content |
+| 配置 | 生产 API 地址正确，浏览器包不包含秘密 |
+| 错误恢复 | 404、离线和服务端失败有明确反馈 |
+
+## 子路径、SPA、变量与缓存失败模式
 
 部署子路径时绝对 `/assets/...` 可能指向域名根。单页应用直接刷新深层 URL 需要服务器回退配置。环境变量嵌入前端构建后对用户可见。开发环境缓存和生产缓存策略不同。
 
-## 补充知识
+## 证书、托管方式与安全边界
 
 TLS 证书需覆盖域名并在有效期内；自动续期仍需监控。静态托管、CDN、容器和服务器都是部署方式，选择取决于是否需要动态执行环境。
 
+HTTPS 提供传输机密性、完整性和对证书所标识服务器的认证，不证明站点内容诚实或应用没有漏洞。TLS 在 HTTP 语义之前建立安全连接；之后仍需正确的认证、授权、输入校验、Cookie 属性和内容安全策略。
+
+## 完整部署案例的验收目标
+
+构建一个三页静态站点并部署到带子路径的 HTTPS 地址。完成标准：全新克隆后按锁文件可重建；预览产物与公开地址行为一致；Network 无 404 和 mixed content；直接刷新深层 URL有效；证书有效；页面 HTML 与带哈希资源采用不同缓存策略；仓库和构建产物中没有秘密。
+
+## 完整案例：部署到 `/roadmap/` 子路径
+
+输入是一个 Vite 静态应用，公开目标为 `https://example.com/roadmap/`，而不是域名根。任务覆盖本地开发、生产构建、产物预览、托管配置、HTTPS 和发布后验证。
+
+### 1. 固定构建输入
+
+```sh
+node --version
+npm --version
+git status --short
+npm ci
+npm test
+```
+
+工作区应只含计划发布的修改。`npm ci` 依赖已提交锁文件；测试失败时停止部署，不用旧 dist 冒充新构建。
+
+### 2. 配置公开基路径
+
+Vite 配置示例：
+
+```js
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  base: '/roadmap/',
+});
+```
+
+`base` 影响构建产物中的资源 URL。页面源码仍应使用工具支持的导入方式，避免把 `/assets/...` 硬编码成域名根。配置改变后必须重新构建，不能手改 dist 文件维持两份真相。
+
+### 3. 构建并审计产物
+
+```sh
+npm run build
+find dist -maxdepth 3 -type f -print
+```
+
+检查入口 HTML、带哈希 JS/CSS、图片和 sourcemap 策略。构建成功只表示工具完成，不证明资源路径和运行时 API 正确。可搜索泄漏内容：
+
+```sh
+rg -n 'localhost|BEGIN PRIVATE KEY|api_secret' dist
+```
+
+无匹配是基础检查，不能证明不存在其他形式秘密；前端产物原则上都可被公开读取。
+
+### 4. 用生产产物预览
+
+```sh
+npm run preview
+```
+
+使用终端给出的 HTTP URL访问，不双击 `file:`。在 Network 禁用缓存首次加载，确认 HTML、JS、CSS 和图片无 404；刷新后检查缓存行为；直接访问应用内部路由，确认托管策略是否需要 SPA fallback。
+
+开发服务器成功不等于预览成功。开发服务器可能自动回退和转换资源，预览才读取真正 dist。
+
+### 5. 上传与响应配置
+
+部署目标应把 dist 内容映射到 `/roadmap/`。推荐缓存原则：
+
+| 资源 | 缓存策略方向 | 原因 |
+| --- | --- | --- |
+| HTML | 短缓存或每次验证 | 需要尽快指向新哈希资源 |
+| 带内容哈希 JS/CSS | 长期 immutable | 内容变化会生成新 URL |
+| 未哈希 favicon/manifest | 按更新需求设置 | URL 不变，不能无限假设内容不变 |
+| 私人 API | 按用户和业务语义 | 不能套用公共静态缓存 |
+
+若先发布 HTML 后资源尚未上传，用户会请求不存在的新哈希文件；发布系统应采用原子切换或先上传资源再切入口，并保留旧哈希资源一段时间。
+
+### 6. HTTPS 验证
+
+浏览器地址栏证书有效只是第一步。Network 检查所有子资源均使用 HTTPS，无 mixed content；Security 面板或命令检查证书域名和有效期。自动续期应有监控，避免只在到期后由用户发现。
+
+HTTPS 不隐藏访问域名和全部流量元数据，也不替代应用认证。前端调用 API 时仍需正确 Cookie、CORS、CSRF 和授权策略。
+
+### 7. 发布后冒烟检查
+
+从无缓存窗口访问公开 URL，完成首页加载、导航、深层刷新、表单错误、网络失败和窄屏操作。记录构建版本或提交哈希，使错误监控能映射到源码版本。
+
+失败分支：资源 404 通常指向 base path 或上传结构错误；刷新深层 URL 404 需要服务器回退到入口但不能吞掉真实静态资源 404；旧 HTML 引用已删除资源说明缓存/发布顺序错误；证书名称不匹配需要修复证书和域名配置，不能让用户忽略警告。
+
+### 8. 回滚与验收输出
+
+部署前准备上一个可用产物或版本指针。回滚要恢复 HTML 与对应哈希资源集合，不能只替换一个文件。验收输出包括构建日志、产物清单、公开 URL、Network 结果、证书状态、错误监控版本和回滚步骤。
+
+完成标准是：全新克隆可重建相同逻辑产物；公开 `/roadmap/` 与预览一致；无资源和深链 404；缓存头匹配资源类型；TLS 有效且无 mixed content；失败可回滚并从监控确认恢复。
+
 ## 来源
 
-- [MDN：Publishing your website](https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Your_first_website/Publishing_your_website)
-- [MDN：HTTPS](https://developer.mozilla.org/en-US/docs/Glossary/HTTPS)
-- [MDN：Mixed content](https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content)
-
-访问日期：2026-07-16。
+- [MDN：Publishing your website](https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Your_first_website/Publishing_your_website) — 访问日期：2026-07-17
+- [MDN：HTTPS](https://developer.mozilla.org/en-US/docs/Glossary/HTTPS) — 访问日期：2026-07-17
+- [MDN：Mixed content](https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content) — 访问日期：2026-07-17
+- [IETF RFC 8446：TLS 1.3](https://www.rfc-editor.org/rfc/rfc8446) — 访问日期：2026-07-17
