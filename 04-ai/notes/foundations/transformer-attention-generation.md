@@ -2,21 +2,23 @@
 type: ai-note
 stage: beginner
 topic: transformer-attention-generation
-verified: 2026-07-16
+verified: 2026-07-17
 tags: [ai, transformer, attention, qkv, positional-encoding, autoregressive]
 ---
 
 # Transformer、Attention、Q/K/V、位置与自回归生成
 
-## 是什么
+## 1. 概念、用途与工程边界
+
+### 定义
 
 Transformer 是以 Attention 和前馈网络为核心的序列模型架构。Self-Attention 让序列中每个位置根据其他可见位置计算加权信息。输入表示通过不同线性投影生成 Query、Key 和 Value：Query 与 Key 决定权重，权重再聚合 Value。位置信息用于区分 Token 顺序。自回归语言模型按条件概率一次生成下一个 Token，并把已生成 Token 作为后续上下文。
 
-## 为什么需要
+### 为什么需要
 
 这些机制解释了模型为何受上下文、顺序、Token 数和解码策略影响，也解释了生成输出为何不是直接查询事实表。应用工程不需要从零训练 Transformer，但需要理解上下文限制和生成误差来源。
 
-## 关键特性
+### 核心特性
 
 Scaled dot-product Attention 的核心形式：
 
@@ -31,7 +33,7 @@ Attention(Q,K,V) = softmax(QKᵀ / √dₖ)V
 - 自回归生成在每一步产生下一 Token 分布，再按贪心、采样或搜索策略选择 Token。
 - Attention 权重不是可靠的自然语言解释或事实依据。
 
-## 实际怎么使用
+### 工程使用
 
 应用层面的直接影响：
 
@@ -41,7 +43,7 @@ Attention(Q,K,V) = softmax(QKᵀ / √dₖ)V
 4. 温度和采样控制输出分布，不修复缺失知识、错误上下文和权限问题。
 5. 要求事实可靠时使用检索、工具、引用和校验，不把语言流畅度当作真实性。
 
-## 常见错误与边界
+### 常见错误与边界
 
 - 把 Attention 解释为模型“理解”或可直接读取的推理过程。
 - 认为模型逐字从训练数据复制；生成基于参数化概率分布，仍可能记忆或复现训练片段，但机制不能简单等同数据库检索。
@@ -49,14 +51,112 @@ Attention(Q,K,V) = softmax(QKᵀ / √dₖ)V
 - 用温度 `0` 承诺完全确定和永远正确。
 - 把 Q/K/V 当作固定的人类可读“问题、键、答案”；它们是学习得到的向量投影。
 
-## 补充知识
+### 延伸机制
 
 推理时 KV Cache 保存先前 Token 的 Key/Value，减少重复计算，但占用显存并影响长上下文服务成本。不同模型可能采用稀疏、滑动窗口或其他 Attention 变体。
 
+## 单个自回归步骤
+
+```mermaid
+flowchart LR
+    A["Token 与位置表示"] --> B["多层 Attention + 前馈网络"]
+    B --> C["下一 Token logits"]
+    C --> D["解码策略"]
+    D --> E["选定下一 Token"]
+    E --> A
+```
+
+每一步输出的是词表上的数值分布；解码策略选择 Token，再把它加入后续输入。模型不会在生成开始时先固定整段自然语言答案。
+
+## Q、K、V 与生成参数
+
+| 名称 | 作用 | 不能推出 |
+| --- | --- | --- |
+| Query | 当前位置用于匹配的信息表示 | 人类可读问题 |
+| Key | 被匹配位置的索引表示 | 数据库主键 |
+| Value | 按权重聚合的内容表示 | 事实答案 |
+| 因果 Mask | 禁止看到未来位置 | 输出事实正确 |
+| Temperature | 缩放 logits 后影响分布 | 修复知识和权限缺失 |
+| KV Cache | 复用先前位置的 K/V 计算 | 无限长期记忆 |
+
+## 可计算示例
+
+若两个候选 Token 的 logits 为 `[2, 1]`，softmax 概率约为 `[0.731, 0.269]`。Temperature 为 2 时先变成 `[1, 0.5]`，概率约为 `[0.622, 0.378]`，分布更平；Temperature 为 0.5 时变成 `[4, 2]`，概率约为 `[0.881, 0.119]`，分布更尖。具体 API 是否支持 Temperature 及其范围由模型供应商决定。
+
+## 验证与排错
+
+1. 区分模型架构事实、供应商服务参数和应用约定。
+2. 对同一输入记录完整模型 ID、解码参数和多次 Trial。
+3. 长上下文退化时检查相关片段位置、干扰信息和截断，不只增加窗口。
+4. 事实任务使用检索、工具和引用验证，不能用 Attention 权重证明答案依据。
+
+## 练习与完成标准
+
+手算两个 logits 在 Temperature 1 和 2 下的 softmax，并说明概率变化。验收：正确解释 Q/K/V、因果 Mask、自回归和 KV Cache；明确 Temperature 不保证正确性；给出一个用外部证据验证事实输出的流程。
+
+## 完整案例：从上下文到下一个 Token
+
+### 输入
+
+假设词表只含 `A`、`B`、`C`，当前步骤得到 logits `[2.0, 1.0, 0.0]`。该简化输入只展示解码，不代表真实模型词表、隐藏层或供应商采样实现。
+
+### 逐步处理
+
+1. 当前 Token 表示加入位置信息后进入 Transformer 层。
+2. 每个 Attention Head 计算 Q 与 K 的缩放点积、应用因果 Mask、经过 softmax 后聚合 V。
+3. 多头结果与前馈网络产生当前位置隐藏表示，输出投影得到 logits。
+4. Temperature 为 1 时，softmax 概率约为 `[0.665, 0.245, 0.090]`。
+5. 若使用贪心选择，下一 Token 为 `A`；若使用随机采样，`B` 和 `C` 仍可能被选中。
+6. 选中的 Token 加入上下文，下一步复用可用的 KV Cache 并再次计算分布。
+
+### 输出
+
+```json
+{
+  "logits": [2.0, 1.0, 0.0],
+  "temperature": 1.0,
+  "probabilities": [0.665, 0.245, 0.09],
+  "greedy_next_token": "A"
+}
+```
+
+### 验证
+
+- 三个概率之和在浮点容差内等于 1。
+- Temperature 降低后分布变尖，提高后分布变平。
+- 因果 Mask 的未来位置权重在 softmax 后为 0。
+- 重复 API 调用是否确定由具体模型与服务实现决定，不能从 Temperature 单独推断。
+
+### 失败分支
+
+即使贪心选择每步最高概率 Token，完整回答也可能事实错误，因为概率来自模型参数和上下文，不是事实数据库。事实任务需要检索或 Tool 提供证据，并由应用校验引用与业务规则。Attention 权重也不能证明模型使用了哪条事实依据。
+
+## 边界检查矩阵
+
+1. Token 表示与人类单词边界不一定一致。
+2. 位置信息方案由具体模型架构定义。
+3. Q/K/V 是学习投影，不是可读语义标签。
+4. 缩放项 `√dₖ` 控制点积数值尺度。
+5. softmax 把可见位置分数转为归一化权重。
+6. 因果 Mask 阻止访问未来 Token。
+7. Multi-head 使用多组投影后合并。
+8. 前馈网络在各位置独立应用共享参数。
+9. logits 经过解码策略才产生下一个 Token。
+10. KV Cache 减少重复计算但增加内存占用。
+11. 采样参数支持范围与默认值由 API 定义。
+12. 生成概率不能替代事实、权限或业务验证。
+
+## Attention 计算中的形状与 Mask
+
+设单个 Head 的序列长度为 `n`，Key 维度为 `dₖ`，则 Q 和 K 可表示为 `n × dₖ`，`QKᵀ` 得到 `n × n` 的位置间分数矩阵。除以 `√dₖ` 后应用 Mask，再沿可见 Key 维度做 softmax。与 V 相乘后，每个位置得到加权表示。真实实现会批处理、多头并行并采用数值稳定优化，但数学对象的角色不变。
+
+Padding Mask 与因果 Mask 解决不同问题：Padding Mask 排除补齐位置，因果 Mask 排除未来位置。是否需要、如何组合取决于架构和任务。把 Mask 写错会让训练看到不应看到的 Token，或让有效输入无法参与计算；应用开发者通常不直接设置底层 Mask，但在阅读模型架构和排查上下文行为时应区分。
+
+自回归生成的停止还受结束 Token、输出上限、停止序列、工具调用和服务策略影响。具体字段、默认值和可用范围属于模型 API 契约。应用应记录完成状态和停止原因，不能把网络连接结束等同于模型正常生成结束。
+
 ## 来源
 
-- [Vaswani et al.：Attention Is All You Need](https://arxiv.org/abs/1706.03762)（访问日期：2026-07-16）
-- [NeurIPS：Attention Is All You Need](https://papers.nips.cc/paper/7181-attention-is-all-you-need)（访问日期：2026-07-16）
-- [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/en/chapter1/4)（访问日期：2026-07-16）
-- [Google：Introduction to Large Language Models](https://developers.google.com/machine-learning/resources/intro-llms)（访问日期：2026-07-16）
-
+- [Vaswani et al.：Attention Is All You Need](https://arxiv.org/abs/1706.03762)（访问日期：2026-07-17）
+- [PyTorch：Scaled Dot Product Attention](https://docs.pytorch.org/docs/stable/generated/torch.nn.functional.scaled_dot_product_attention.html)（访问日期：2026-07-17）
+- [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/en/chapter1/4)（访问日期：2026-07-17）
+- [Google：Introduction to Large Language Models](https://developers.google.com/machine-learning/resources/intro-llms)（访问日期：2026-07-17）
