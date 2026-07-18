@@ -96,6 +96,17 @@
 - [x] [无答案、过期资料、冲突来源与权限测试](rag-evaluation/04-no-answer-stale-conflict-permission-tests.md)
 - [x] [Chunk、检索与模型变更后的 RAG 回归](rag-evaluation/05-rag-regression.md)
 
+## 阶段六：Tool Calling 与 MCP
+
+### Tool 设计
+
+- [x] [清晰的 Tool 名称与描述](tool-design/01-clear-tool-names-and-descriptions.md)
+- [x] [Tool 单一职责、简洁 Schema 与稳定输出](tool-design/02-single-responsibility-schema-stable-output.md)
+- [x] [Tool 输入验证、超时、有限重试与幂等](tool-design/03-validation-timeout-retry-idempotency.md)
+- [x] [只读与写入 Tool 分离](tool-design/04-separate-read-and-write-tools.md)
+- [x] [写操作的影响范围展示与确认](tool-design/05-write-impact-and-confirmation.md)
+- [x] [Tool 权限、审计、脱敏与错误隔离](tool-design/06-permission-audit-redaction-error-isolation.md)
+
 ## 写作与维护要求
 
 - 资料优先级：规范与官方文档 → 论文/模型卡 → 可复现实验 → 高质量工程资料。
