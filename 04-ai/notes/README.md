@@ -111,6 +111,10 @@
 
 - [x] [MCP Host、Client 与 Server](mcp/01-host-client-server.md)
 - [x] [MCP Transport、Tools、Resources、Prompts 与 Capabilities](mcp/02-transports-primitives-capabilities.md)
+- [x] [使用 MCP Inspector 调试 Server](mcp/03-inspector-debugging.md)
+- [x] [开发本地 MCP Server](mcp/04-build-local-server.md)
+- [x] [MCP 认证、授权与日志](mcp/05-auth-authorization-logging.md)
+- [x] [限制 MCP 文件、URL、命令访问与 SSRF](mcp/06-files-urls-commands-ssrf.md)
 
 ## 写作与维护要求
 
