@@ -18,7 +18,7 @@ flowchart LR
  D --> E["业务发布与审计"]
 ```
 
-对象存在不代表业务有效；数据库中的所有权、状态、object version 和校验结果决定它能否被引用。
+Multipart Upload 的恢复事实是服务端保存的 upload ID 与 part 清单，发布事实是最终对象版本和 manifest 指针。ETag 在分段上传、加密或不同实现下不一定是内容 MD5，完整性必须使用明确的 checksum；CDN 缓存也不能代替源站版本记录。
 
 ## 2. CreateMultipartUpload
 
@@ -198,7 +198,7 @@ flowchart LR
 
 ### 恢复要求
 
-失败后以数据库 upload/job 状态和对象 version 为准，重复任务使用 generation/条件更新；孤儿对象由清单与生命周期受控回收，不能根据用户文件名删除。
+断线恢复先用 upload ID 分页执行 `ListParts`，将服务端 part number、ETag/checksum 与本地清单比较，只重传缺失或校验不符的 part。完成请求必须提交有序清单并以 generation 条件更新一次；过期 generation 不得发布，取消后主动 abort，生命周期只负责兜底回收未完成 parts。
 
 ## 14. 完整案例：静态资源发布与回滚
 
@@ -228,7 +228,7 @@ Web资源全球CDN，发布后不可出现HTML引用旧/新混合，可快速回
 
 ### 恢复要求
 
-失败后以数据库 upload/job 状态和对象 version 为准，重复任务使用 generation/条件更新；孤儿对象由清单与生命周期受控回收，不能根据用户文件名删除。
+发布中断时保持旧 manifest 指针不变，已经上传的内容 hash 资源可安全复用。确认新版本全部可从源站读取后再切换指针；回滚只恢复旧 manifest。清理任务从仍被 manifest 引用的版本集合计算保留集，不能按上传时间直接删除旧资源。
 
 ## 15. 故障注入矩阵
 
@@ -256,33 +256,33 @@ Web资源全球CDN，发布后不可出现HTML引用旧/新混合，可快速回
 9. `origin_bytes`：按环境、操作和低基数结果分类，定义单位、采样点、SLO与告警窗口。
 10. `checksum_mismatch`：按环境、操作和低基数结果分类，定义单位、采样点、SLO与告警窗口。
 
-按 upload ID/object ID 从业务记录、签名、对象metadata/version、扫描任务到下载审计逐跳核对；签名query和敏感正文不进入普通日志。
+大文件故障按业务 generation 和 upload ID 检查 `ListParts` 分页、重复 part、完成清单、最终 object version 与 checksum；静态发布故障再核对 manifest 指针、源站响应、CDN cache key、`Age` 和命中层级。先区分源站对象错误与边缘陈旧缓存，再决定续传、回滚或失效缓存。
 
 ## 17. S3兼容实现边界
 
-1. Multipart 完成与版本发布依赖的一致性模型必须以实际对象存储产品和部署版本的官方文档/集成测试确认；S3 API兼容不自动表示语义完全一致。
-2. 条件请求 必须以实际对象存储产品和部署版本的官方文档/集成测试确认；S3 API兼容不自动表示语义完全一致。
-3. ETag/Checksum 必须以实际对象存储产品和部署版本的官方文档/集成测试确认；S3 API兼容不自动表示语义完全一致。
-4. 版本与delete marker 必须以实际对象存储产品和部署版本的官方文档/集成测试确认；S3 API兼容不自动表示语义完全一致。
-5. multipart最小part/part数 必须以实际对象存储产品和部署版本的官方文档/集成测试确认；S3 API兼容不自动表示语义完全一致。
-6. 生命周期执行时间 必须以实际对象存储产品和部署版本的官方文档/集成测试确认；S3 API兼容不自动表示语义完全一致。
-7. IAM/Policy语法 必须以实际对象存储产品和部署版本的官方文档/集成测试确认；S3 API兼容不自动表示语义完全一致。
-8. 加密/KMS 必须以实际对象存储产品和部署版本的官方文档/集成测试确认；S3 API兼容不自动表示语义完全一致。
-9. 事件通知 必须以实际对象存储产品和部署版本的官方文档/集成测试确认；S3 API兼容不自动表示语义完全一致。
-10. List分页 必须以实际对象存储产品和部署版本的官方文档/集成测试确认；S3 API兼容不自动表示语义完全一致。
+1. 固化最小/最大 part 大小、最大 part 数与最后一段例外，按这些限制计算分段策略。
+2. `ListParts` 可能分页；续传测试必须覆盖超过单页的上传，不能把首屏结果当完整清单。
+3. 验证重复上传同一 part number 的覆盖规则，以及完成清单对顺序、ETag 和 checksum 的要求。
+4. 明确 `CompleteMultipartUpload` 超时后的判定方式：先查询最终对象，不能直接创建第二个上传。
+5. ETag 是否能作为 MD5 取决于分段与加密方式；跨产品校验统一使用显式 checksum。
+6. 测试 versioning 开启后的覆盖、删除、delete marker 和指定 version 读取，保留业务发布的 version ID。
+7. 生命周期规则分别验证未完成 multipart、当前版本和非当前版本；执行是异步的，不能承担同步取消。
+8. CDN cache key 要明确是否包含 query、Host、压缩协商与选定 headers，避免不同资源误共享缓存。
+9. 对 HTML/manifest 使用短缓存或条件请求，对内容 hash 资源使用 immutable；分别验证 `ETag`/`Last-Modified` 行为。
+10. 演练 manifest 切换、边缘缓存未刷新和旧版本回滚，确保生命周期不会删除仍可被回滚指针引用的对象。
 
 ## 18. 生产检查
 
-1. bucket/key由服务端控制；Multipart Upload、断点续传、版本、生命周期、CDN 与 ETag 的负责人提供可重复验证证据。
-2. 所有业务读取重新授权；Multipart Upload、断点续传、版本、生命周期、CDN 与 ETag 的负责人提供可重复验证证据。
-3. 上传有大小/速率/checksum；Multipart Upload、断点续传、版本、生命周期、CDN 与 ETag 的负责人提供可重复验证证据。
-4. 未验证对象隔离；Multipart Upload、断点续传、版本、生命周期、CDN 与 ETag 的负责人提供可重复验证证据。
-5. 版本和删除策略明确；Multipart Upload、断点续传、版本、生命周期、CDN 与 ETag 的负责人提供可重复验证证据。
-6. multipart孤儿可清理；Multipart Upload、断点续传、版本、生命周期、CDN 与 ETag 的负责人提供可重复验证证据。
-7. 凭据最小权限且可轮换；Multipart Upload、断点续传、版本、生命周期、CDN 与 ETag 的负责人提供可重复验证证据。
-8. 敏感URL不进日志；Multipart Upload、断点续传、版本、生命周期、CDN 与 ETag 的负责人提供可重复验证证据。
-9. 故障有重试预算与幂等；Multipart Upload、断点续传、版本、生命周期、CDN 与 ETag 的负责人提供可重复验证证据。
-10. 备份/恢复和隐私删除已演练；Multipart Upload、断点续传、版本、生命周期、CDN 与 ETag 的负责人提供可重复验证证据。
+1. part 大小、并发数和最大 part 数由文件大小与产品限制计算，并设客户端内存/带宽上限。
+2. 续传以服务端 `ListParts` 完整分页结果为准，缺失与 checksum 不符的 part 才重传。
+3. complete 请求使用有序清单，超时后先 HEAD 最终对象，避免盲目创建第二个 multipart。
+4. 最终对象保存 version 与显式 checksum，不把 multipart ETag 解释为内容 MD5。
+5. 取消路径主动 abort，未完成 multipart 的数量、字节和最老年龄都有告警。
+6. 生命周期分别覆盖未完成上传、非当前版本和孤儿 hash 资源，并验证不会删除回滚依赖。
+7. 静态资源以内容 hash key 不可变发布，HTML/manifest 是唯一可切换发布指针。
+8. CDN cache key、TTL、条件请求与压缩变体有集成测试，能区分 edge miss 与 origin error。
+9. 发布中断保留旧 manifest；回滚测试证明无需覆盖资源或大范围 purge。
+10. 版本恢复、delete marker、生命周期延迟与 CDN 陈旧缓存纳入定期故障演练。
 
 ## 19. 综合练习与验收
 
