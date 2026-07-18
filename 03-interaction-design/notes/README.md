@@ -1,6 +1,6 @@
-# 交互设计入门与初级学习笔记
+# 交互设计入门、初级与中级学习笔记
 
-本目录覆盖 [交互设计 Roadmap](../roadmap.md) 的阶段零、阶段一和阶段二。每篇对应一个独立路线图条目；日常产品任务分析仍放在 [`daily/`](../daily/README.md)。
+本目录覆盖 [交互设计 Roadmap](../roadmap.md) 的阶段零至阶段五。每篇对应一个独立知识点；日常产品任务分析仍放在 [`daily/`](../daily/README.md)。
 
 ## 阅读顺序
 
@@ -8,6 +8,9 @@
 2. `principles/`：掌握分析设计决策所需的基础原则及适用边界。
 3. `deconstruction/`：对真实任务进行可复现拆解、比较和重新设计。
 4. `validation/`：使用公开证据、走查、审计与原型验证方案。
+5. `information-architecture/`：建立、审计、重组并验证复杂产品结构。
+6. `flows-states/`：为流程中的正常、异常、中断和恢复状态建立契约。
+7. `interaction-patterns/`：按导航、输入、数据、反馈、操作和协作建立模式库。
 
 ## 阶段零：交互设计基础
 
@@ -64,6 +67,91 @@
 - [可选的可用性测试：增强证据而非学习准入](validation/13-optional-usability-testing.md)
 - [根据证据迭代并维护假设清单](validation/14-evidence-iteration-assumption-log.md)
 
+## 阶段三：信息架构
+
+- [绘制复杂产品的现有站点地图](information-architecture/01-current-sitemap.md)
+- [审计重复、混乱与层级过深的入口](information-architecture/02-entry-problem-audit.md)
+- [按任务、角色或业务对象重新分类](information-architecture/03-reclassify-task-role-object.md)
+- [设计顶部、侧边、Tabs、面包屑与搜索的边界](information-architecture/04-navigation-boundaries.md)
+- [验证目标功能是否容易找到](information-architecture/05-findability-validation.md)
+
+## 阶段四：用户流程与状态
+
+- [初始状态](flows-states/01-initial.md)
+- [空状态](flows-states/02-empty.md)
+- [加载状态](flows-states/03-loading.md)
+- [成功状态](flows-states/04-success.md)
+- [失败状态](flows-states/05-failure.md)
+- [部分成功状态](flows-states/06-partial-success.md)
+- [无权限状态](flows-states/07-no-permission.md)
+- [离线状态](flows-states/08-offline.md)
+- [数据过期状态](flows-states/09-stale-data.md)
+- [取消状态](flows-states/10-cancel.md)
+- [重试状态](flows-states/11-retry.md)
+- [并发冲突状态](flows-states/12-concurrent-conflict.md)
+
+## 阶段五：交互模式库
+
+### 导航模式
+
+- [Sidebar 侧边导航](interaction-patterns/navigation/sidebar.md)
+- [Top Navigation 顶部导航](interaction-patterns/navigation/top-navigation.md)
+- [Tabs 标签页](interaction-patterns/navigation/tabs.md)
+- [Breadcrumb 面包屑](interaction-patterns/navigation/breadcrumb.md)
+- [Command Palette 命令面板](interaction-patterns/navigation/command-palette.md)
+- [Stepper 步骤器](interaction-patterns/navigation/stepper.md)
+
+### 输入模式
+
+- [Form 表单](interaction-patterns/input/form.md)
+- [Inline Edit 行内编辑](interaction-patterns/input/inline-edit.md)
+- [Auto Complete 自动完成](interaction-patterns/input/autocomplete.md)
+- [Tag Input 标签输入](interaction-patterns/input/tag-input.md)
+- [Date Picker 日期选择](interaction-patterns/input/date-picker.md)
+- [Upload 文件上传](interaction-patterns/input/upload.md)
+- [Rich Text Editor 富文本编辑器](interaction-patterns/input/rich-text-editor.md)
+
+### 数据模式
+
+- [Table 数据表格](interaction-patterns/data/table.md)
+- [List 列表](interaction-patterns/data/list.md)
+- [Card 卡片](interaction-patterns/data/card.md)
+- [Tree 树形数据](interaction-patterns/data/tree.md)
+- [Timeline 时间线](interaction-patterns/data/timeline.md)
+- [Dashboard 仪表盘](interaction-patterns/data/dashboard.md)
+- [Chart 图表](interaction-patterns/data/chart.md)
+
+### 反馈模式
+
+- [Toast 轻提示](interaction-patterns/feedback/toast.md)
+- [Alert 警示](interaction-patterns/feedback/alert.md)
+- [Inline Error 行内错误](interaction-patterns/feedback/inline-error.md)
+- [Progress 进度](interaction-patterns/feedback/progress.md)
+- [Skeleton 骨架屏](interaction-patterns/feedback/skeleton.md)
+- [Empty State 空状态](interaction-patterns/feedback/empty-state.md)
+- [Result Page 结果页](interaction-patterns/feedback/result-page.md)
+
+### 操作模式
+
+- [Create 创建](interaction-patterns/operations/create.md)
+- [Edit 编辑](interaction-patterns/operations/edit.md)
+- [Delete 删除](interaction-patterns/operations/delete.md)
+- [Batch 批量操作](interaction-patterns/operations/batch.md)
+- [Drag 拖拽](interaction-patterns/operations/drag.md)
+- [Undo 撤销](interaction-patterns/operations/undo.md)
+- [Retry 重试](interaction-patterns/operations/retry.md)
+- [Save Draft 保存草稿](interaction-patterns/operations/save-draft.md)
+
+### 协作模式
+
+- [Comment 评论](interaction-patterns/collaboration/comment.md)
+- [Mention 提及](interaction-patterns/collaboration/mention.md)
+- [Share 分享](interaction-patterns/collaboration/share.md)
+- [Notification 通知](interaction-patterns/collaboration/notification.md)
+- [Presence 在线状态](interaction-patterns/collaboration/presence.md)
+- [Version History 版本历史](interaction-patterns/collaboration/version-history.md)
+- [Conflict Resolution 冲突解决](interaction-patterns/collaboration/conflict-resolution.md)
+
 ## 覆盖表
 
 | Roadmap 范围 | Roadmap 条目 | 笔记数 | 覆盖状态 |
@@ -73,7 +161,10 @@
 | 阶段一 | 10 | 10 | 完成 |
 | 阶段二 · 无需访谈的证据来源 | 8 | 8 | 完成 |
 | 阶段二 · 原型验证 | 6 | 6 | 完成 |
-| **合计** | **35** | **36** | **全部覆盖** |
+| 阶段三 · 信息架构 | 5 | 5 | 完成 |
+| 阶段四 · 用户流程与状态 | 12 | 12 | 完成 |
+| 阶段五 · 交互模式库 | 42 | 42 | 完成 |
+| **合计** | **94** | **95** | **阶段零至阶段五全部覆盖** |
 
 ## 维护规则
 
