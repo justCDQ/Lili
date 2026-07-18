@@ -184,7 +184,7 @@ flowchart LR
 
 ## 7. TypeScript 核心实现
 
-下面代码只实现本主题的核心契约；网络、DOM 或存储副作用留在调用边界。
+下面代码从解析后的模块边构建有向图，并报告强连通分量。解析器与 bundler 图在边界注入，以便分别覆盖源码 import、路径别名和动态加载。
 
 ```tsx
 type Graph = Readonly<Record<string, readonly string[]>>;
@@ -199,7 +199,7 @@ export function nodesInCycles(graph: Graph): string[] {
 }
 ```
 
-类型检查用于排除结构错误，运行时仍需校验外部输入、测试时序并执行安全约束。
+TypeScript 能解析某些循环而不报错，运行时仍可能出现未初始化绑定，bundler 也可能形成大块。检查器需覆盖文件图、包图和动态边，并用已知环夹具测试漏报。
 
 ## 8. 方案选择
 
@@ -209,7 +209,7 @@ export function nodesInCycles(graph: Graph): string[] {
 | ESLint import 检查 | 快速本地反馈 | 解析大型图成本 |
 | 专用图工具 | 全仓 SCC、可视化与 CI | 需匹配真实 resolver |
 
-选择应以所有权、生命周期、订阅范围和失败成本为依据。引入库不能替代这些判断；库只提供实现机制。
+小型项目可以在 CI 扫描全部边，大型 monorepo 需要缓存和只阻止新增环的迁移基线。工具选择取决于能否理解路径别名、workspace 和动态 import，而不是图形界面是否漂亮。
 
 ## 9. 调试与失败注入
 
@@ -224,7 +224,7 @@ export function nodesInCycles(graph: Graph): string[] {
 | CI 突然失败大量旧环 | 无基线迁移 | 只阻止新增并计划清零 |
 | 动态 import 掩盖 | 只看同步边 | 加入 bundler 图 |
 
-调试顺序是：确认输入事实，再检查所有者和转换，随后检查订阅与渲染，最后检查异步资源。跳过前序证据直接增加 Effect，通常会制造第二个状态源。
+先读取检查器报告的最短闭环，再展开 barrel 找到实际文件边，随后对照包依赖和 bundler chunk 图确认影响范围。失败信号是初始化值为 `undefined`、测试顺序改变结果或一个改动触发巨大重打包；用最小环复现、SCC 报告和构建统计验证。
 
 ## 10. 性能、安全与运维边界
 
@@ -246,7 +246,7 @@ export function nodesInCycles(graph: Graph): string[] {
 - ADR 记录暂时例外。
 - 组合根用于消除双向实例创建。
 
-集成时先画出事实所有者，跨边界只传递稳定契约。不要为了减少一层调用而复制同一事实。
+集成时源码扫描、package 依赖检查和 bundler 分析使用同一模块身份映射。历史环进入有负责人和期限的基线，新环在 CI 立即阻断，避免基线永久膨胀。
 
 ## 12. 综合练习
 

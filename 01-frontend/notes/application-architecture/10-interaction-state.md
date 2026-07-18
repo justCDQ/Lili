@@ -10,7 +10,7 @@ tags:
 
 # Interaction State：把瞬时操作留在最小交互边界
 
-Interaction State 描述焦点、展开、悬停、拖拽、选择预览和动画阶段等短生命周期状态。它通常由组件或局部复合控件拥有，并必须与 DOM、键盘和辅助技术的真实状态一致。
+交互状态的权威范围通常是一个复合控件：Root 维护活动项和阶段，子项通过上下文读取并上报事件。状态中的活动 ID、DOM 的真实焦点和 ARIA 属性必须由同一转换更新，否则视觉、键盘与辅助技术会观察到不同控件状态。
 
 ## 前置知识与能力边界
 
@@ -168,7 +168,7 @@ pointer、keyboard、assistive activation 转为领域交互事件。
 
 ## 7. TypeScript 核心实现
 
-下面代码只实现本主题的核心契约；网络、DOM 或存储副作用留在调用边界。
+下面代码把复合控件的活动项、展开状态和键盘事件收敛到局部状态机。真实焦点移动留在 DOM 边界，并通过用户事件测试确认状态与 `document.activeElement` 一致。
 
 ```tsx
 type DragState =
@@ -191,7 +191,7 @@ export function updateDrag(state: DragState, event: DragEvent): DragState {
 }
 ```
 
-类型检查用于排除结构错误，运行时仍需校验外部输入、测试时序并执行安全约束。
+状态联合能排除非法分支，却不能保证焦点目标仍在 DOM 中。动态增删项目、动画结束和失焦都要在运行时修复活动项，并用真实键盘序列验证。
 
 ## 8. 方案选择
 
@@ -201,7 +201,7 @@ export function updateDrag(state: DragState, event: DragEvent): DragState {
 | 局部 State | 组件内短生命周期交互 | 跨树协调会增加传递 |
 | 局部状态机 | 拖拽、动画、复合控件有非法组合 | 模型和测试成本增加 |
 
-选择应以所有权、生命周期、订阅范围和失败成本为依据。引入库不能替代这些判断；库只提供实现机制。
+局部、短命且只服务一个控件的状态应贴近控件；跨路由分享或服务端事实则属于其他状态类型。状态机库适合并发阶段复杂的交互，但不会自动赋予正确 ARIA 和焦点语义。
 
 ## 9. 调试与失败注入
 
@@ -216,7 +216,7 @@ export function updateDrag(state: DragState, event: DragEvent): DragState {
 | 删除项后 tabIndex 全 -1 | roving owner 是否修复 activeId | 动态集合测试 |
 | 派生状态闪烁 | 是否用 Effect 同步 Props | render 时直接派生 |
 
-调试顺序是：确认输入事实，再检查所有者和转换，随后检查订阅与渲染，最后检查异步资源。跳过前序证据直接增加 Effect，通常会制造第二个状态源。
+先检查键盘事件是否到达正确控件，再对比活动项 ID、`tabIndex` 与真实焦点，最后确认项目删除或动画结束是否触发合法状态转换。失败信号是焦点落在已卸载节点、所有项均不可 Tab 或鼠标与键盘选择分叉；用动态集合和完整键盘路径测试验证。
 
 ## 10. 性能、安全与运维边界
 
@@ -238,7 +238,7 @@ export function updateDrag(state: DragState, event: DragEvent): DragState {
 - State Machine 适合拖拽和动画等有限模式。
 - 基础组件统一交互语义，业务组件提供领域命令。
 
-集成时先画出事实所有者，跨边界只传递稳定契约。不要为了减少一层调用而复制同一事实。
+集成时组件拥有瞬时焦点与展开阶段，URL 或领域层只接收最终选择结果。不要把 `isHovered`、动画帧或 DOM 引用提升到全局 store；这会扩大订阅并破坏控件生命周期。
 
 ## 12. 综合练习
 

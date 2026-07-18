@@ -10,7 +10,7 @@ tags:
 
 # 单向依赖规则：把架构方向变成可执行约束
 
-单向依赖规则规定高层可以依赖哪些低层公开契约，并禁止反向和横向越界。方向必须由静态检查、包 exports 和构建图执行，不能只存在于架构图。
+依赖边 `A → B` 表示 A 在编译、测试或运行时需要 B；稳定策略应位于箭头目标一侧，易变实现位于来源一侧。源码 import、workspace package、TypeScript Project References 与构建任务图都必须保持同一方向。
 
 ## 前置知识与能力边界
 
@@ -168,7 +168,7 @@ tsconfig path 与 bundler alias 保持一致。
 
 ## 7. TypeScript 核心实现
 
-下面代码只实现本主题的核心契约；网络、DOM 或存储副作用留在调用边界。
+下面代码把允许的层级边声明成可执行规则，并对违规 import 给出源和目标。构建、测试与脚本文件使用同一规则集，避免生产源码合规而测试继续越界。
 
 ```tsx
 export const dependencyRules = {
@@ -184,7 +184,7 @@ export function mayDepend(from: Layer, to: Layer): boolean {
 }
 ```
 
-类型检查用于排除结构错误，运行时仍需校验外部输入、测试时序并执行安全约束。
+TypeScript 能解析模块却不会自动判断架构方向；必须结合路径标签、包 exports 和项目引用检查。对动态 import、生成代码和 workspace 依赖还要补充构建图验证。
 
 ## 8. 方案选择
 
@@ -194,7 +194,7 @@ export function mayDepend(from: Layer, to: Layer): boolean {
 | ESLint 边界 | 单仓 TypeScript 快反馈 | 需正确 resolver |
 | 包级约束 | monorepo 与发布包 | 配置和构建成本更高 |
 
-选择应以所有权、生命周期、订阅范围和失败成本为依据。引入库不能替代这些判断；库只提供实现机制。
+规则粒度应对应真实层级与领域边界：过宽无法阻止越界，过细会让每次正常变更都改配置。先定义少量稳定方向，再用违规数据决定是否细化。
 
 ## 9. 调试与失败注入
 
@@ -209,7 +209,7 @@ export function mayDepend(from: Layer, to: Layer): boolean {
 | 测试越界 | 排除了 tests | 统一规则 |
 | CI 太慢 | 全量分析 | 增量缓存 |
 
-调试顺序是：确认输入事实，再检查所有者和转换，随后检查订阅与渲染，最后检查异步资源。跳过前序证据直接增加 Effect，通常会制造第二个状态源。
+先从 CI 报告定位具体 import 边，再确认源与目标标签是否正确，随后检查 barrel 或路径别名是否隐藏了真实方向，最后核对 package 图。失败信号是本地通过而 CI 失败、测试文件越界或源码图与 workspace 图相反；用统一配置和双图快照验证。
 
 ## 10. 性能、安全与运维边界
 
@@ -231,7 +231,7 @@ export function mayDepend(from: Layer, to: Layer): boolean {
 - 循环检测提供全图证据。
 - 第三方封装固定 platform 边界。
 
-集成时先画出事实所有者，跨边界只传递稳定契约。不要为了减少一层调用而复制同一事实。
+集成时规则文件与目录标签、包出口和构建任务图共同维护，任何例外都记录原因和到期时间。禁止用通配白名单长期掩盖反向依赖。
 
 ## 12. 综合练习
 
