@@ -118,6 +118,49 @@
 - [环境变量、配置、构建、部署与错误监控](typescript-frameworks/16-config-deploy-monitoring.md)
 - [依赖选择、升级、锁文件与供应链](typescript-frameworks/17-dependencies-lockfiles-supply-chain.md)
 
+## 阶段五：浏览器与运行时
+
+- [从 DNS 到 HTTP：浏览器请求的连接路径与诊断](browser-runtime/01-dns-tcp-tls-http.md)
+- [HTML Parser 与 Speculative Parser](browser-runtime/02-html-parser-preload-scanner.md)
+- [CSS 与 Script 的阻塞行为](browser-runtime/03-css-script-blocking.md)
+- [preload、modulepreload、prefetch 与 preconnect](browser-runtime/04-resource-hints.md)
+- [HTTP Cache 与 Service Worker Cache](browser-runtime/05-http-service-worker-cache.md)
+- [Network 瀑布图](browser-runtime/06-network-waterfall.md)
+- [Style、Layout、Paint 与 Composite](browser-runtime/07-rendering-pipeline.md)
+- [主线程、合成线程与光栅线程](browser-runtime/08-rendering-threads-raster.md)
+- [Long Task 与 Layout Thrashing](browser-runtime/09-long-task-layout-thrashing.md)
+- [requestAnimationFrame 与任务切片](browser-runtime/10-raf-task-yielding.md)
+- [GPU 合成层](browser-runtime/11-gpu-layers.md)
+- [JavaScript Heap 与分配分析](browser-runtime/12-heap-allocation-profiling.md)
+- [Detached DOM 与 Retainer Path](browser-runtime/13-detached-dom-retainer.md)
+- [事件、定时器、Worker 与 Blob URL 泄漏](browser-runtime/14-resource-leaks.md)
+- [无界缓存](browser-runtime/15-unbounded-cache.md)
+- [内存泄漏实验](browser-runtime/16-memory-leak-lab.md)
+- [卡顿实验](browser-runtime/17-jank-lab.md)
+- [性能优化前后报告](browser-runtime/18-performance-before-after-report.md)
+
+## 阶段六：应用与组件架构
+
+- [单一职责与组合](application-architecture/01-single-responsibility-composition.md)
+- [Controlled 与 Uncontrolled 组件](application-architecture/02-controlled-uncontrolled.md)
+- [Headless 与 Compound Component](application-architecture/03-headless-compound-components.md)
+- [State Machine 与 Context Boundary](application-architecture/04-state-machine-context-boundary.md)
+- [依赖倒置与 API 稳定性](application-architecture/05-dependency-inversion-api-stability.md)
+- [基础、通用与业务组件边界](application-architecture/06-component-layer-boundaries.md)
+- [URL State](application-architecture/07-url-state.md)
+- [Server State](application-architecture/08-server-state.md)
+- [Form State](application-architecture/09-form-state.md)
+- [Interaction State](application-architecture/10-interaction-state.md)
+- [Global State](application-architecture/11-global-state.md)
+- [Persistent State](application-architecture/12-persistent-state.md)
+- [状态所有权与单一数据源](application-architecture/13-state-ownership-single-source.md)
+- [按业务领域组织模块](application-architecture/14-organize-by-domain.md)
+- [单向依赖规则](application-architecture/15-one-way-dependency-rules.md)
+- [封装第三方基础设施](application-architecture/16-wrap-third-party-infrastructure.md)
+- [统一错误、请求、缓存与重试](application-architecture/17-unified-error-request-cache-retry.md)
+- [Architecture Decision Record](application-architecture/18-architecture-decision-records.md)
+- [循环依赖检查](application-architecture/19-circular-dependency-checks.md)
+
 ## 覆盖表
 
 | 路线阶段 | 路线图知识点 | 笔记数 | 状态 |
@@ -127,7 +170,9 @@
 | 阶段二：CSS 与视觉实现 | 12 | 12 | 完成 |
 | 阶段三：JavaScript | 18 | 18 | 完成 |
 | 阶段四：TypeScript、框架与应用工程 | 17 | 17 | 完成 |
-| 合计 | 70 | 70 | 完成 |
+| 阶段五：浏览器与运行时 | 18 | 18 | 完成 |
+| 阶段六：应用与组件架构 | 19 | 19 | 完成 |
+| 合计 | 107 | 107 | 完成 |
 
 ## 维护约定
 
