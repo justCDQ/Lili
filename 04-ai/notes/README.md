@@ -134,6 +134,29 @@
 - [x] [防止 Agent 循环、重复操作与重试风暴](agent/04-loop-duplicate-and-retry-storm-prevention.md)
 - [x] [Agent 长任务架构：持久化步骤、队列、Worker、进度与完成](agent/05-long-running-task-architecture.md)
 
+## 阶段八：Evaluation
+
+- [x] [从真实请求建立正常、边界、无答案、权限与对抗样例集](evaluation/01-real-normal-edge-no-answer-permission-adversarial-cases.md)
+- [x] [把 Bug 转化为可持续运行的回归样例](evaluation/02-bug-regression-cases.md)
+- [x] [组合确定性检查、人工评估与 LLM Judge](evaluation/03-deterministic-human-llm-judge.md)
+- [x] [检验并校准 LLM Judge 的稳定性](evaluation/04-llm-judge-stability-and-calibration.md)
+- [x] [联合记录质量、延迟与成本](evaluation/05-quality-latency-cost.md)
+- [x] [设置上线门槛与 CI 回归](evaluation/06-release-gates-and-ci-regression.md)
+- [x] [把线上失败回流到离线评估集](evaluation/07-production-failures-to-offline-evals.md)
+
+## 覆盖表
+
+| Roadmap 范围 | 笔记数 | 覆盖状态 |
+| --- | ---: | --- |
+| 阶段零至阶段二：入门与初级 | 29 | 完成 |
+| 阶段三：Context Engineering | 10 | 完成 |
+| 阶段四：AI 应用与 AI UX | 8 | 完成 |
+| 阶段五：RAG | 18 | 完成 |
+| 阶段六：Tool Calling 与 MCP | 12 | 完成 |
+| 阶段七：Workflow 与 Agent | 10 | 完成 |
+| 阶段八：Evaluation | 7 | 完成 |
+| **合计** | **94** | **阶段零至阶段八全部覆盖** |
+
 ## 写作与维护要求
 
 - 资料优先级：规范与官方文档 → 论文/模型卡 → 可复现实验 → 高质量工程资料。
