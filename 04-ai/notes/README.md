@@ -80,6 +80,22 @@
 - [x] [列表、表格与超长段落的分块](rag-chunking/03-lists-tables-long-paragraphs.md)
 - [x] [文档版本、更新、删除与重新索引](rag-chunking/04-version-update-delete-reindex.md)
 
+### Retrieval
+
+- [x] [Dense、Keyword 与 Hybrid Retrieval](rag-retrieval/01-dense-keyword-hybrid.md)
+- [x] [Metadata Filter 与权限过滤](rag-retrieval/02-metadata-permission-filters.md)
+- [x] [Query Rewrite、Multi-query、实体与时间过滤](rag-retrieval/03-query-rewrite-multiquery-entities-time.md)
+- [x] [Top-K、Threshold 与 Rerank](rag-retrieval/04-topk-threshold-rerank.md)
+- [x] [无相关结果时的拒答与降级](rag-retrieval/05-no-relevant-results.md)
+
+### Evaluation
+
+- [x] [构建至少 50 条真实 RAG 问题](rag-evaluation/01-real-question-set.md)
+- [x] [相关文档与参考答案标注](rag-evaluation/02-relevant-documents-reference-answers.md)
+- [x] [Recall@K、Context Relevance、Groundedness 与 Citation Accuracy](rag-evaluation/03-recall-context-groundedness-citations.md)
+- [x] [无答案、过期资料、冲突来源与权限测试](rag-evaluation/04-no-answer-stale-conflict-permission-tests.md)
+- [x] [Chunk、检索与模型变更后的 RAG 回归](rag-evaluation/05-rag-regression.md)
+
 ## 写作与维护要求
 
 - 资料优先级：规范与官方文档 → 论文/模型卡 → 可复现实验 → 高质量工程资料。
