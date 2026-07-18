@@ -1,0 +1,10 @@
+:root { font-family: system-ui, sans-serif; background: #f4f7fb; color: #17233a; }
+main { width: min(920px, calc(100% - 32px)); margin: 40px auto; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; }
+button { border: 0; border-radius: 8px; padding: 10px 14px; background: #164e87; color: white; }
+button:focus-visible { outline: 3px solid #f59e0b; outline-offset: 3px; }
+output { display: block; margin: 20px 0 8px; min-height: 24px; }
+#progress { height: 12px; border-radius: 999px; overflow: hidden; background: #cbd5e1; }
+#progress span { display: block; width: 0; height: 100%; background: #0e9f6e; transition: width 80ms linear; }
+#boxes { display: grid; grid-template-columns: repeat(20, 1fr); gap: 2px; margin-top: 24px; }
+.box { height: 18px; background: #7dd3fc; }
