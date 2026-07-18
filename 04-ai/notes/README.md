@@ -124,6 +124,7 @@
 - [x] [Routing：规则、分类器与模型混合路由](workflow/02-routing.md)
 - [x] [Parallelization：独立任务、Fan-out/Fan-in 与结果聚合](workflow/03-parallelization.md)
 - [x] [Orchestrator–Workers：动态任务分解、调度与受控执行](workflow/04-orchestrator-workers.md)
+- [x] [Evaluator–Optimizer：受控反馈、迭代改进与停止条件](workflow/05-evaluator-optimizer.md)
 
 ## 写作与维护要求
 
