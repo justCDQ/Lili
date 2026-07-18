@@ -116,6 +116,12 @@
 - [x] [MCP 认证、授权与日志](mcp/05-auth-authorization-logging.md)
 - [x] [限制 MCP 文件、URL、命令访问与 SSRF](mcp/06-files-urls-commands-ssrf.md)
 
+## 阶段七：Workflow 与 Agent
+
+### Workflow 模式
+
+- [x] [Prompt Chaining 与 Sequential Workflow](workflow/01-prompt-chaining-sequential.md)
+
 ## 写作与维护要求
 
 - 资料优先级：规范与官方文档 → 论文/模型卡 → 可复现实验 → 高质量工程资料。
