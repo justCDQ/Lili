@@ -126,6 +126,14 @@
 - [x] [Orchestrator–Workers：动态任务分解、调度与受控执行](workflow/04-orchestrator-workers.md)
 - [x] [Evaluator–Optimizer：受控反馈、迭代改进与停止条件](workflow/05-evaluator-optimizer.md)
 
+### Agent 组件
+
+- [x] [Agent 的 Goal、State、Planner、Tools、Executor、Evaluator、Memory、Stop Condition 与 Human Approval](agent/01-agent-components.md)
+- [x] [Agent 的步骤、Token、成本与总超时预算](agent/02-agent-budgets-and-timeouts.md)
+- [x] [Agent 的暂停、取消、恢复、失败步骤与部分完成](agent/03-pause-cancel-resume-and-partial-completion.md)
+- [x] [防止 Agent 循环、重复操作与重试风暴](agent/04-loop-duplicate-and-retry-storm-prevention.md)
+- [x] [Agent 长任务架构：持久化步骤、队列、Worker、进度与完成](agent/05-long-running-task-architecture.md)
+
 ## 写作与维护要求
 
 - 资料优先级：规范与官方文档 → 论文/模型卡 → 可复现实验 → 高质量工程资料。
