@@ -107,6 +107,11 @@
 - [x] [写操作的影响范围展示与确认](tool-design/05-write-impact-and-confirmation.md)
 - [x] [Tool 权限、审计、脱敏与错误隔离](tool-design/06-permission-audit-redaction-error-isolation.md)
 
+### MCP
+
+- [x] [MCP Host、Client 与 Server](mcp/01-host-client-server.md)
+- [x] [MCP Transport、Tools、Resources、Prompts 与 Capabilities](mcp/02-transports-primitives-capabilities.md)
+
 ## 写作与维护要求
 
 - 资料优先级：规范与官方文档 → 论文/模型卡 → 可复现实验 → 高质量工程资料。
