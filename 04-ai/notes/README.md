@@ -121,6 +121,7 @@
 ### Workflow 模式
 
 - [x] [Prompt Chaining 与 Sequential Workflow](workflow/01-prompt-chaining-sequential.md)
+- [x] [Routing：规则、分类器与模型混合路由](workflow/02-routing.md)
 
 ## 写作与维护要求
 
