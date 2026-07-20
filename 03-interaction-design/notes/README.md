@@ -4,153 +4,153 @@
 
 ## 阅读顺序
 
-1. `foundations/`：建立任务、界面结构、流程、状态和交付物的共同语言。
-2. `principles/`：掌握分析设计决策所需的基础原则及适用边界。
-3. `deconstruction/`：对真实任务进行可复现拆解、比较和重新设计。
-4. `validation/`：使用公开证据、走查、审计与原型验证方案。
-5. `information-architecture/`：建立、审计、重组并验证复杂产品结构。
-6. `flows-states/`：为流程中的正常、异常、中断和恢复状态建立契约。
-7. `interaction-patterns/`：按导航、输入、数据、反馈、操作和协作建立模式库。
+1. `00-foundations/`：建立任务、界面结构、流程、状态和交付物的共同语言。
+2. `01-principles/`：掌握分析设计决策所需的基础原则及适用边界。
+3. `02-deconstruction/`：对真实任务进行可复现拆解、比较和重新设计。
+4. `03-validation/`：使用公开证据、走查、审计与原型验证方案。
+5. `04-information-architecture/`：建立、审计、重组并验证复杂产品结构。
+6. `05-flows-states/`：为流程中的正常、异常、中断和恢复状态建立契约。
+7. `06-interaction-patterns/`：按导航、输入、数据、反馈、操作和协作建立模式库。
 
 ## 阶段零：交互设计基础
 
 ### 基本语言
 
-- [用户目标、任务、场景、入口、路径与完成标准](foundations/01-user-goal-task-context-path.md)
-- [页面、弹窗、抽屉与浮层](foundations/02-page-dialog-drawer-popover.md)
-- [导航、表单、列表与详情](foundations/03-navigation-form-list-detail.md)
-- [信息架构、用户流程、任务流程、状态与反馈](foundations/04-ia-user-flow-task-flow-state-feedback.md)
-- [线框图、原型保真度与设计规范](foundations/05-wireframe-prototype-fidelity-spec.md)
-- [区分产品、交互、视觉与工程问题](foundations/06-product-interaction-visual-engineering-problems.md)
+- [用户目标、任务、场景、入口、路径与完成标准](00-foundations/01-user-goal-task-context-path.md)
+- [页面、弹窗、抽屉与浮层](00-foundations/02-page-dialog-drawer-popover.md)
+- [导航、表单、列表与详情](00-foundations/03-navigation-form-list-detail.md)
+- [信息架构、用户流程、任务流程、状态与反馈](00-foundations/04-ia-user-flow-task-flow-state-feedback.md)
+- [线框图、原型保真度与设计规范](00-foundations/05-wireframe-prototype-fidelity-spec.md)
+- [区分产品、交互、视觉与工程问题](00-foundations/06-product-interaction-visual-engineering-problems.md)
 
 ### 基础原则
 
-- [心智模型、概念模型与现实世界映射](principles/01-mental-conceptual-real-world-mapping.md)
-- [可见性、可供性、反馈、一致性与约束](principles/02-visibility-affordance-feedback-consistency-constraints.md)
-- [识别优于回忆、认知负荷与信息分组](principles/03-recognition-cognitive-load-grouping.md)
-- [用户控制、撤销、容错、错误预防与恢复](principles/04-control-undo-tolerance-error-prevention-recovery.md)
-- [渐进披露、默认值、熟悉性与学习成本](principles/05-progressive-disclosure-defaults-familiarity-learning.md)
-- [Fitts 定律与 Hick 定律的适用边界](principles/06-fitts-hick-laws-boundaries.md)
+- [心智模型、概念模型与现实世界映射](01-principles/01-mental-conceptual-real-world-mapping.md)
+- [可见性、可供性、反馈、一致性与约束](01-principles/02-visibility-affordance-feedback-consistency-constraints.md)
+- [识别优于回忆、认知负荷与信息分组](01-principles/03-recognition-cognitive-load-grouping.md)
+- [用户控制、撤销、容错、错误预防与恢复](01-principles/04-control-undo-tolerance-error-prevention-recovery.md)
+- [渐进披露、默认值、熟悉性与学习成本](01-principles/05-progressive-disclosure-defaults-familiarity-learning.md)
+- [Fitts 定律与 Hick 定律的适用边界](01-principles/06-fitts-hick-laws-boundaries.md)
 
 ## 阶段一：思考、产品拆解与重新设计
 
-- [产品拆解的上下文记录](deconstruction/01-record-context.md)
-- [还原入口、前置条件、主流程、分支、异常与完成状态](deconstruction/02-reconstruct-flow.md)
-- [初始、空、加载、成功、失败、权限、离线与冲突状态清单](deconstruction/03-state-inventory.md)
-- [信息层级、操作层级、默认值、文案与渐进披露分析](deconstruction/04-hierarchy-defaults-copy-disclosure.md)
-- [识别交互模式及适用条件](deconstruction/05-identify-patterns.md)
-- [用启发式原则分析并区分事实与推断](deconstruction/06-heuristics-facts-inferences.md)
-- [与同类产品或现实工作流比较](deconstruction/07-compare-product-workflow.md)
-- [重新设计流程与线框图](deconstruction/08-redesign-flow-wireframe.md)
-- [评估改动收益、代价、风险与工程注意事项](deconstruction/09-benefit-cost-risk-engineering.md)
-- [实现关键交互并验证键盘、响应式与状态切换](deconstruction/10-implement-keyboard-responsive-states.md)
+- [产品拆解的上下文记录](02-deconstruction/01-record-context.md)
+- [还原入口、前置条件、主流程、分支、异常与完成状态](02-deconstruction/02-reconstruct-flow.md)
+- [初始、空、加载、成功、失败、权限、离线与冲突状态清单](02-deconstruction/03-state-inventory.md)
+- [信息层级、操作层级、默认值、文案与渐进披露分析](02-deconstruction/04-hierarchy-defaults-copy-disclosure.md)
+- [识别交互模式及适用条件](02-deconstruction/05-identify-patterns.md)
+- [用启发式原则分析并区分事实与推断](02-deconstruction/06-heuristics-facts-inferences.md)
+- [与同类产品或现实工作流比较](02-deconstruction/07-compare-product-workflow.md)
+- [重新设计流程与线框图](02-deconstruction/08-redesign-flow-wireframe.md)
+- [评估改动收益、代价、风险与工程注意事项](02-deconstruction/09-benefit-cost-risk-engineering.md)
+- [实现关键交互并验证键盘、响应式与状态切换](02-deconstruction/10-implement-keyboard-responsive-states.md)
 
 ## 阶段二：个人可执行的研究与验证
 
 ### 无需访谈的证据来源
 
-- [用产品评论、公开 Issue、帮助文档、更新日志和社区问题取证](validation/01-public-reviews-issues-docs-changelogs.md)
-- [竞品、历史版本与跨平台任务对比](validation/02-competitive-version-platform-comparison.md)
-- [Cognitive Walkthrough：认知走查](validation/03-cognitive-walkthrough.md)
-- [Heuristic Evaluation：启发式评估](validation/04-heuristic-evaluation.md)
-- [Accessibility Audit：无障碍审计](validation/05-accessibility-audit.md)
-- [状态审计：空、错、慢、断、冲突与权限](validation/06-state-audit.md)
-- [Dogfooding 与任务日志](validation/07-dogfooding-task-log.md)
-- [使用埋点、热图、搜索词、错误日志与客服材料](validation/08-analytics-heatmaps-search-errors-support.md)
+- [用产品评论、公开 Issue、帮助文档、更新日志和社区问题取证](03-validation/01-public-reviews-issues-docs-changelogs.md)
+- [竞品、历史版本与跨平台任务对比](03-validation/02-competitive-version-platform-comparison.md)
+- [Cognitive Walkthrough：认知走查](03-validation/03-cognitive-walkthrough.md)
+- [Heuristic Evaluation：启发式评估](03-validation/04-heuristic-evaluation.md)
+- [Accessibility Audit：无障碍审计](03-validation/05-accessibility-audit.md)
+- [状态审计：空、错、慢、断、冲突与权限](03-validation/06-state-audit.md)
+- [Dogfooding 与任务日志](03-validation/07-dogfooding-task-log.md)
+- [使用埋点、热图、搜索词、错误日志与客服材料](03-validation/08-analytics-heatmaps-search-errors-support.md)
 
 ### 原型验证
 
-- [为原型定义真实任务、成功条件和观察项](validation/09-prototype-task-success-observations.md)
-- [原型自测中的认知走查](validation/10-self-test-cognitive-walkthrough.md)
-- [用键盘、窄屏、慢网、空数据和错误响应制造边界](validation/11-manufacture-boundary-conditions.md)
-- [比较改版前后的步骤、完成率、时间、错误与认知成本](validation/12-compare-before-after.md)
-- [可选的可用性测试：增强证据而非学习准入](validation/13-optional-usability-testing.md)
-- [根据证据迭代并维护假设清单](validation/14-evidence-iteration-assumption-log.md)
+- [为原型定义真实任务、成功条件和观察项](03-validation/09-prototype-task-success-observations.md)
+- [原型自测中的认知走查](03-validation/10-self-test-cognitive-walkthrough.md)
+- [用键盘、窄屏、慢网、空数据和错误响应制造边界](03-validation/11-manufacture-boundary-conditions.md)
+- [比较改版前后的步骤、完成率、时间、错误与认知成本](03-validation/12-compare-before-after.md)
+- [可选的可用性测试：增强证据而非学习准入](03-validation/13-optional-usability-testing.md)
+- [根据证据迭代并维护假设清单](03-validation/14-evidence-iteration-assumption-log.md)
 
 ## 阶段三：信息架构
 
-- [绘制复杂产品的现有站点地图](information-architecture/01-current-sitemap.md)
-- [审计重复、混乱与层级过深的入口](information-architecture/02-entry-problem-audit.md)
-- [按任务、角色或业务对象重新分类](information-architecture/03-reclassify-task-role-object.md)
-- [设计顶部、侧边、Tabs、面包屑与搜索的边界](information-architecture/04-navigation-boundaries.md)
-- [验证目标功能是否容易找到](information-architecture/05-findability-validation.md)
+- [绘制复杂产品的现有站点地图](04-information-architecture/01-current-sitemap.md)
+- [审计重复、混乱与层级过深的入口](04-information-architecture/02-entry-problem-audit.md)
+- [按任务、角色或业务对象重新分类](04-information-architecture/03-reclassify-task-role-object.md)
+- [设计顶部、侧边、Tabs、面包屑与搜索的边界](04-information-architecture/04-navigation-boundaries.md)
+- [验证目标功能是否容易找到](04-information-architecture/05-findability-validation.md)
 
 ## 阶段四：用户流程与状态
 
-- [初始状态](flows-states/01-initial.md)
-- [空状态](flows-states/02-empty.md)
-- [加载状态](flows-states/03-loading.md)
-- [成功状态](flows-states/04-success.md)
-- [失败状态](flows-states/05-failure.md)
-- [部分成功状态](flows-states/06-partial-success.md)
-- [无权限状态](flows-states/07-no-permission.md)
-- [离线状态](flows-states/08-offline.md)
-- [数据过期状态](flows-states/09-stale-data.md)
-- [取消状态](flows-states/10-cancel.md)
-- [重试状态](flows-states/11-retry.md)
-- [并发冲突状态](flows-states/12-concurrent-conflict.md)
+- [初始状态](05-flows-states/01-initial.md)
+- [空状态](05-flows-states/02-empty.md)
+- [加载状态](05-flows-states/03-loading.md)
+- [成功状态](05-flows-states/04-success.md)
+- [失败状态](05-flows-states/05-failure.md)
+- [部分成功状态](05-flows-states/06-partial-success.md)
+- [无权限状态](05-flows-states/07-no-permission.md)
+- [离线状态](05-flows-states/08-offline.md)
+- [数据过期状态](05-flows-states/09-stale-data.md)
+- [取消状态](05-flows-states/10-cancel.md)
+- [重试状态](05-flows-states/11-retry.md)
+- [并发冲突状态](05-flows-states/12-concurrent-conflict.md)
 
 ## 阶段五：交互模式库
 
 ### 导航模式
 
-- [Sidebar 侧边导航](interaction-patterns/navigation/sidebar.md)
-- [Top Navigation 顶部导航](interaction-patterns/navigation/top-navigation.md)
-- [Tabs 标签页](interaction-patterns/navigation/tabs.md)
-- [Breadcrumb 面包屑](interaction-patterns/navigation/breadcrumb.md)
-- [Command Palette 命令面板](interaction-patterns/navigation/command-palette.md)
-- [Stepper 步骤器](interaction-patterns/navigation/stepper.md)
+- [Sidebar 侧边导航](06-interaction-patterns/00-navigation/sidebar.md)
+- [Top Navigation 顶部导航](06-interaction-patterns/00-navigation/top-navigation.md)
+- [Tabs 标签页](06-interaction-patterns/00-navigation/tabs.md)
+- [Breadcrumb 面包屑](06-interaction-patterns/00-navigation/breadcrumb.md)
+- [Command Palette 命令面板](06-interaction-patterns/00-navigation/command-palette.md)
+- [Stepper 步骤器](06-interaction-patterns/00-navigation/stepper.md)
 
 ### 输入模式
 
-- [Form 表单](interaction-patterns/input/form.md)
-- [Inline Edit 行内编辑](interaction-patterns/input/inline-edit.md)
-- [Auto Complete 自动完成](interaction-patterns/input/autocomplete.md)
-- [Tag Input 标签输入](interaction-patterns/input/tag-input.md)
-- [Date Picker 日期选择](interaction-patterns/input/date-picker.md)
-- [Upload 文件上传](interaction-patterns/input/upload.md)
-- [Rich Text Editor 富文本编辑器](interaction-patterns/input/rich-text-editor.md)
+- [Form 表单](06-interaction-patterns/01-input/form.md)
+- [Inline Edit 行内编辑](06-interaction-patterns/01-input/inline-edit.md)
+- [Auto Complete 自动完成](06-interaction-patterns/01-input/autocomplete.md)
+- [Tag Input 标签输入](06-interaction-patterns/01-input/tag-input.md)
+- [Date Picker 日期选择](06-interaction-patterns/01-input/date-picker.md)
+- [Upload 文件上传](06-interaction-patterns/01-input/upload.md)
+- [Rich Text Editor 富文本编辑器](06-interaction-patterns/01-input/rich-text-editor.md)
 
 ### 数据模式
 
-- [Table 数据表格](interaction-patterns/data/table.md)
-- [List 列表](interaction-patterns/data/list.md)
-- [Card 卡片](interaction-patterns/data/card.md)
-- [Tree 树形数据](interaction-patterns/data/tree.md)
-- [Timeline 时间线](interaction-patterns/data/timeline.md)
-- [Dashboard 仪表盘](interaction-patterns/data/dashboard.md)
-- [Chart 图表](interaction-patterns/data/chart.md)
+- [Table 数据表格](06-interaction-patterns/02-data/table.md)
+- [List 列表](06-interaction-patterns/02-data/list.md)
+- [Card 卡片](06-interaction-patterns/02-data/card.md)
+- [Tree 树形数据](06-interaction-patterns/02-data/tree.md)
+- [Timeline 时间线](06-interaction-patterns/02-data/timeline.md)
+- [Dashboard 仪表盘](06-interaction-patterns/02-data/dashboard.md)
+- [Chart 图表](06-interaction-patterns/02-data/chart.md)
 
 ### 反馈模式
 
-- [Toast 轻提示](interaction-patterns/feedback/toast.md)
-- [Alert 警示](interaction-patterns/feedback/alert.md)
-- [Inline Error 行内错误](interaction-patterns/feedback/inline-error.md)
-- [Progress 进度](interaction-patterns/feedback/progress.md)
-- [Skeleton 骨架屏](interaction-patterns/feedback/skeleton.md)
-- [Empty State 空状态](interaction-patterns/feedback/empty-state.md)
-- [Result Page 结果页](interaction-patterns/feedback/result-page.md)
+- [Toast 轻提示](06-interaction-patterns/03-feedback/toast.md)
+- [Alert 警示](06-interaction-patterns/03-feedback/alert.md)
+- [Inline Error 行内错误](06-interaction-patterns/03-feedback/inline-error.md)
+- [Progress 进度](06-interaction-patterns/03-feedback/progress.md)
+- [Skeleton 骨架屏](06-interaction-patterns/03-feedback/skeleton.md)
+- [Empty State 空状态](06-interaction-patterns/03-feedback/empty-state.md)
+- [Result Page 结果页](06-interaction-patterns/03-feedback/result-page.md)
 
 ### 操作模式
 
-- [Create 创建](interaction-patterns/operations/create.md)
-- [Edit 编辑](interaction-patterns/operations/edit.md)
-- [Delete 删除](interaction-patterns/operations/delete.md)
-- [Batch 批量操作](interaction-patterns/operations/batch.md)
-- [Drag 拖拽](interaction-patterns/operations/drag.md)
-- [Undo 撤销](interaction-patterns/operations/undo.md)
-- [Retry 重试](interaction-patterns/operations/retry.md)
-- [Save Draft 保存草稿](interaction-patterns/operations/save-draft.md)
+- [Create 创建](06-interaction-patterns/04-operations/create.md)
+- [Edit 编辑](06-interaction-patterns/04-operations/edit.md)
+- [Delete 删除](06-interaction-patterns/04-operations/delete.md)
+- [Batch 批量操作](06-interaction-patterns/04-operations/batch.md)
+- [Drag 拖拽](06-interaction-patterns/04-operations/drag.md)
+- [Undo 撤销](06-interaction-patterns/04-operations/undo.md)
+- [Retry 重试](06-interaction-patterns/04-operations/retry.md)
+- [Save Draft 保存草稿](06-interaction-patterns/04-operations/save-draft.md)
 
 ### 协作模式
 
-- [Comment 评论](interaction-patterns/collaboration/comment.md)
-- [Mention 提及](interaction-patterns/collaboration/mention.md)
-- [Share 分享](interaction-patterns/collaboration/share.md)
-- [Notification 通知](interaction-patterns/collaboration/notification.md)
-- [Presence 在线状态](interaction-patterns/collaboration/presence.md)
-- [Version History 版本历史](interaction-patterns/collaboration/version-history.md)
-- [Conflict Resolution 冲突解决](interaction-patterns/collaboration/conflict-resolution.md)
+- [Comment 评论](06-interaction-patterns/05-collaboration/comment.md)
+- [Mention 提及](06-interaction-patterns/05-collaboration/mention.md)
+- [Share 分享](06-interaction-patterns/05-collaboration/share.md)
+- [Notification 通知](06-interaction-patterns/05-collaboration/notification.md)
+- [Presence 在线状态](06-interaction-patterns/05-collaboration/presence.md)
+- [Version History 版本历史](06-interaction-patterns/05-collaboration/version-history.md)
+- [Conflict Resolution 冲突解决](06-interaction-patterns/05-collaboration/conflict-resolution.md)
 
 ## 覆盖表
 
