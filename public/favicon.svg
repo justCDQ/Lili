@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="狸力">
+  <rect width="64" height="64" rx="14" fill="#0f766e"/>
+  <path d="M18 42V18h7v18h21v6H18Z" fill="#f8fafc"/>
+  <path d="M33 18h13v6h-6v24h-7V18Z" fill="#ccfbf1"/>
+</svg>

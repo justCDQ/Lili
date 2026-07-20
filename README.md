@@ -55,6 +55,29 @@
 4. 项目结束后使用 [项目复盘模板](templates/project-retrospective.md)，把代码、数据、文档或体验证据链接回来。
 5. 通过 Git 提交和 GitHub 同步；路线图更新、学习笔记和日常记录尽量分别提交。
 
+## 网站发布
+
+这个仓库同时支持 GitHub 阅读、Obsidian 维护和 VitePress 网站发布。
+
+本地预览：
+
+```bash
+pnpm install
+pnpm docs:dev
+```
+
+生产构建：
+
+```bash
+pnpm docs:build
+```
+
+推送到 `main` 后，GitHub Actions 会自动构建并发布到 GitHub Pages。网站入口预期为：
+
+```text
+https://justcdq.github.io/Lili/
+```
+
 ## 目录结构
 
 ```text

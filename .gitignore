@@ -2,4 +2,6 @@
 .trash/
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
-
+node_modules/
+.vitepress/cache/
+.vitepress/dist/

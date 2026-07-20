@@ -190,7 +190,7 @@ const response = await fetch('/api/lessons?limit=20', {
 });
 ```
 
-fetch 接受 URL/String/Request 和 RequestInit，返回 Promise<Response>。浏览器收到状态与响应头后 Promise 就可能 fulfilled，正文仍需异步读取。
+fetch 接受 URL/String/Request 和 RequestInit，返回 `Promise<Response>`。浏览器收到状态与响应头后 Promise 就可能 fulfilled，正文仍需异步读取。
 
 ### 7.1 JSON 请求体
 
