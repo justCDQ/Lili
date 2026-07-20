@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jank Lab</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <main>
+      <h1>Jank Lab</h1>
+      <p>在相同数据上比较同步计算、任务切片，以及布局抖动与批量读写。</p>
+      <div class="controls">
+        <button id="sync">同步计算</button>
+        <button id="yield">任务切片</button>
+        <button id="thrash">布局抖动</button>
+        <button id="batch">批量读写</button>
+      </div>
+      <output id="status" aria-live="polite">就绪</output>
+      <div id="progress"><span></span></div>
+      <section id="boxes" aria-label="实验盒子"></section>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

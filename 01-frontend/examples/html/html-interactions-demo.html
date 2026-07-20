@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HTML 原生交互与表单状态演示</title>
+    <style>
+      :root { font-family: system-ui, sans-serif; color: #172033; background: #f4f7fb; }
+      * { box-sizing: border-box; }
+      body { margin: 0; }
+      main { width: min(100% - 2rem, 64rem); margin: 2rem auto; }
+      header, section { padding: 1.5rem; margin-block-end: 1rem; border: 1px solid #d7deea; border-radius: 1rem; background: white; }
+      h1, h2 { margin-block-start: 0; }
+      .toolbar, form { display: grid; gap: .75rem; }
+      .toolbar { grid-template-columns: repeat(auto-fit, minmax(10rem, max-content)); }
+      label { font-weight: 700; }
+      input, button { min-height: 2.75rem; padding: .6rem .8rem; font: inherit; }
+      button { border: 0; border-radius: .5rem; color: white; background: #155eef; cursor: pointer; }
+      button.secondary { color: #172033; background: #e8eef8; }
+      :focus-visible { outline: 3px solid #f79009; outline-offset: 3px; }
+      [popover], dialog { width: min(92vw, 28rem); padding: 1.25rem; border: 1px solid #aab7cc; border-radius: .75rem; box-shadow: 0 1rem 3rem rgb(23 32 51 / 25%); }
+      dialog::backdrop { background: rgb(10 18 32 / 55%); }
+      .error { color: #b42318; font-weight: 700; }
+      #error-summary { padding: 1rem; border-inline-start: .35rem solid #b42318; background: #fff1f0; }
+      #result-status { min-height: 1.5rem; }
+      @media (max-width: 34rem) {
+        main { width: min(100% - 1rem, 64rem); margin-block: .5rem; }
+        header, section { padding: 1rem; border-radius: .75rem; }
+        .toolbar { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>原生交互与表单状态</h1>
+        <p>使用键盘依次检查 Popover、Dialog、Details 和错误摘要。</p>
+      </header>
+
+      <section aria-labelledby="actions-title">
+        <h2 id="actions-title">订单操作</h2>
+        <div class="toolbar">
+          <button type="button" popovertarget="order-actions">打开操作菜单</button>
+          <button class="secondary" id="open-delete" type="button">打开删除确认</button>
+        </div>
+        <div id="order-actions" popover="auto">
+          <p><strong>订单 #42</strong></p>
+          <p><a href="#form-title">前往配送表单</a></p>
+          <button class="secondary" type="button" popovertarget="order-actions" popovertargetaction="hide">关闭菜单</button>
+        </div>
+        <details>
+          <summary>删除规则</summary>
+          <p>已发货订单不能删除；本演示不会发送网络请求。</p>
+        </details>
+      </section>
+
+      <section aria-labelledby="form-title">
+        <h2 id="form-title">配送地址</h2>
+        <div id="error-summary" tabindex="-1" hidden></div>
+        <form id="address-form" novalidate>
+          <label for="recipient">收件人</label>
+          <input id="recipient" name="recipient" autocomplete="shipping name" aria-describedby="recipient-help">
+          <small id="recipient-help">请输入至少 2 个字符。</small>
+          <p class="error" id="recipient-error" hidden></p>
+
+          <label for="postal-code">邮编</label>
+          <input id="postal-code" name="postalCode" inputmode="numeric" autocomplete="shipping postal-code" aria-describedby="postal-code-help">
+          <small id="postal-code-help">请输入 6 位数字。</small>
+          <p class="error" id="postal-code-error" hidden></p>
+
+          <button type="submit">验证并保存</button>
+          <p id="result-status" role="status"></p>
+        </form>
+      </section>
+    </main>
+
+    <dialog id="delete-dialog" aria-labelledby="delete-title">
+      <h2 id="delete-title">确认删除订单？</h2>
+      <p>订单 #42 将从列表移除。演示中只更新状态文本。</p>
+      <form method="dialog" class="toolbar">
+        <button class="secondary" value="cancel">取消</button>
+        <button value="confirm">确认删除</button>
+      </form>
+    </dialog>
+
+    <script>
+      const deleteDialog = document.querySelector('#delete-dialog');
+      const deleteButton = document.querySelector('#open-delete');
+      const resultStatus = document.querySelector('#result-status');
+      const form = document.querySelector('#address-form');
+      const summary = document.querySelector('#error-summary');
+
+      deleteButton.addEventListener('click', () => deleteDialog.showModal());
+      deleteDialog.addEventListener('close', () => {
+        if (deleteDialog.returnValue === 'confirm') {
+          resultStatus.textContent = '订单删除操作已确认（演示未发送请求）。';
+        }
+      });
+
+      function setError(fieldId, message) {
+        const field = document.getElementById(fieldId);
+        const error = document.getElementById(`${fieldId}-error`);
+        error.textContent = message;
+        error.hidden = false;
+        field.setAttribute('aria-invalid', 'true');
+        field.setAttribute('aria-describedby', `${fieldId}-help ${fieldId}-error`);
+      }
+
+      function clearError(fieldId) {
+        const field = document.getElementById(fieldId);
+        const error = document.getElementById(`${fieldId}-error`);
+        error.textContent = '';
+        error.hidden = true;
+        field.removeAttribute('aria-invalid');
+        field.setAttribute('aria-describedby', `${fieldId}-help`);
+      }
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const errors = [];
+        const recipient = form.elements.recipient.value.trim();
+        const postalCode = form.elements.postalCode.value.trim();
+        clearError('recipient');
+        clearError('postal-code');
+
+        if (recipient.length < 2) errors.push(['recipient', '收件人至少需要 2 个字符。']);
+        if (!/^\d{6}$/.test(postalCode)) errors.push(['postal-code', '邮编必须是 6 位数字。']);
+
+        if (errors.length) {
+          for (const [fieldId, message] of errors) setError(fieldId, message);
+          const heading = document.createElement('h2');
+          heading.textContent = `表单中有 ${errors.length} 个错误`;
+          const list = document.createElement('ul');
+          for (const [fieldId, message] of errors) {
+            const item = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = `#${fieldId}`;
+            link.textContent = message;
+            item.append(link);
+            list.append(item);
+          }
+          summary.replaceChildren(heading, list);
+          summary.hidden = false;
+          summary.focus();
+          resultStatus.textContent = '';
+          return;
+        }
+
+        summary.hidden = true;
+        summary.replaceChildren();
+        resultStatus.textContent = '配送地址格式验证通过。';
+      });
+    </script>
+  </body>
+</html>

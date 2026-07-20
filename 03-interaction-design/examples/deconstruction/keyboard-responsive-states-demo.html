@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>任务列表键盘、响应式与状态示例</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      --accent: #2563eb;
+      --danger: #b91c1c;
+      --border: #9ca3af;
+      --surface: Canvas;
+      --text: CanvasText;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    a,
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      min-block-size: 44px;
+      padding: 0.55rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 0.4rem;
+      color: var(--text);
+      background: var(--surface);
+      cursor: pointer;
+    }
+
+    button:hover {
+      border-color: var(--accent);
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      inset-block-start: 0.5rem;
+      inset-inline-start: -100rem;
+      z-index: 10;
+      padding: 0.6rem;
+      color: white;
+      background: #111827;
+    }
+
+    .skip-link:focus {
+      inset-inline-start: 0.5rem;
+    }
+
+    header,
+    main {
+      inline-size: min(72rem, calc(100% - 2rem));
+      margin-inline: auto;
+    }
+
+    header {
+      padding-block: 1.5rem 0.75rem;
+    }
+
+    h1,
+    h2,
+    p {
+      margin-block-start: 0;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-block-end: 1rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(16rem, 2fr) minmax(18rem, 3fr);
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .panel {
+      min-inline-size: 0;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+    }
+
+    .task-list {
+      display: grid;
+      gap: 0.5rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .task-button {
+      display: grid;
+      inline-size: 100%;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.75rem;
+      text-align: start;
+    }
+
+    .task-button[aria-current="true"] {
+      border-color: var(--accent);
+      box-shadow: inset 0 0 0 2px var(--accent);
+    }
+
+    .task-title {
+      overflow-wrap: anywhere;
+      font-weight: 650;
+    }
+
+    .task-state {
+      white-space: nowrap;
+    }
+
+    .status-box,
+    .error-box,
+    .empty-box {
+      padding: 0.8rem;
+      border-inline-start: 0.3rem solid var(--accent);
+      background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+    }
+
+    .error-box {
+      border-inline-start-color: var(--danger);
+      background: color-mix(in srgb, var(--danger) 10%, var(--surface));
+    }
+
+    .detail-list {
+      display: grid;
+      grid-template-columns: max-content minmax(0, 1fr);
+      gap: 0.5rem 1rem;
+    }
+
+    .detail-list dt {
+      font-weight: 650;
+    }
+
+    .detail-list dd {
+      margin: 0;
+      overflow-wrap: anywhere;
+    }
+
+    dialog {
+      inline-size: min(32rem, calc(100% - 2rem));
+      max-block-size: calc(100dvh - 2rem);
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: 0.7rem;
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    dialog::backdrop {
+      background: rgb(0 0 0 / 55%);
+    }
+
+    dialog form {
+      display: grid;
+      gap: 1rem;
+      padding: 1.25rem;
+    }
+
+    label {
+      font-weight: 650;
+    }
+
+    input {
+      inline-size: 100%;
+      min-block-size: 44px;
+      padding: 0.55rem;
+      border: 1px solid var(--border);
+      border-radius: 0.35rem;
+    }
+
+    input[aria-invalid="true"] {
+      border-color: var(--danger);
+      box-shadow: inset 0 0 0 1px var(--danger);
+    }
+
+    .field-error {
+      margin-block: -0.7rem 0;
+      color: var(--danger);
+      font-weight: 650;
+    }
+
+    .dialog-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.75rem;
+    }
+
+    .primary {
+      border-color: var(--accent);
+      color: white;
+      background: var(--accent);
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 44rem) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-list {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-list dd {
+        margin-block-end: 0.5rem;
+      }
+
+      .dialog-actions > button {
+        flex: 1 1 10rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header>
+    <h1>项目任务</h1>
+    <p>示例覆盖加载、就绪、空、失败、详情、表单错误和保存结果。</p>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="toolbar" role="group" aria-label="任务列表状态控制">
+      <button id="load-button" type="button">加载任务</button>
+      <button id="error-button" type="button">模拟加载失败</button>
+      <button id="empty-button" type="button">显示空状态</button>
+    </div>
+
+    <p id="live-status" role="status" aria-atomic="true"></p>
+
+    <div class="layout">
+      <section class="panel" aria-labelledby="list-heading" aria-busy="false">
+        <h2 id="list-heading">任务列表</h2>
+        <div id="loading-state" class="status-box" hidden>正在加载任务…</div>
+        <div id="error-state" class="error-box" hidden>
+          <p>无法加载任务。测试数据没有改变。</p>
+          <button id="retry-button" type="button">重试加载</button>
+        </div>
+        <div id="empty-state" class="empty-box" hidden>
+          <p>当前项目还没有任务。</p>
+          <button id="empty-load-button" type="button">载入示例任务</button>
+        </div>
+        <ul id="task-list" class="task-list"></ul>
+      </section>
+
+      <section class="panel" aria-labelledby="detail-heading">
+        <h2 id="detail-heading">任务详情</h2>
+        <div id="no-selection">
+          <p>从任务列表选择一项查看详情。</p>
+        </div>
+        <div id="task-detail" hidden>
+          <dl class="detail-list">
+            <dt>标题</dt>
+            <dd id="detail-title"></dd>
+            <dt>状态</dt>
+            <dd id="detail-state"></dd>
+            <dt>截止日期</dt>
+            <dd id="detail-date"></dd>
+          </dl>
+          <button id="edit-button" class="primary" type="button">修改截止日期</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <dialog id="edit-dialog" aria-labelledby="dialog-title">
+    <form id="edit-form" novalidate>
+      <div>
+        <h2 id="dialog-title">修改截止日期</h2>
+        <p id="dialog-task-name"></p>
+      </div>
+
+      <label for="due-date">新截止日期</label>
+      <input id="due-date" name="dueDate" type="date" required aria-describedby="date-help date-error">
+      <p id="date-help">日期不得早于 2026-07-17。</p>
+      <p id="date-error" class="field-error" hidden></p>
+
+      <div class="dialog-actions">
+        <button id="cancel-button" type="button">取消</button>
+        <button class="primary" type="submit">保存日期</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script>
+    const tasks = [
+      { id: "T-101", title: "补充交互状态清单", state: "进行中", dueDate: "2026-07-20" },
+      { id: "T-102", title: "验证移动端超长任务标题在窄屏下的换行", state: "待处理", dueDate: "2026-07-23" },
+      { id: "T-103", title: "复测键盘焦点顺序", state: "已完成", dueDate: "2026-07-17" }
+    ];
+
+    const listPanel = document.querySelector("[aria-labelledby='list-heading']");
+    const taskList = document.querySelector("#task-list");
+    const loadingState = document.querySelector("#loading-state");
+    const errorState = document.querySelector("#error-state");
+    const emptyState = document.querySelector("#empty-state");
+    const liveStatus = document.querySelector("#live-status");
+    const noSelection = document.querySelector("#no-selection");
+    const taskDetail = document.querySelector("#task-detail");
+    const editDialog = document.querySelector("#edit-dialog");
+    const editForm = document.querySelector("#edit-form");
+    const dueDate = document.querySelector("#due-date");
+    const dateError = document.querySelector("#date-error");
+    let selectedTaskId = null;
+    let loadTimer = null;
+
+    function announce(message) {
+      liveStatus.textContent = "";
+      window.requestAnimationFrame(() => {
+        liveStatus.textContent = message;
+      });
+    }
+
+    function clearStates() {
+      loadingState.hidden = true;
+      errorState.hidden = true;
+      emptyState.hidden = true;
+      taskList.hidden = true;
+      listPanel.setAttribute("aria-busy", "false");
+    }
+
+    function clearSelection() {
+      selectedTaskId = null;
+      noSelection.hidden = false;
+      taskDetail.hidden = true;
+    }
+
+    function showLoading() {
+      window.clearTimeout(loadTimer);
+      clearStates();
+      clearSelection();
+      loadingState.hidden = false;
+      listPanel.setAttribute("aria-busy", "true");
+      announce("正在加载任务");
+      loadTimer = window.setTimeout(renderTasks, 600);
+    }
+
+    function renderTasks() {
+      clearStates();
+      taskList.replaceChildren();
+      tasks.forEach((task) => {
+        const item = document.createElement("li");
+        const button = document.createElement("button");
+        const title = document.createElement("span");
+        const state = document.createElement("span");
+
+        button.type = "button";
+        button.className = "task-button";
+        button.dataset.taskId = task.id;
+        title.className = "task-title";
+        title.textContent = `${task.id} · ${task.title}`;
+        state.className = "task-state";
+        state.textContent = task.state;
+        button.append(title, state);
+        button.addEventListener("click", () => selectTask(task.id));
+        item.append(button);
+        taskList.append(item);
+      });
+      taskList.hidden = false;
+      announce(`已加载 ${tasks.length} 个任务`);
+    }
+
+    function showError() {
+      window.clearTimeout(loadTimer);
+      clearStates();
+      clearSelection();
+      errorState.hidden = false;
+      announce("任务加载失败，可以重试");
+      document.querySelector("#retry-button").focus();
+    }
+
+    function showEmpty() {
+      window.clearTimeout(loadTimer);
+      clearStates();
+      clearSelection();
+      emptyState.hidden = false;
+      announce("当前项目没有任务");
+    }
+
+    function selectTask(taskId) {
+      const task = tasks.find((item) => item.id === taskId);
+      selectedTaskId = taskId;
+      document.querySelectorAll(".task-button").forEach((button) => {
+        if (button.dataset.taskId === taskId) {
+          button.setAttribute("aria-current", "true");
+        } else {
+          button.removeAttribute("aria-current");
+        }
+      });
+      document.querySelector("#detail-title").textContent = task.title;
+      document.querySelector("#detail-state").textContent = task.state;
+      document.querySelector("#detail-date").textContent = task.dueDate;
+      noSelection.hidden = true;
+      taskDetail.hidden = false;
+      announce(`已选择任务 ${task.id}`);
+    }
+
+    function openEditDialog() {
+      const task = tasks.find((item) => item.id === selectedTaskId);
+      document.querySelector("#dialog-task-name").textContent = `${task.id} · ${task.title}`;
+      dueDate.value = task.dueDate;
+      dueDate.removeAttribute("aria-invalid");
+      dateError.hidden = true;
+      dateError.textContent = "";
+      editDialog.showModal();
+      dueDate.focus();
+    }
+
+    function closeEditDialog() {
+      editDialog.close();
+    }
+
+    function saveDate(event) {
+      event.preventDefault();
+      const value = dueDate.value;
+      let message = "";
+      if (!value) {
+        message = "请选择截止日期。";
+      } else if (value < "2026-07-17") {
+        message = "截止日期不得早于 2026-07-17。";
+      }
+
+      if (message) {
+        dueDate.setAttribute("aria-invalid", "true");
+        dateError.textContent = message;
+        dateError.hidden = false;
+        dueDate.focus();
+        return;
+      }
+
+      const task = tasks.find((item) => item.id === selectedTaskId);
+      task.dueDate = value;
+      document.querySelector("#detail-date").textContent = value;
+      dueDate.removeAttribute("aria-invalid");
+      dateError.hidden = true;
+      editDialog.close();
+      announce(`任务 ${task.id} 的截止日期已更新为 ${value}`);
+    }
+
+    document.querySelector("#load-button").addEventListener("click", showLoading);
+    document.querySelector("#error-button").addEventListener("click", showError);
+    document.querySelector("#empty-button").addEventListener("click", showEmpty);
+    document.querySelector("#retry-button").addEventListener("click", showLoading);
+    document.querySelector("#empty-load-button").addEventListener("click", showLoading);
+    document.querySelector("#edit-button").addEventListener("click", openEditDialog);
+    document.querySelector("#cancel-button").addEventListener("click", closeEditDialog);
+    editForm.addEventListener("submit", saveDate);
+    editDialog.addEventListener("close", () => {
+      document.querySelector("#edit-button").focus();
+    });
+
+    showLoading();
+  </script>
+</body>
+</html>

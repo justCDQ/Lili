@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Context Debugger</title>
+  <style>
+    :root { color-scheme: dark; font: 15px/1.5 Inter, system-ui, sans-serif; background:#09111f; color:#e5edf8; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-width:320px; }
+    header { padding:24px clamp(16px,4vw,48px); border-bottom:1px solid #22314a; background:#0d1728; }
+    h1 { margin:0 0 4px; font-size:clamp(24px,4vw,36px); }
+    header p { margin:0; color:#9fb0c8; }
+    main { padding:24px clamp(16px,4vw,48px); display:grid; gap:20px; }
+    .metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+    .metric,.panel { border:1px solid #263752; border-radius:14px; background:#101c30; }
+    .metric { padding:14px; }
+    .metric strong { display:block; font-size:22px; color:#fff; }
+    .metric span { color:#9fb0c8; font-size:13px; }
+    .toolbar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+    button { border:1px solid #365075; background:#172944; color:#dce9fa; border-radius:999px; padding:8px 13px; cursor:pointer; }
+    button[aria-pressed="true"] { background:#2f6fed; border-color:#6b98ff; color:#fff; }
+    .layout { display:grid; grid-template-columns:minmax(0,1.3fr) minmax(280px,.7fr); gap:20px; }
+    .panel { overflow:hidden; }
+    .panel h2 { margin:0; padding:15px 18px; font-size:16px; border-bottom:1px solid #263752; }
+    .items { list-style:none; margin:0; padding:0; }
+    .item { padding:16px 18px; border-bottom:1px solid #22314a; }
+    .item:last-child { border-bottom:0; }
+    .row { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; }
+    .title { font-weight:700; }
+    .meta { color:#92a6c2; font-size:13px; }
+    .preview { margin:10px 0 0; padding:10px; border-radius:8px; background:#0a1424; color:#bdcbe0; white-space:pre-wrap; }
+    .tag { display:inline-block; margin:8px 6px 0 0; border:1px solid #385071; border-radius:999px; padding:2px 8px; font-size:12px; }
+    .trusted { color:#6ee7b7; } .untrusted { color:#fbbf24; } .excluded { color:#fb7185; }
+    .details { padding:18px; }
+    dl { display:grid; grid-template-columns:auto 1fr; gap:8px 12px; margin:0; }
+    dt { color:#8da2bf; } dd { margin:0; word-break:break-word; }
+    .notice { margin-top:18px; padding:12px; border-left:3px solid #fbbf24; background:#2a2315; color:#f9deb1; }
+    [hidden] { display:none !important; }
+    @media (max-width:760px) {
+      .metrics { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .layout { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Context Debugger</h1>
+    <p>Request req_20260717_991 · 脱敏只读视图</p>
+  </header>
+  <main>
+    <section class="metrics" aria-label="上下文指标">
+      <div class="metric"><strong>4,210</strong><span>实际输入 Token</span></div>
+      <div class="metric"><strong>6</strong><span>已选择内容项</span></div>
+      <div class="metric"><strong>3</strong><span>已排除候选</span></div>
+      <div class="metric"><strong>ctx-v7</strong><span>上下文策略</span></div>
+    </section>
+
+    <div class="toolbar" aria-label="内容项筛选">
+      <span>显示：</span>
+      <button type="button" data-filter="all" aria-pressed="true">全部</button>
+      <button type="button" data-filter="selected" aria-pressed="false">已选择</button>
+      <button type="button" data-filter="excluded" aria-pressed="false">已排除</button>
+      <button type="button" data-filter="untrusted" aria-pressed="false">不可信</button>
+    </div>
+
+    <div class="layout">
+      <section class="panel">
+        <h2>最终内容顺序</h2>
+        <ol class="items">
+          <li class="item" data-state="selected" data-trust="trusted">
+            <div class="row"><span class="title">1 · Developer instructions</span><span class="meta">620 tokens</span></div>
+            <span class="tag trusted">policy</span><span class="tag">support-v12</span>
+            <p class="preview">只依据授权证据回答；无证据时返回 insufficient_evidence。</p>
+          </li>
+          <li class="item" data-state="selected" data-trust="trusted">
+            <div class="row"><span class="title">2 · Verified case state</span><span class="meta">280 tokens</span></div>
+            <span class="tag trusted">verified_fact</span><span class="tag">case_991@v8</span>
+            <p class="preview">订单状态：pending_payment · 支付事件：gateway_timeout</p>
+          </li>
+          <li class="item" data-state="selected" data-trust="untrusted">
+            <div class="row"><span class="title">3 · Runbook chunk</span><span class="meta">740 tokens</span></div>
+            <span class="tag untrusted">untrusted</span><span class="tag">runbook_12@v5</span>
+            <p class="preview">网关超时时不要自动确认支付，先查询事件状态……</p>
+          </li>
+          <li class="item" data-state="excluded" data-trust="untrusted">
+            <div class="row"><span class="title">Candidate · Old policy</span><span class="meta">1,140 tokens</span></div>
+            <span class="tag excluded">expired</span><span class="tag">policy_v3</span>
+            <p class="preview">已于 2026-07-01 失效，未进入模型输入。</p>
+          </li>
+          <li class="item" data-state="excluded" data-trust="untrusted">
+            <div class="row"><span class="title">Candidate · Similar FAQ</span><span class="meta">900 tokens</span></div>
+            <span class="tag excluded">duplicate</span><span class="tag">faq_77</span>
+            <p class="preview">与 runbook_12 的已选段落重复。</p>
+          </li>
+        </ol>
+      </section>
+
+      <aside class="panel">
+        <h2>请求详情</h2>
+        <div class="details">
+          <dl>
+            <dt>Model</dt><dd>reader-2026-06-01</dd>
+            <dt>Prompt</dt><dd>support-v12</dd>
+            <dt>Schema</dt><dd>answer-v4</dd>
+            <dt>Tenant</dt><dd>hmac:7b3…91a</dd>
+            <dt>Filter</dt><dd>sha256:2dc…4ee</dd>
+            <dt>Output</dt><dd>validated</dd>
+          </dl>
+          <p class="notice">完整 Prompt、Secret 和客户原文默认不在此页面展示。</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <script>
+    const buttons = [...document.querySelectorAll("[data-filter]")];
+    const items = [...document.querySelectorAll(".item")];
+
+    function applyFilter(filter) {
+      for (const item of items) {
+        item.hidden =
+          filter !== "all" &&
+          item.dataset.state !== filter &&
+          item.dataset.trust !== filter;
+      }
+      for (const button of buttons) {
+        button.setAttribute(
+          "aria-pressed",
+          String(button.dataset.filter === filter),
+        );
+      }
+    }
+
+    for (const button of buttons) {
+      button.addEventListener("click", () => applyFilter(button.dataset.filter));
+    }
+  </script>
+</body>
+</html>

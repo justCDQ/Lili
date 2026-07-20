@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSS 布局、主题与动效演示</title>
+    <style>
+      @layer reset, base, components;
+      @layer reset { *,*::before,*::after { box-sizing:border-box; } button { font:inherit; } }
+      @layer base {
+        :root { color-scheme:light; --surface:#fff; --page:#f4f7fb; --text:#172033; --muted:#475467; --action:#155eef; --on-action:#fff; --border:#d0d5dd; }
+        :root[data-theme="dark"] { color-scheme:dark; --surface:#101828; --page:#0c111d; --text:#f9fafb; --muted:#d0d5dd; --action:#84adff; --on-action:#101828; --border:#475467; }
+        body { margin:0; font-family:system-ui,sans-serif; color:var(--text); background:var(--page); }
+      }
+      @layer components {
+        main { inline-size:min(100% - 2rem,72rem); margin:2rem auto; }
+        header,.demo { padding:clamp(1rem,.75rem + 1vw,1.5rem); margin-block-end:1rem; border:1px solid var(--border); border-radius:1rem; background:var(--surface); }
+        h1,h2 { margin-block-start:0; }
+        .toolbar { display:flex; flex-wrap:wrap; gap:.75rem; align-items:center; }
+        button { min-block-size:2.75rem; padding:.6rem .9rem; border:0; border-radius:.5rem; color:var(--on-action); background:var(--action); cursor:pointer; }
+        button:focus-visible { outline:3px solid #f79009; outline-offset:3px; }
+        .product-slot { container:product / inline-size; resize:horizontal; overflow:auto; inline-size:100%; min-inline-size:16rem; max-inline-size:100%; padding:.5rem; border:1px dashed var(--border); }
+        .card { display:grid; gap:1rem; padding:1rem; border:1px solid var(--border); border-radius:.75rem; background:var(--surface); transition:transform 180ms ease-out; }
+        .card:hover { transform:translateY(-.2rem); }
+        .art { display:grid; place-items:center; min-block-size:10rem; border-radius:.5rem; color:#fff; background:linear-gradient(145deg,#155eef,#7f56d9); font-size:3rem; font-weight:800; }
+        .card__body { min-inline-size:0; }
+        .price { font-size:1.5rem; font-weight:700; }
+        @container product (width >= 34rem) { .card { grid-template-columns:minmax(12rem,40%) minmax(0,1fr); align-items:center; } }
+        @media (prefers-reduced-motion:reduce) { .card { transition:none; } .card:hover { transform:none; } }
+        @media (max-width:30rem) { main { inline-size:min(100% - 1rem,72rem); margin-block:.5rem; } }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>CSS 布局、主题与动效</h1>
+        <p>调整虚线容器宽度，观察卡片由单列切换为双列。</p>
+        <div class="toolbar">
+          <button id="theme" type="button">切换深色主题</button>
+          <button id="direction" type="button">切换 RTL</button>
+        </div>
+      </header>
+      <section class="demo" aria-labelledby="card-title">
+        <h2 id="card-title">容器查询卡片</h2>
+        <div class="product-slot">
+          <article class="card">
+            <div class="art" role="img" aria-label="蓝紫色键盘产品占位图">Lili</div>
+            <div class="card__body">
+              <p>机械键盘</p>
+              <h2>Lili 75 配列键盘</h2>
+              <p>支持热插拔轴体、有线连接和自定义键位。</p>
+              <p class="price">¥699</p>
+              <button type="button">加入购物车</button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+    <script>
+      const root=document.documentElement;
+      document.querySelector('#theme').addEventListener('click',()=>{
+        root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';
+      });
+      document.querySelector('#direction').addEventListener('click',()=>{
+        root.dir=root.dir==='rtl'?'ltr':'rtl';
+      });
+    </script>
+  </body>
+</html>

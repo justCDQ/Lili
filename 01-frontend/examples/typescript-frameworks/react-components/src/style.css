@@ -1,0 +1,10 @@
+:root { font-family: system-ui, sans-serif; color: #172033; background: #f4f7fb; }
+body { margin: 0; }
+main { max-width: 42rem; margin: 3rem auto; padding: 1rem; }
+section { background: white; border: 1px solid #dbe3ef; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 1rem 3rem #48608018; }
+label { display: grid; gap: .4rem; margin-block: 1rem; font-weight: 650; }
+input { font: inherit; padding: .65rem; border: 1px solid #8290a8; border-radius: .5rem; }
+.checkbox { display: flex; align-items: center; font-weight: 500; }
+ul { padding: 0; list-style: none; display: grid; gap: .6rem; }
+li { display: flex; justify-content: space-between; gap: 1rem; padding: .8rem; background: #f7f9fc; border-radius: .6rem; }
+li span { color: #53627a; }

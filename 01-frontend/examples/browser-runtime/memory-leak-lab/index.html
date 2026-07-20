@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Memory Leak Lab</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <main>
+      <h1>Memory Leak Lab</h1>
+      <p>比较泄漏实现与正确释放实现。每轮创建 200 个节点并附加数据。</p>
+      <section class="controls" aria-label="实验控制">
+        <button id="leak">运行泄漏轮次</button>
+        <button id="safe">运行安全轮次</button>
+        <button id="clear">清理泄漏引用</button>
+      </section>
+      <dl>
+        <div><dt>泄漏轮次</dt><dd id="leak-runs">0</dd></div>
+        <div><dt>安全轮次</dt><dd id="safe-runs">0</dd></div>
+        <div><dt>保留节点</dt><dd id="retained">0</dd></div>
+        <div><dt>窗口监听器</dt><dd id="listeners">0</dd></div>
+      </dl>
+      <div id="sandbox" aria-live="polite"></div>
+      <pre id="log"></pre>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

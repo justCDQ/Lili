@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>表单、URL 与存储演示</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; color: #172033; background: #f4f7fc; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 28px 16px; }
+    main { max-width: 760px; margin: auto; background: white; padding: 24px; border: 1px solid #dbe3f0; border-radius: 18px; box-shadow: 0 16px 46px #20345b12; }
+    h1 { margin: 0 0 8px; }
+    .lead, .hint { color: #526078; }
+    form { display: grid; grid-template-columns: 2fr 1fr; gap: 14px; margin-top: 22px; }
+    label { display: grid; gap: 6px; font-weight: 650; }
+    label.full, .actions { grid-column: 1 / -1; }
+    input, select, button { min-height: 44px; border-radius: 10px; font: inherit; }
+    input, select { border: 1px solid #aeb9ca; padding: 0 12px; }
+    .check { display: flex; align-items: center; gap: 8px; font-weight: 500; }
+    .check input { min-height: auto; width: 18px; height: 18px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    button { border: 0; padding: 0 16px; background: #3157d5; color: white; font-weight: 650; }
+    button.secondary { background: #e9edfa; color: #243a78; }
+    output, pre { display: block; margin-top: 18px; padding: 14px; border-radius: 12px; background: #f6f8fc; white-space: pre-wrap; overflow-wrap: anywhere; }
+    @media (max-width: 560px) { main { padding: 18px; } form { grid-template-columns: 1fr; } label.full, .actions { grid-column: auto; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>学习路线筛选</h1>
+    <p class="lead">提交后把筛选写入当前 URL；主题偏好写入 localStorage。</p>
+    <form id="filter-form">
+      <label class="full">搜索词
+        <input name="q" maxlength="40" autocomplete="off" placeholder="例如：DOM">
+      </label>
+      <label>每页数量
+        <select name="pageSize">
+          <option value="10">10</option>
+          <option value="20" selected>20</option>
+          <option value="50">50</option>
+        </select>
+      </label>
+      <label>主题
+        <select name="theme">
+          <option value="system">跟随系统</option>
+          <option value="light">浅色</option>
+          <option value="dark">深色</option>
+        </select>
+      </label>
+      <label class="check full"><input name="completed" type="checkbox" value="1"> 只看已完成</label>
+      <div class="actions">
+        <button type="submit">应用筛选</button>
+        <button class="secondary" id="clear-storage" type="button">清除偏好</button>
+      </div>
+    </form>
+    <output id="status" role="status" aria-live="polite"></output>
+    <pre id="evidence" aria-label="解析后的状态"></pre>
+  </main>
+  <script>
+    const STORAGE_KEY = 'lili:filter-preferences:v1';
+    const PAGE_SIZES = new Set(['10', '20', '50']);
+    const THEMES = new Set(['system', 'light', 'dark']);
+    const form = document.querySelector('#filter-form');
+    const status = document.querySelector('#status');
+    const evidence = document.querySelector('#evidence');
+    const clearButton = document.querySelector('#clear-storage');
+
+    function readPreferences() {
+      try {
+        const text = localStorage.getItem(STORAGE_KEY);
+        if (text === null) return { theme: 'system' };
+        const value = JSON.parse(text);
+        if (!THEMES.has(value?.theme)) throw new TypeError('stored theme invalid');
+        return { theme: value.theme };
+      } catch (error) {
+        console.warn('preferences_read_failed', { name: error.name });
+        return { theme: 'system' };
+      }
+    }
+
+    function readUrlState() {
+      const url = new URL(location.href);
+      const pageSize = url.searchParams.get('pageSize') ?? '20';
+      return {
+        q: url.searchParams.get('q') ?? '',
+        pageSize: PAGE_SIZES.has(pageSize) ? pageSize : '20',
+        completed: url.searchParams.get('completed') === '1',
+      };
+    }
+
+    function render(state, message) {
+      form.elements.q.value = state.q;
+      form.elements.pageSize.value = state.pageSize;
+      form.elements.completed.checked = state.completed;
+      form.elements.theme.value = state.theme;
+      status.textContent = message;
+      evidence.textContent = JSON.stringify(state, null, 2);
+    }
+
+    function initialize() {
+      render({ ...readUrlState(), ...readPreferences() }, '已从 URL 与本地偏好恢复状态。');
+    }
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const data = new FormData(form, event.submitter);
+      const q = String(data.get('q') ?? '').trim();
+      const pageSize = String(data.get('pageSize'));
+      const theme = String(data.get('theme'));
+      const completed = data.has('completed');
+      if (!PAGE_SIZES.has(pageSize) || !THEMES.has(theme)) throw new RangeError('invalid selection');
+
+      const url = new URL(location.href);
+      q === '' ? url.searchParams.delete('q') : url.searchParams.set('q', q);
+      pageSize === '20' ? url.searchParams.delete('pageSize') : url.searchParams.set('pageSize', pageSize);
+      completed ? url.searchParams.set('completed', '1') : url.searchParams.delete('completed');
+      history.replaceState(null, '', url);
+
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ theme }));
+        render({ q, pageSize, completed, theme }, 'URL 与主题偏好已更新。');
+      } catch (error) {
+        console.warn('preferences_write_failed', { name: error.name });
+        render({ q, pageSize, completed, theme }, 'URL 已更新，但本地偏好无法保存。');
+      }
+    });
+
+    clearButton.addEventListener('click', () => {
+      try { localStorage.removeItem(STORAGE_KEY); } catch (error) { console.warn('preferences_clear_failed', { name: error.name }); }
+      form.elements.theme.value = 'system';
+      status.textContent = '本地主题偏好已清除。';
+    });
+
+    window.addEventListener('popstate', initialize);
+    initialize();
+  </script>
+</body>
+</html>
