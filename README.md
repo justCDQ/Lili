@@ -72,11 +72,17 @@ pnpm docs:dev
 pnpm docs:build
 ```
 
-推送到 `main` 后，GitHub Actions 会自动构建并发布到 GitHub Pages。网站入口预期为：
+当前 GitHub Pages 从 `gh-pages` 分支根目录发布，`main` 分支继续作为源码、Markdown 和配置的维护入口。网站入口为：
 
 ```text
 https://justcdq.github.io/Lili/
 ```
+
+发布流程：
+
+1. 在 `main` 分支维护 Markdown 内容。
+2. 运行 `pnpm docs:build` 生成静态站点。
+3. 将 `.vitepress/dist` 发布到 `gh-pages` 分支。
 
 ## 目录结构
 
