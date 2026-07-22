@@ -208,14 +208,14 @@ Todo：
 
 Todo：
 
-- [ ] 分析三个直接竞品。
-- [ ] 分析两个替代方案。
-- [ ] 识别使用者、购买者和审批者。
-- [ ] 分析产品定价与收费方式。
-- [ ] 分析获客、交付、模型和基础设施成本。
-- [ ] 理解 MRR、ARR、ARPU、CAC、LTV、Churn、毛利。
-- [ ] 判断竞品哪些功能不应复制。
-- [ ] 分析长期差异化和迁移成本。
+- [x] [分析三个直接竞品](notes/07-market-business/01-market-competition-business-system.md)。
+- [x] [分析两个替代方案](notes/07-market-business/01-market-competition-business-system.md)。
+- [x] [识别使用者、购买者和审批者](notes/07-market-business/01-market-competition-business-system.md)。
+- [x] [分析产品定价与收费方式](notes/07-market-business/01-market-competition-business-system.md)。
+- [x] [分析获客、交付、模型和基础设施成本](notes/07-market-business/01-market-competition-business-system.md)。
+- [x] [理解 MRR、ARR、ARPU、CAC、LTV、Churn、毛利](notes/07-market-business/01-market-competition-business-system.md)。
+- [x] [判断竞品哪些功能不应复制](notes/07-market-business/01-market-competition-business-system.md)。
+- [x] [分析长期差异化和迁移成本](notes/07-market-business/01-market-competition-business-system.md)。
 
 验收：能解释产品谁使用、谁付费、为什么付费、如何获客、主要成本、竞争优势和可能被谁替代。
 
@@ -227,12 +227,12 @@ Todo：
 
 Todo：
 
-- [ ] Roadmap 围绕目标而不是功能列表。
-- [ ] 明确负责人、依赖和风险。
-- [ ] 组织需求、设计和上线评审。
-- [ ] 制定灰度、回滚和通知策略。
-- [ ] 上线后观察指标和用户反馈。
-- [ ] 完成无责复盘和行动项。
+- [x] [Roadmap 围绕目标而不是功能列表](notes/08-delivery-iteration/01-outcome-roadmap-release-postmortem.md)。
+- [x] [明确负责人、依赖和风险](notes/08-delivery-iteration/01-outcome-roadmap-release-postmortem.md)。
+- [x] [组织需求、设计和上线评审](notes/08-delivery-iteration/01-outcome-roadmap-release-postmortem.md)。
+- [x] [制定灰度、回滚和通知策略](notes/08-delivery-iteration/01-outcome-roadmap-release-postmortem.md)。
+- [x] [上线后观察指标和用户反馈](notes/08-delivery-iteration/01-outcome-roadmap-release-postmortem.md)。
+- [x] [完成无责复盘和行动项](notes/08-delivery-iteration/01-outcome-roadmap-release-postmortem.md)。
 
 验收：能够推动一个中等复杂度功能完成发现、定义、设计、开发、灰度、数据观察和复盘的闭环。
 
@@ -240,25 +240,25 @@ Todo：
 
 ## 阶段九：B 端产品专项
 
-- [ ] 用户角色与权限矩阵。
-- [ ] 核心业务对象与关系。
-- [ ] 状态机和审批流程。
-- [ ] 数据责任、操作日志和合规。
-- [ ] 标准化、配置与定制的边界。
-- [ ] 系统迁移、数据导入和实施流程。
-- [ ] 使用者、管理员、购买者不同的场景。
+- [x] [用户角色与权限矩阵](notes/09-b2b-products/01-enterprise-domain-permission-workflow-migration.md)。
+- [x] [核心业务对象与关系](notes/09-b2b-products/01-enterprise-domain-permission-workflow-migration.md)。
+- [x] [状态机和审批流程](notes/09-b2b-products/01-enterprise-domain-permission-workflow-migration.md)。
+- [x] [数据责任、操作日志和合规](notes/09-b2b-products/01-enterprise-domain-permission-workflow-migration.md)。
+- [x] [标准化、配置与定制的边界](notes/09-b2b-products/01-enterprise-domain-permission-workflow-migration.md)。
+- [x] [系统迁移、数据导入和实施流程](notes/09-b2b-products/01-enterprise-domain-permission-workflow-migration.md)。
+- [x] [使用者、管理员、购买者不同的场景](notes/09-b2b-products/01-enterprise-domain-permission-workflow-migration.md)。
 
 ---
 
 ## 阶段十：AI 产品专项
 
-- [ ] 判断 AI 是否真的必要。
-- [ ] 定义 AI 输出质量和不可接受错误。
-- [ ] 设计引用、证据和人工确认。
-- [ ] 评估模型成本、延迟和隐私。
-- [ ] 设计失败降级和人工接管。
-- [ ] 建立真实评估数据集。
-- [ ] 平衡质量、体验、成本和商业模式。
+- [x] [判断 AI 是否真的必要](notes/10-ai-products/01-ai-product-quality-evaluation-operations.md)。
+- [x] [定义 AI 输出质量和不可接受错误](notes/10-ai-products/01-ai-product-quality-evaluation-operations.md)。
+- [x] [设计引用、证据和人工确认](notes/10-ai-products/01-ai-product-quality-evaluation-operations.md)。
+- [x] [评估模型成本、延迟和隐私](notes/10-ai-products/01-ai-product-quality-evaluation-operations.md)。
+- [x] [设计失败降级和人工接管](notes/10-ai-products/01-ai-product-quality-evaluation-operations.md)。
+- [x] [建立真实评估数据集](notes/10-ai-products/01-ai-product-quality-evaluation-operations.md)。
+- [x] [平衡质量、体验、成本和商业模式](notes/10-ai-products/01-ai-product-quality-evaluation-operations.md)。
 
 ---
 

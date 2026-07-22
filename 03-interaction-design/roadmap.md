@@ -159,31 +159,31 @@ Comment、Mention、Share、Notification、Presence、Version History、Conflict
 
 ### 表格
 
-- [ ] 信息层级、默认列和列配置。
-- [ ] 固定列、横向滚动、排序、筛选和分页。
-- [ ] 批量操作、跨页选择和不可选行。
-- [ ] 行内编辑、树形数据和保存视图。
-- [ ] 导出、权限字段和大数据性能。
+- [x] [信息层级、默认列和列配置](notes/06-interaction-patterns/02-data/table.md)。
+- [x] [固定列、横向滚动、排序、筛选和分页](notes/06-interaction-patterns/02-data/table.md)。
+- [x] [批量操作、跨页选择和不可选行](notes/06-interaction-patterns/02-data/table.md)。
+- [x] [行内编辑、树形数据和保存视图](notes/06-interaction-patterns/02-data/table.md)。
+- [x] [导出、权限字段和大数据性能](notes/06-interaction-patterns/02-data/table.md)。
 
 ### 表单
 
-- [ ] 字段分组、默认值、必填与选填。
-- [ ] 校验时机、异步校验和字段依赖。
-- [ ] 草稿、自动保存、离开提醒。
-- [ ] 提交失败保留输入。
-- [ ] 服务端错误和多人冲突。
+- [x] [字段分组、默认值、必填与选填](notes/06-interaction-patterns/01-input/form.md)。
+- [x] [校验时机、异步校验和字段依赖](notes/06-interaction-patterns/01-input/form.md)。
+- [x] [草稿、自动保存、离开提醒](notes/06-interaction-patterns/01-input/form.md)。
+- [x] [提交失败保留输入](notes/06-interaction-patterns/01-input/form.md)。
+- [x] [服务端错误和多人冲突](notes/06-interaction-patterns/01-input/form.md)。
 
 ### 权限
 
-- [ ] 无权限、只读、字段权限、数据范围。
-- [ ] 临时权限、申请权限和权限过期。
-- [ ] 不只隐藏功能，还说明原因和获取方式。
+- [x] [无权限、只读、字段权限、数据范围](notes/07-enterprise-interactions/01-permission-states-data-scope.md)。
+- [x] [临时权限、申请权限和权限过期](notes/07-enterprise-interactions/02-temporary-access-request-expiry.md)。
+- [x] [说明限制原因和权限获取方式](notes/07-enterprise-interactions/01-permission-states-data-scope.md)。
 
 ### 审批
 
-- [ ] 当前节点、下一节点、审批人和预计时间。
-- [ ] 驳回、撤回、转交、加签、抄送。
-- [ ] 历史、超时、异常中断和并行审批。
+- [x] [当前节点、下一节点、审批人和预计时间](notes/07-enterprise-interactions/03-approval-workflow-state-exceptions.md)。
+- [x] [驳回、撤回、转交、加签、抄送](notes/07-enterprise-interactions/03-approval-workflow-state-exceptions.md)。
+- [x] [历史、超时、异常中断和并行审批](notes/07-enterprise-interactions/03-approval-workflow-state-exceptions.md)。
 
 ---
 
@@ -193,12 +193,12 @@ Comment、Mention、Share、Notification、Presence、Version History、Conflict
 
 Todo：
 
-- [ ] 页面只有一个主要视觉焦点。
-- [ ] 使用系统化间距和有限字体层级。
-- [ ] 颜色不是唯一信息表达方式。
-- [ ] 动效说明元素从哪来、去哪和状态如何变化。
-- [ ] 高频操作避免冗长动画。
-- [ ] 支持键盘、焦点和减少动画设置。
+- [x] [页面建立一个与当前任务匹配的主要视觉焦点](notes/08-visual-motion-accessibility/01-visual-hierarchy-spacing-typography-color-icons.md)。
+- [x] [使用系统化间距和有限字体层级](notes/08-visual-motion-accessibility/01-visual-hierarchy-spacing-typography-color-icons.md)。
+- [x] [颜色不是唯一信息表达方式](notes/08-visual-motion-accessibility/01-visual-hierarchy-spacing-typography-color-icons.md)。
+- [x] [动效说明元素从哪来、去哪和状态如何变化](notes/08-visual-motion-accessibility/02-motion-state-transitions-reduced-motion.md)。
+- [x] [高频操作避免冗长动画](notes/08-visual-motion-accessibility/02-motion-state-transitions-reduced-motion.md)。
+- [x] [支持键盘、焦点和减少动画设置](notes/08-visual-motion-accessibility/03-keyboard-focus-accessible-interaction.md)。
 
 验收：能独立完成结构清晰、层级合理、可访问的中保真方案。
 
@@ -208,28 +208,28 @@ Todo：
 
 ### Chat 与 Streaming
 
-- [ ] 澄清需求、多轮、停止、重试、继续。
-- [ ] 首 Token、部分结果、断线、中断和恢复。
+- [x] [澄清需求、多轮、停止、重试、继续](notes/09-ai-product-interaction/01-chat-streaming.md)。
+- [x] [首 Token、部分结果、断线、中断和恢复](notes/09-ai-product-interaction/01-chat-streaming.md)。
 
 ### Artifact
 
-- [ ] 创建、局部修改、版本、Diff、恢复、导出。
-- [ ] 区分用户修改和 AI 修改。
+- [x] [创建、局部修改、版本、Diff、恢复、导出](notes/09-ai-product-interaction/02-artifact-editing-versioning.md)。
+- [x] [区分用户修改和 AI 修改](notes/09-ai-product-interaction/02-artifact-editing-versioning.md)。
 
 ### Tool Call 与 Approval
 
-- [ ] 展示工具、参数、影响、风险和结果。
-- [ ] 高风险写操作必须确认。
+- [x] [展示工具、参数、影响、风险和结果](notes/09-ai-product-interaction/03-tool-call-approval.md)。
+- [x] [高风险写操作必须确认](notes/09-ai-product-interaction/03-tool-call-approval.md)。
 
 ### Agent Task
 
-- [ ] 目标、计划、步骤、当前进度。
-- [ ] 暂停、取消、恢复、失败步骤和人工接管。
+- [x] [目标、计划、步骤、当前进度](notes/09-ai-product-interaction/04-agent-task-control.md)。
+- [x] [暂停、取消、恢复、失败步骤和人工接管](notes/09-ai-product-interaction/04-agent-task-control.md)。
 
 ### Citation 与 Memory
 
-- [ ] 引用定位原文、来源日期和推断说明。
-- [ ] 记忆可查看、修改、删除、关闭并说明作用范围。
+- [x] [引用定位原文、来源日期和推断说明](notes/09-ai-product-interaction/05-citation-memory.md)。
+- [x] [记忆可查看、修改、删除、关闭并说明作用范围](notes/09-ai-product-interaction/05-citation-memory.md)。
 
 验收：用户始终知道 AI 正在做什么，可以停止、修改、确认、恢复，并能判断结果可信度。
 

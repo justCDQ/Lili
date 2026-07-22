@@ -1,6 +1,6 @@
-# 产品学习笔记：入门至中级
+# 产品学习笔记：入门至高级专项
 
-本索引覆盖 [产品 Roadmap](../roadmap.md) 的阶段零至阶段六。每个路线图知识点对应一篇独立笔记；不包含用户访谈必修模块。具体产品事实应注明观察日期，事实、推断与个人观点必须分开。
+本索引覆盖 [产品 Roadmap](../roadmap.md) 的阶段零至阶段十。阶段零至六按独立知识点拆分；阶段七至十将紧密耦合的市场商业、推进运行、B 端系统和 AI 产品知识分别组织为一篇完整深文。具体产品事实应注明观察日期，事实、推断与个人观点必须分开。
 
 ## 覆盖表
 
@@ -15,7 +15,11 @@
 | 阶段四：产品方案与 MVP | 7 | 7 | 已覆盖 |
 | 阶段五：PRD 与产品表达 | 7 | 7 | 已覆盖 |
 | 阶段六：产品数据与实验 | 9 | 9 | 已覆盖 |
-| **合计** | **65** | **65** | **已覆盖** |
+| 阶段七：市场、竞品和商业 | 8 | 1 | 已覆盖 |
+| 阶段八：产品推进与持续迭代 | 6 | 1 | 已覆盖 |
+| 阶段九：B 端产品专项 | 7 | 1 | 已覆盖 |
+| 阶段十：AI 产品专项 | 7 | 1 | 已覆盖 |
+| **合计** | **93** | **69** | **已覆盖** |
 
 ## 阶段零：产品基础语言
 
@@ -111,4 +115,18 @@
 8. [根据数据提出产品假设](06-metrics-experiments/08-data-to-hypothesis.md)
 9. [相关性与因果关系](06-metrics-experiments/09-correlation-causality.md)
 
-阶段七及以后继续使用 `market-business/` 和 `b2b-ai-products/`。新增笔记时复制 [产品笔记模板](../notes-template.md)，并在本页增加索引。
+## 阶段七：市场、竞品和商业
+
+1. [市场、竞品与商业系统分析](07-market-business/01-market-competition-business-system.md)
+
+## 阶段八：产品推进与持续迭代
+
+1. [目标导向 Roadmap、产品推进与持续迭代](08-delivery-iteration/01-outcome-roadmap-release-postmortem.md)
+
+## 阶段九：B 端产品专项
+
+1. [B 端产品的业务对象、权限、流程与实施](09-b2b-products/01-enterprise-domain-permission-workflow-migration.md)
+
+## 阶段十：AI 产品专项
+
+1. [AI 产品必要性、质量评估与运行治理](10-ai-products/01-ai-product-quality-evaluation-operations.md)

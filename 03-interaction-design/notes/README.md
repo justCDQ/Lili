@@ -1,6 +1,6 @@
 # 交互设计入门、初级与中级学习笔记
 
-本目录覆盖 [交互设计 Roadmap](../roadmap.md) 的阶段零至阶段五。每篇对应一个独立知识点；日常产品任务分析仍放在 [`daily/`](../daily/README.md)。
+本目录覆盖 [交互设计 Roadmap](../roadmap.md) 的阶段零至阶段八。每篇对应一个独立知识点；日常产品任务分析仍放在 [`daily/`](../daily/README.md)。
 
 ## 阅读顺序
 
@@ -11,6 +11,9 @@
 5. `04-information-architecture/`：建立、审计、重组并验证复杂产品结构。
 6. `05-flows-states/`：为流程中的正常、异常、中断和恢复状态建立契约。
 7. `06-interaction-patterns/`：按导航、输入、数据、反馈、操作和协作建立模式库。
+8. `07-enterprise-interactions/`：处理字段与数据范围权限、临时访问和可恢复审批工作流。
+9. `08-visual-motion-accessibility/`：建立视觉系统、状态动效、键盘与焦点规范。
+10. `09-ai-product-interaction/`：设计可控制、可恢复、可核验的 AI 对话、产物、工具、Agent、引用与记忆交互。
 
 ## 阶段零：交互设计基础
 
@@ -152,6 +155,33 @@
 - [Version History 版本历史](06-interaction-patterns/05-collaboration/version-history.md)
 - [Conflict Resolution 冲突解决](06-interaction-patterns/05-collaboration/conflict-resolution.md)
 
+## 阶段六：复杂 B 端交互
+
+### 表格与表单
+
+- [复杂数据表格：列、排序、筛选、分页、跨页选择、编辑、导出与性能](06-interaction-patterns/02-data/table.md)
+- [复杂表单：分组、依赖、校验、草稿、错误保留与冲突](06-interaction-patterns/01-input/form.md)
+
+### 权限与审批
+
+- [B 端权限状态、字段权限与数据范围](07-enterprise-interactions/01-permission-states-data-scope.md)
+- [临时权限、权限申请与到期恢复](07-enterprise-interactions/02-temporary-access-request-expiry.md)
+- [审批流程、并行决策与异常恢复](07-enterprise-interactions/03-approval-workflow-state-exceptions.md)
+
+## 阶段七：视觉基础、动效与无障碍
+
+- [视觉层级、间距、字体、色彩与图标系统](08-visual-motion-accessibility/01-visual-hierarchy-spacing-typography-color-icons.md)
+- [界面动效、状态转移与减少动画](08-visual-motion-accessibility/02-motion-state-transitions-reduced-motion.md)
+- [键盘、焦点与可访问交互](08-visual-motion-accessibility/03-keyboard-focus-accessible-interaction.md)
+
+## 阶段八：AI 产品交互
+
+- [AI 对话与流式响应：澄清、多轮、停止、重试、继续与断线恢复](09-ai-product-interaction/01-chat-streaming.md)
+- [AI Artifact 编辑与版本：创建、局部修改、Diff、恢复、导出与修改来源](09-ai-product-interaction/02-artifact-editing-versioning.md)
+- [AI 工具调用与风险确认：工具、参数、影响、结果与高风险写入批准](09-ai-product-interaction/03-tool-call-approval.md)
+- [Agent 任务与人工接管：目标、计划、进度、暂停、取消、恢复与失败步骤](09-ai-product-interaction/04-agent-task-control.md)
+- [AI 引用与记忆交互：原文定位、日期、推断和记忆作用范围控制](09-ai-product-interaction/05-citation-memory.md)
+
 ## 覆盖表
 
 | Roadmap 范围 | Roadmap 条目 | 笔记数 | 覆盖状态 |
@@ -164,7 +194,10 @@
 | 阶段三 · 信息架构 | 5 | 5 | 完成 |
 | 阶段四 · 用户流程与状态 | 12 | 12 | 完成 |
 | 阶段五 · 交互模式库 | 42 | 42 | 完成 |
-| **合计** | **94** | **95** | **阶段零至阶段五全部覆盖** |
+| 阶段六 · 复杂 B 端交互 | 16 | 5 | 完成；表格与表单沿用模式库深度文章，权限与审批新增 3 篇 |
+| 阶段七 · 视觉、动效与无障碍 | 6 | 3 | 完成；按视觉系统、动效状态机与可访问交互聚合 |
+| 阶段八 · AI 产品交互 | 10 | 5 | 完成；按五组紧密耦合的状态与控制契约聚合 |
+| **合计** | **126** | **106** | **阶段零至阶段八全部覆盖** |
 
 ## 维护规则
 
