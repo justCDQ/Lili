@@ -227,28 +227,28 @@ Role + Task + Context + Constraints + Examples + Output Format + Failure Behavio
 
 ### Model Gateway
 
-- [ ] Generate、Stream、Embed、Structured Output、Tool、Usage 和 Error 的统一接口。
-- [ ] 多模型路由、Fallback、超时、重试。
-- [ ] 按任务、复杂度、上下文、延迟、成本和合规选择模型。
+- [x] [Generate、Stream、Embed、Structured Output、Tool、Usage 和 Error 的统一接口](notes/14-production-engineering/01-model-gateway-cache-queue-observability-reliability.md#2-模型网关统一能力而非抹平差异)。
+- [x] [多模型路由、Fallback、超时、重试](notes/14-production-engineering/01-model-gateway-cache-queue-observability-reliability.md#路由决策)。
+- [x] [按任务、复杂度、上下文、延迟、成本和合规选择模型](notes/14-production-engineering/01-model-gateway-cache-queue-observability-reliability.md#路由决策)。
 
 ### Cache 与 Queue
 
-- [ ] Exact、Semantic、Retrieval、Tool Result 和 Prefix Cache。
-- [ ] 租户隔离、过期、失效和命中率。
-- [ ] 文档解析、Embedding、批量生成和 Agent 长任务进入队列。
-- [ ] 重试、死信、幂等、取消、进度和配额。
+- [x] [Exact、Semantic、Retrieval、Tool Result 和 Prefix Cache](notes/14-production-engineering/01-model-gateway-cache-queue-observability-reliability.md#3-缓存复用结果但不跨越权限和新鲜度)。
+- [x] [租户隔离、过期、失效和命中率](notes/14-production-engineering/01-model-gateway-cache-queue-observability-reliability.md#3-缓存复用结果但不跨越权限和新鲜度)。
+- [x] [文档解析、Embedding、批量生成和 Agent 长任务进入队列](notes/14-production-engineering/01-model-gateway-cache-queue-observability-reliability.md#4-queue把可等待工作从同步路径移走)。
+- [x] [重试、死信、幂等、取消、进度和配额](notes/14-production-engineering/01-model-gateway-cache-queue-observability-reliability.md#队列合同与幂等)。
 
 ### Observability
 
-- [ ] Request ID、User、Tenant、Model、Prompt Version。
-- [ ] Token、Cost、首 Token 延迟和总时长。
-- [ ] Retrieval Query、过滤、结果与分数。
-- [ ] Tool 参数、结果、审批和错误。
-- [ ] Agent Step、状态、停止原因。
+- [x] [Request ID、User、Tenant、Model、Prompt Version](notes/14-production-engineering/01-model-gateway-cache-queue-observability-reliability.md#5-可观测性从一次答案追到每个决定)。
+- [x] [Token、Cost、首 Token 延迟和总时长](notes/14-production-engineering/01-model-gateway-cache-queue-observability-reliability.md#5-可观测性从一次答案追到每个决定)。
+- [x] [Retrieval Query、过滤、结果与分数](notes/14-production-engineering/01-model-gateway-cache-queue-observability-reliability.md#5-可观测性从一次答案追到每个决定)。
+- [x] [Tool 参数、结果、审批和错误](notes/14-production-engineering/01-model-gateway-cache-queue-observability-reliability.md#5-可观测性从一次答案追到每个决定)。
+- [x] [Agent Step、状态、停止原因](notes/14-production-engineering/01-model-gateway-cache-queue-observability-reliability.md#5-可观测性从一次答案追到每个决定)。
 
 ### Reliability
 
-- [ ] Timeout、Backoff、Jitter、Circuit Breaker、Rate Limit、Fallback、Partial Success。
+- [x] [Timeout、Backoff、Jitter、Circuit Breaker、Rate Limit、Fallback、Partial Success](notes/14-production-engineering/01-model-gateway-cache-queue-observability-reliability.md#6-可靠性机制的适用边界)。
 
 验收：线上问题能定位到具体模型、Prompt、上下文、检索、Tool 或 Agent 步骤。
 
@@ -256,14 +256,14 @@ Role + Task + Context + Constraints + Examples + Output Format + Failure Behavio
 
 ## 阶段十：安全与治理
 
-- [ ] Prompt Injection 和间接注入。
-- [ ] 外部网页、邮件、PDF、数据库和 Tool 结果视为不可信数据。
-- [ ] 服务端最小权限和租户隔离。
-- [ ] 写操作确认、二次验证、幂等和审计。
-- [ ] 日志脱敏、数据保存周期和删除机制。
-- [ ] 限制文件路径、网络目标、命令和执行沙箱。
-- [ ] 对第三方 MCP Server 做安全审查。
-- [ ] Red Team：泄露 Prompt、跨租户、删除数据、内网访问、重复支付、资源消耗。
+- [x] [Prompt Injection 和间接注入](notes/15-security-governance/01-prompt-injection-permissions-audit-and-red-team.md#1-威胁模型谁能控制什么)。
+- [x] [外部网页、邮件、PDF、数据库和 Tool 结果视为不可信数据](notes/15-security-governance/01-prompt-injection-permissions-audit-and-red-team.md#2-把指令数据和能力拆开)。
+- [x] [服务端最小权限和租户隔离](notes/15-security-governance/01-prompt-injection-permissions-audit-and-red-team.md#3-最小权限与租户隔离)。
+- [x] [写操作确认、二次验证、幂等和审计](notes/15-security-governance/01-prompt-injection-permissions-audit-and-red-team.md#4-写操作确认不是一个按钮而是受约束的交易)。
+- [x] [日志脱敏、数据保存周期和删除机制](notes/15-security-governance/01-prompt-injection-permissions-audit-and-red-team.md#5-日志保留和删除)。
+- [x] [限制文件路径、网络目标、命令和执行沙箱](notes/15-security-governance/01-prompt-injection-permissions-audit-and-red-team.md#6-文件网络命令与沙箱)。
+- [x] [对第三方 MCP Server 做安全审查](notes/15-security-governance/01-prompt-injection-permissions-audit-and-red-team.md#7-第三方-mcp-server-审查)。
+- [x] [Red Team：泄露 Prompt、跨租户、删除数据、内网访问、重复支付、资源消耗](notes/15-security-governance/01-prompt-injection-permissions-audit-and-red-team.md#8-红队把攻击假设变成可重复测试)。
 
 验收：模型无法绕过服务端权限；所有高风险动作可审计且需要确认。
 
@@ -273,11 +273,11 @@ Role + Task + Context + Constraints + Examples + Output Format + Failure Behavio
 
 ### 开源模型与本地推理
 
-Hugging Face、量化、显存、Batch、Throughput、Latency、KV Cache、Serving、许可证和总持有成本。
+[Hugging Face、量化、显存、Batch、Throughput、Latency、KV Cache、Serving、许可证和总持有成本](notes/16-advanced-options/01-local-inference-and-fine-tuning-decisions.md#2-开源模型与本地推理的组成)。
 
 ### Fine-tuning
 
-仅在 Prompt、上下文、RAG、Tool 和模型选择都不能解决，并拥有高质量数据和评估集时使用。
+[Fine-tuning 的适用条件、PEFT/LoRA、数据与评估、训练恢复和发布](notes/16-advanced-options/01-local-inference-and-fine-tuning-decisions.md#7-fine-tuning-的输入输出与风险)：仅在 Prompt、上下文、RAG、Tool 和模型选择都不能解决，并拥有高质量数据和评估集时使用。
 
 ---
 

@@ -1,6 +1,6 @@
 # 后端与数据学习笔记
 
-本索引覆盖 [后端与数据 Roadmap](../roadmap.md) 的阶段零至阶段八。路线图每个复选项对应一篇独立笔记。算法日练仍放在 `daily/`；可迁移的原理和模式归档在此处。
+本索引覆盖 [后端与数据 Roadmap](../roadmap.md) 的阶段零至阶段十三。路线图每个复选项对应一篇独立笔记；强耦合的中级主题在一篇深度文章内分节覆盖。算法日练仍放在 `daily/`；可迁移的原理和模式归档在此处。
 
 ## 覆盖表
 
@@ -27,7 +27,12 @@
 | 阶段八：搜索 | 4 | 4 | 已覆盖 |
 | 阶段八：对象存储 | 3 | 3 | 已覆盖 |
 | 阶段八：数据工程 | 5 | 5 | 已覆盖 |
-| **合计** | **84** | **84** | **已覆盖** |
+| 阶段九：分布式系统 | 11 | 3 | 已覆盖 |
+| 阶段十：系统设计 | 1 | 1 | 已覆盖 |
+| 阶段十一：云原生交付 | 9 | 1 | 已覆盖 |
+| 阶段十二：可观测性、SRE 与安全 | 9 | 1 | 已覆盖 |
+| 阶段十三：领域建模与架构 | 5 | 1 | 已覆盖 |
+| **合计** | **119** | **91** | **已覆盖阶段零至十三** |
 
 ## 阶段零：编程与计算机基础
 
@@ -186,4 +191,26 @@
 4. [ClickHouse、dbt、Airflow、Kafka、Flink 与 Spark 的定位](07-cache-messaging-storage/22-data-tools-positioning.md)
 5. [漏斗、留存、错误率、性能与 AI 成本分析](07-cache-messaging-storage/23-product-analytics-metrics.md)
 
-阶段九及以后继续使用 `distributed-systems/` 和 `cloud-sre-security/`。新增笔记时复制 [后端与数据笔记模板](../notes-template.md) 并更新本索引。
+新增笔记时复制 [后端与数据笔记模板](../notes-template.md) 并更新本索引。
+
+## 阶段九：分布式系统
+
+1. [复制、故障切换与分片路由](08-distributed-systems/01-replication-sharding.md)：Leader-Follower、Multi-Leader、Leaderless、复制确认、Read-after-write、Failover、Range/Hash/Directory 分片、热点、迁移、跨分片与全局 ID。
+2. [一致性、仲裁与 Raft：在网络分区中定义正确写入](08-distributed-systems/02-consistency-consensus-cap-raft.md)：CAP、线性一致性、最终一致性、读己之写、Quorum、Raft 选举、日志复制、多数派与 split brain 防护。
+3. [分布式事务与韧性：把不确定结果变成可恢复流程](08-distributed-systems/03-distributed-transactions-failure-resilience.md)：2PC、Saga、TCC、Outbox、补偿、幂等、部分失败、重试、背压、熔断、隔离与负载削减。
+
+## 阶段十：系统设计
+
+1. [需求、规模估算与架构取舍](09-system-design/01-requirements-estimation-architecture-tradeoffs.md)
+
+## 阶段十一：Docker、Kubernetes、IaC 与 CI/CD
+
+1. [容器、Kubernetes、Terraform 与 CI/CD](10-cloud-delivery/01-containers-kubernetes-iac-cicd.md)
+
+## 阶段十二：可观测性、SRE 与安全
+
+1. [可观测性、SRE 与应用安全](11-observability-sre-security/01-observability-sre-security.md)
+
+## 阶段十三：领域建模与架构
+
+1. [领域建模与分层架构](12-domain-architecture/01-domain-modeling-layered-architecture.md)

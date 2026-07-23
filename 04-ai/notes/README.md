@@ -144,6 +144,18 @@
 - [x] [设置上线门槛与 CI 回归](13-evaluation/06-release-gates-and-ci-regression.md)
 - [x] [把线上失败回流到离线评估集](13-evaluation/07-production-failures-to-offline-evals.md)
 
+## 阶段九：生产工程
+
+- [x] [模型网关、缓存队列、可观测性与可靠性](14-production-engineering/01-model-gateway-cache-queue-observability-reliability.md)
+
+## 阶段十：安全与治理
+
+- [x] [提示注入、最小权限、审计与红队](15-security-governance/01-prompt-injection-permissions-audit-and-red-team.md)
+
+## 阶段十一：进阶选修
+
+- [x] [开源模型本地推理与 Fine-tuning 决策](16-advanced-options/01-local-inference-and-fine-tuning-decisions.md)
+
 ## 覆盖表
 
 | Roadmap 范围 | 笔记数 | 覆盖状态 |
@@ -155,7 +167,10 @@
 | 阶段六：Tool Calling 与 MCP | 12 | 完成 |
 | 阶段七：Workflow 与 Agent | 10 | 完成 |
 | 阶段八：Evaluation | 7 | 完成 |
-| **合计** | **94** | **阶段零至阶段八全部覆盖** |
+| 阶段九：生产工程 | 1 | 完成 |
+| 阶段十：安全与治理 | 1 | 完成 |
+| 阶段十一：进阶选修 | 1 | 完成 |
+| **合计** | **97** | **阶段零至阶段十一全部覆盖** |
 
 ## 写作与维护要求
 

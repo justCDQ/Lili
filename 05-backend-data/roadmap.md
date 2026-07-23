@@ -219,26 +219,26 @@
 
 ### 复制与分片
 
-- [ ] Leader-Follower、Multi-Leader、Leaderless。
-- [ ] 同步/异步复制、复制延迟、Read-after-write、Failover。
-- [ ] Range、Hash、Directory Sharding、热点、扩容、跨分片、全局 ID。
+- [x] [Leader-Follower、Multi-Leader、Leaderless](notes/08-distributed-systems/01-replication-sharding.md)。
+- [x] [同步/异步复制、复制延迟、Read-after-write、Failover](notes/08-distributed-systems/01-replication-sharding.md)。
+- [x] [Range、Hash、Directory Sharding、热点、扩容、跨分片、全局 ID](notes/08-distributed-systems/01-replication-sharding.md)。
 
 ### 一致性与共识
 
-- [ ] CAP 的正确理解。
-- [ ] Linearizability、Eventual Consistency、Read-your-writes、Quorum。
-- [ ] Raft 的 Leader Election、Log Replication、Term、Majority。
+- [x] [CAP 的正确理解](notes/08-distributed-systems/02-consistency-consensus-cap-raft.md)。
+- [x] [Linearizability、Eventual Consistency、Read-your-writes、Quorum](notes/08-distributed-systems/02-consistency-consensus-cap-raft.md)。
+- [x] [Raft 的 Leader Election、Log Replication、Term、Majority](notes/08-distributed-systems/02-consistency-consensus-cap-raft.md)。
 
 ### 分布式事务
 
-- [ ] 2PC、Saga、TCC、Outbox、Compensation、Idempotency。
+- [x] [2PC、Saga、TCC、Outbox、Compensation、Idempotency](notes/08-distributed-systems/03-distributed-transactions-failure-resilience.md)。
 
 ### 故障模式
 
-- [ ] Network Partition、Partial Failure、Duplicate Request。
-- [ ] Retry Storm、Thundering Herd、Split Brain、Hot Key。
-- [ ] Backpressure、Cascading Failure。
-- [ ] Timeout、Backoff、Jitter、Circuit Breaker、Bulkhead、Load Shedding。
+- [x] [Network Partition、Partial Failure、Duplicate Request](notes/08-distributed-systems/03-distributed-transactions-failure-resilience.md)。
+- [x] [Retry Storm、Thundering Herd、Split Brain、Hot Key](notes/08-distributed-systems/03-distributed-transactions-failure-resilience.md)。
+- [x] [Backpressure、Cascading Failure](notes/08-distributed-systems/03-distributed-transactions-failure-resilience.md)。
+- [x] [Timeout、Backoff、Jitter、Circuit Breaker、Bulkhead、Load Shedding](notes/08-distributed-systems/03-distributed-transactions-failure-resilience.md)。
 
 验收：能处理部分失败和最终一致性，并知道什么时候不应该拆微服务或分库分表。
 
@@ -258,24 +258,24 @@
 
 ### Docker
 
-- [ ] Dockerfile、Layer、Multi-stage、非 Root、Volume、Network、Health Check、Signal、Compose、Registry、扫描。
+- [x] [Dockerfile、Layer、Multi-stage、非 Root、Volume、Network、Health Check、Signal、Compose、Registry、扫描](notes/10-cloud-delivery/01-containers-kubernetes-iac-cicd.md)。
 
 ### Kubernetes
 
-- [ ] Pod、Deployment、StatefulSet、Service、Ingress。
-- [ ] ConfigMap、Secret、Job、CronJob、PV/PVC。
-- [ ] Startup、Readiness、Liveness。
-- [ ] Rolling、Rollback、Canary、HPA、Helm。
+- [x] [Pod、Deployment、StatefulSet、Service、Ingress](notes/10-cloud-delivery/01-containers-kubernetes-iac-cicd.md)。
+- [x] [ConfigMap、Secret、Job、CronJob、PV/PVC](notes/10-cloud-delivery/01-containers-kubernetes-iac-cicd.md)。
+- [x] [Startup、Readiness、Liveness](notes/10-cloud-delivery/01-containers-kubernetes-iac-cicd.md)。
+- [x] [Rolling、Rollback、Canary、HPA、Helm](notes/10-cloud-delivery/01-containers-kubernetes-iac-cicd.md)。
 
 ### Terraform
 
-- [ ] Provider、Resource、State、Plan、Apply、Module、Remote State、Drift。
+- [x] [Provider、Resource、State、Plan、Apply、Module、Remote State、Drift](notes/10-cloud-delivery/01-containers-kubernetes-iac-cicd.md)。
 
 ### CI/CD
 
-- [ ] Lint、测试、构建、依赖和镜像扫描。
-- [ ] Registry、测试环境、Smoke Test、生产审批、灰度和回滚。
-- [ ] Commit、镜像、发布版本可追溯。
+- [x] [Lint、测试、构建、依赖和镜像扫描](notes/10-cloud-delivery/01-containers-kubernetes-iac-cicd.md)。
+- [x] [Registry、测试环境、Smoke Test、生产审批、灰度和回滚](notes/10-cloud-delivery/01-containers-kubernetes-iac-cicd.md)。
+- [x] [Commit、镜像、发布版本可追溯](notes/10-cloud-delivery/01-containers-kubernetes-iac-cicd.md)。
 
 验收：能将完整系统自动部署到集群，处理健康检查、扩容、灰度、回滚和基础设施变更。
 
@@ -285,21 +285,21 @@
 
 ### 可观测性
 
-- [ ] 结构化日志、Request ID、Trace ID、版本和脱敏。
-- [ ] RED、USE、业务指标、分位数和告警。
-- [ ] OpenTelemetry、Prometheus、Grafana、Loki、Tempo/Jaeger。
+- [x] [结构化日志、Request ID、Trace ID、版本和脱敏](notes/11-observability-sre-security/01-observability-sre-security.md)。
+- [x] [RED、USE、业务指标、分位数和告警](notes/11-observability-sre-security/01-observability-sre-security.md)。
+- [x] [OpenTelemetry、Prometheus、Grafana、Loki、Tempo/Jaeger](notes/11-observability-sre-security/01-observability-sre-security.md)。
 
 ### SRE
 
-- [ ] SLI、SLO、SLA、Error Budget。
-- [ ] Timeout、Retry、Backoff、Jitter、熔断、限流、隔舱、降级。
-- [ ] Backup、Restore、RPO、RTO、故障演练和无责复盘。
+- [x] [SLI、SLO、SLA、Error Budget](notes/11-observability-sre-security/01-observability-sre-security.md)。
+- [x] [Timeout、Retry、Backoff、Jitter、熔断、限流、隔舱、降级](notes/11-observability-sre-security/01-observability-sre-security.md)。
+- [x] [Backup、Restore、RPO、RTO、故障演练和无责复盘](notes/11-observability-sre-security/01-observability-sre-security.md)。
 
 ### 安全
 
-- [ ] 密码哈希、Session、MFA、RBAC、ABAC、租户隔离。
-- [ ] SQL/Command Injection、Path Traversal、SSRF、IDOR、Replay、Mass Assignment。
-- [ ] 传输和静态加密、Secret 管理、日志脱敏、审计和数据删除。
+- [x] [密码哈希、Session、MFA、RBAC、ABAC、租户隔离](notes/11-observability-sre-security/01-observability-sre-security.md)。
+- [x] [SQL/Command Injection、Path Traversal、SSRF、IDOR、Replay、Mass Assignment](notes/11-observability-sre-security/01-observability-sre-security.md)。
+- [x] [传输和静态加密、Secret 管理、日志脱敏、审计和数据删除](notes/11-observability-sre-security/01-observability-sre-security.md)。
 
 验收：能从告警定位到请求、服务、数据库或依赖；系统有明确 SLO、恢复方案和安全边界。
 
@@ -307,11 +307,11 @@
 
 ## 阶段十三：领域建模与架构
 
-- [ ] Interface、Application、Domain、Infrastructure 分层。
-- [ ] Entity、Value Object、Aggregate、Repository、Domain Event。
-- [ ] Bounded Context 和统一业务语言。
-- [ ] 模块化单体优先于微服务。
-- [ ] 业务规则不堆在 Handler，数据库模型不等于领域模型。
+- [x] [Interface、Application、Domain、Infrastructure 分层](notes/12-domain-architecture/01-domain-modeling-layered-architecture.md)。
+- [x] [Entity、Value Object、Aggregate、Repository、Domain Event](notes/12-domain-architecture/01-domain-modeling-layered-architecture.md)。
+- [x] [Bounded Context 和统一业务语言](notes/12-domain-architecture/01-domain-modeling-layered-architecture.md)。
+- [x] [模块化单体优先于微服务](notes/12-domain-architecture/01-domain-modeling-layered-architecture.md)。
+- [x] [业务规则不堆在 Handler，数据库模型不等于领域模型](notes/12-domain-architecture/01-domain-modeling-layered-architecture.md)。
 
 ---
 

@@ -161,6 +161,24 @@
 - [Architecture Decision Record](06-application-architecture/18-architecture-decision-records.md)
 - [循环依赖检查](06-application-architecture/19-circular-dependency-checks.md)
 
+## 阶段七：性能工程
+
+- [性能指标、真实用户数据与性能预算](07-performance/01-performance-metrics-field-data.md)
+- [加载性能与关键渲染路径](07-performance/02-loading-performance-critical-path.md)
+- [运行时性能、调度与渲染边界](07-performance/03-runtime-performance.md)
+
+## 阶段八：工程化与工具链
+
+- [前端工具链、Monorepo 与团队 CLI](08-tooling/01-frontend-toolchain-monorepo-cli.md)
+
+## 阶段九：测试、安全与可观测性
+
+- [前端测试、安全与可观测性闭环](09-quality-security-observability/01-frontend-quality-security-observability.md)
+
+## 阶段十：专家专项
+
+- [专家前端专项的架构选择：平台、复杂交互、AI 与 Web Platform](10-expert-specializations/01-expert-frontend-architecture-selection.md)
+
 ## 覆盖表
 
 | 路线阶段 | 路线图知识点 | 笔记数 | 状态 |
@@ -172,11 +190,15 @@
 | 阶段四：TypeScript、框架与应用工程 | 17 | 17 | 完成 |
 | 阶段五：浏览器与运行时 | 18 | 18 | 完成 |
 | 阶段六：应用与组件架构 | 19 | 19 | 完成 |
-| 合计 | 107 | 107 | 完成 |
+| 阶段七：性能工程 | 3 | 3 | 完成 |
+| 阶段八：工程化与工具链 | 15 | 1 | 聚合笔记完成 |
+| 阶段九：测试、安全与可观测性 | 15 | 1 | 聚合笔记完成 |
+| 阶段十：专家专项 | 4 | 1 | 聚合笔记完成 |
+| 合计 | 144 | 113 | 持续补充 |
 
 ## 维护约定
 
 - 文件名使用稳定主题，不按日期命名。
 - 每篇包含“是什么、为什么需要、关键规则、实际使用、常见错误与边界、补充知识、来源”。
 - 修改技术结论时同步核对官方规范或官方文档，并更新访问日期。
-- 每完成后续路线图知识点，继续按“一条勾选项一篇”补充本索引。
+- 以一个可独立学习的知识点为一篇；多个紧密耦合、需要共同理解的路线图条目可以合并为一篇深度文章，并在覆盖表中注明。

@@ -270,28 +270,30 @@
 
 ## 阶段八：工程化与工具链
 
+学习笔记：[前端工具链、Monorepo 与团队 CLI](notes/08-tooling/01-frontend-toolchain-monorepo-cli.md)
+
 ### 构建与模块
 
-- [ ] ESM、CJS、Package Exports。
-- [ ] Tree Shaking、Code Splitting、Chunk。
-- [ ] Source Map、HMR。
-- [ ] Bundler Plugin、AST、Compiler Pipeline。
-- [ ] ESM/CJS/类型声明发布。
+- [x] ESM、CJS、Package Exports。
+- [x] Tree Shaking、Code Splitting、Chunk。
+- [x] Source Map、HMR。
+- [x] Bundler Plugin、AST、Compiler Pipeline。
+- [x] ESM/CJS/类型声明发布。
 
 ### Monorepo
 
-- [ ] Workspace、Package Boundary。
-- [ ] Task Graph、Remote Cache。
-- [ ] Incremental Build。
-- [ ] Versioning、Changelog、Release。
-- [ ] 跨包依赖约束。
+- [x] Workspace、Package Boundary。
+- [x] Task Graph、Remote Cache。
+- [x] Incremental Build。
+- [x] Versioning、Changelog、Release。
+- [x] 跨包依赖约束。
 
 ### CLI 与自动化
 
-- [ ] 交互式和非交互式命令。
-- [ ] 模板、Dry Run、回滚。
-- [ ] Migration、Codemod。
-- [ ] 日志等级、单元和集成测试。
+- [x] 交互式和非交互式命令。
+- [x] 模板、Dry Run、回滚。
+- [x] Migration、Codemod。
+- [x] 日志等级、单元和集成测试。
 
 必做：
 
@@ -307,34 +309,38 @@
 
 ## 阶段九：测试、安全与可观测性
 
+学习笔记：[前端测试、安全与可观测性闭环](notes/09-quality-security-observability/01-frontend-quality-security-observability.md)
+
 ### 测试
 
-- [ ] Unit、Integration、Component、E2E。
-- [ ] Contract、Visual Regression。
-- [ ] Accessibility、Performance Test。
-- [ ] 测试加载、失败、重试、权限和边界。
-- [ ] Bug 修复附带回归测试。
+- [x] Unit、Integration、Component、E2E。
+- [x] Contract、Visual Regression。
+- [x] Accessibility、Performance Test。
+- [x] 测试加载、失败、重试、权限和边界。
+- [x] Bug 修复附带回归测试。
 
 ### 安全
 
-- [ ] XSS、CSRF、CSP、CORS。
-- [ ] Cookie、SameSite、OAuth。
-- [ ] Token Storage、Open Redirect、Clickjacking。
-- [ ] 依赖风险、Source Map 暴露。
-- [ ] 前端权限不等于后端鉴权。
+- [x] XSS、CSRF、CSP、CORS。
+- [x] Cookie、SameSite、OAuth。
+- [x] Token Storage、Open Redirect、Clickjacking。
+- [x] 依赖风险、Source Map 暴露。
+- [x] 前端权限不等于后端鉴权。
 
 ### 可观测性
 
-- [ ] Runtime Error、Promise Error、API Error。
-- [ ] Release、Source Map、Web Vitals。
-- [ ] User Action、Trace、Business Event。
-- [ ] 错误聚合、采样、告警和版本关联。
+- [x] Runtime Error、Promise Error、API Error。
+- [x] Release、Source Map、Web Vitals。
+- [x] User Action、Trace、Business Event。
+- [x] 错误聚合、采样、告警和版本关联。
 
 验收：线上问题可以回答谁、在哪、何时、哪个版本、执行了什么、影响多少用户以及是否由本次发布引入。
 
 ---
 
 ## 阶段十：专家专项
+
+学习笔记：[专家前端专项的架构选择：平台、复杂交互、AI 与 Web Platform](notes/10-expert-specializations/01-expert-frontend-architecture-selection.md)
 
 选择一到两个长期深入：
 
